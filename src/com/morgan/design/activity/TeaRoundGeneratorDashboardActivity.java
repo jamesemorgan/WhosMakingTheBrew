@@ -10,7 +10,6 @@ import android.view.View;
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
 import com.morgan.design.analytics.AbstractActivityAnalytic;
-import com.morgan.design.helpers.AdViewer;
 import com.morgan.design.helpers.Changelog;
 import com.morgan.design.helpers.Constants;
 import com.morgan.design.utils.PreferencesUtils;
@@ -25,7 +24,6 @@ public class TeaRoundGeneratorDashboardActivity extends AbstractActivityAnalytic
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard);
 
-		AdViewer.displayBanner(this);
 		Changelog.show(this);
 	}
 

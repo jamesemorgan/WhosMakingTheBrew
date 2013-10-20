@@ -6,10 +6,15 @@ Code changes
 - [ ] Alter domain logic and clean up Brew*.java 
 - [ ] Make project work with latest version of Android
 - [ ] Update all libraries it uses, including assessing alternatives
+- [ ] Update to latest Ormlite
+- [ ] Update to latest ACRA
+- [ ] change build system to use gradle/maven
 
 Remove dead features:
 - [x] Tea timer (maybe replaced one day!)
 - [x] Pointless widget etc
+- [x] Remove any advertisements
+- [ ] Remove commons-lang, replace with Guava if needed
 
 Keep main features including:
 - [ ] Running a game of selected players
@@ -18,7 +23,8 @@ Keep main features including:
 
 Gui changes
 - [ ] Improve animation during game runner
-- [ ] GUIRemove scores for players with option to view view option
+- [ ] Remove scores from players with option to view via preference
+- [ ] Remove unused images and assets
 - [ ] Internationalise and strings
 - [ ] Fix all lint errors, within reason
 

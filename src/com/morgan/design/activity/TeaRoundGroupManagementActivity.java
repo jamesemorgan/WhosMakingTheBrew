@@ -19,7 +19,6 @@ import com.morgan.design.adaptor.GroupAdaptor;
 import com.morgan.design.analytics.AbstractListActivityAnalytic;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
-import com.morgan.design.helpers.AdViewer;
 import com.morgan.design.helpers.Logger;
 import com.morgan.design.utils.Utils;
 
@@ -38,8 +37,6 @@ public class TeaRoundGroupManagementActivity extends AbstractListActivityAnalyti
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.group_management);
 
-		AdViewer.displayBanner(this);
-
 		findAllViewsById();
 		loadGroups();
 	}
@@ -50,7 +47,7 @@ public class TeaRoundGroupManagementActivity extends AbstractListActivityAnalyti
 
 	@Override
 	public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {
-		if (v.getId() == this.getListView().getId()) {
+		if (v.getId() == getListView().getId()) {
 			final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 			final String groupName = this.groups.get(info.position).getName();
 			menu.setHeaderTitle(groupName);
@@ -94,7 +91,7 @@ public class TeaRoundGroupManagementActivity extends AbstractListActivityAnalyti
 		this.groups = getBrewRepository().findAllBrewGroups();
 		this.groupAdaptor = new GroupAdaptor(this, R.layout.group_data_row, this.groups);
 		setListAdapter(this.groupAdaptor);
-		registerForContextMenu(this.getListView());
+		registerForContextMenu(getListView());
 		this.groupAdaptor.notifyDataSetChanged();
 	}
 

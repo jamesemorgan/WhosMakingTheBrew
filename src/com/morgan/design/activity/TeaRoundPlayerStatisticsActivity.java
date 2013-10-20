@@ -15,7 +15,6 @@ import android.widget.SimpleAdapter;
 import com.morgan.design.R;
 import com.morgan.design.analytics.AbstractActivityAnalytic;
 import com.morgan.design.db.domain.PlayerStats;
-import com.morgan.design.helpers.AdViewer;
 import com.morgan.design.ui.SeparatedListAdapter;
 
 /**
@@ -37,7 +36,6 @@ public class TeaRoundPlayerStatisticsActivity extends AbstractActivityAnalytic {
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player_stats);
-		AdViewer.displayBanner(this);
 
 		final SeparatedListAdapter adapter = new SeparatedListAdapter(this, R.layout.list_header);
 		final ListView list = (ListView) findViewById(R.id.stats_list);

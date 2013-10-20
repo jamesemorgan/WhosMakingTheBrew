@@ -23,7 +23,6 @@ import com.morgan.design.adaptor.ResultAdaptor;
 import com.morgan.design.analytics.AbstractActivityAnalytic;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.db.domain.TeaRound;
-import com.morgan.design.helpers.AdViewer;
 import com.morgan.design.helpers.Logger;
 import com.morgan.design.utils.Utils;
 
@@ -45,8 +44,6 @@ public class TeaRoundGeneratorResultsActivity extends AbstractActivityAnalytic {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.results);
-
-		AdViewer.displayBanner(this);
 
 		findAllViewsById();
 		final ArrayList<Integer> playerIds = getIntent().getExtras().getIntegerArrayList(TeaApplication.PLAYER_IDS);

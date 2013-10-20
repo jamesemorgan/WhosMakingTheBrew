@@ -2,8 +2,6 @@ package com.morgan.design.helpers;
 
 public class Constants {
 
-	public static final String ADMOB_PUBLISHER_ID = "a14e2091880f2d9";
-
 	public static final String[] MY_EMAIL = new String[] { "james.morgan.e@googlemail.com" };
 	public static final String[] APP_FEEDBACK_EMAIL = new String[] { "appfeedback@morgan-design.com" };
 
