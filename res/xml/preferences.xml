@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory
+		android:title="General">
+		<CheckBoxPreference
+			android:title="Change Log"
+			android:defaultValue="true"
+			android:summary="Show Change Log On Version Upgrade"
+			android:key="changelog" />
+		<CheckBoxPreference
+			android:title="Timer Vibration"
+			android:defaultValue="true"
+			android:summary="Vibrate on Timer Completion"
+			android:key="timerVibration" />
+		<CheckBoxPreference
+			android:title="Google Anayltics"
+			android:defaultValue="true"
+			android:summary="Enable Google Analytics. Thanks for helping make Who's Making The Brew better"
+			android:key="googleAnalytics" />
+	</PreferenceCategory>
+</PreferenceScreen>

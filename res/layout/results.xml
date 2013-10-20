@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	android:id="@+id/main"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<LinearLayout
+		android:id="@+id/top_container"
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TextView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:paddingTop="2dip"
+			android:paddingBottom="2dip"
+			android:paddingLeft="5dip"
+			android:text="@string/winner_label"
+			style="?android:attr/listSeparatorTextViewStyle" />
+
+		<TextView
+			android:id="@+id/winner_text"
+			android:gravity="center_horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textSize="50px"
+			android:singleLine="true"
+			android:ellipsize="marquee"
+			android:textStyle="bold"
+			android:textColor="#ffffff" />
+
+		<TextView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:paddingTop="2dip"
+			android:paddingBottom="2dip"
+			android:paddingLeft="5dip"
+			android:text="@string/score_label"
+			style="?android:attr/listSeparatorTextViewStyle" />
+
+		<TextView
+			android:id="@+id/winner_score"
+			android:gravity="center_horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:textSize="50px"
+			android:singleLine="true"
+			android:ellipsize="marquee"
+			android:textStyle="bold" />
+
+		<TextView
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:paddingTop="2dip"
+			android:paddingBottom="2dip"
+			android:paddingLeft="5dip"
+			android:text="@string/results"
+			style="?android:attr/listSeparatorTextViewStyle" />
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/bottom_view"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true">
+		<!--Put whatever view item you want here -->
+		<LinearLayout
+			android:id="@+id/add_holder"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+		</LinearLayout>
+	</LinearLayout>
+
+	<ListView
+		android:id="@+id/results_list"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_above="@id/bottom_view"
+		android:layout_below="@id/top_container" />
+</RelativeLayout>

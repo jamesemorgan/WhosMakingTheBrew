@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="10dip"
+    android:paddingLeft="15dip"
+    android:paddingTop="10dip" >
+
+    <TextView
+        android:text="PlayerName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/player_name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/num_games_entered"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Num Games Entered"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/num_games_won"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Num Games Won"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/highest_score"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Highest Score"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lowest_score"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Lowest Score"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</LinearLayout>

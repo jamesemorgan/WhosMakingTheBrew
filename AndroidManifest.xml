@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:installLocation="auto"
+    package="com.morgan.design"
+    android:versionCode="31"
+    android:versionName="1.26" >
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" >
+    </supports-screens>
+
+    <application
+        android:configChanges="keyboardHidden|orientation"
+        android:icon="@drawable/dashboard_teapot_icon"
+        android:label="@string/app_name"
+        android:name="TeaApplication" >
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:label="@string/app_title"
+            android:name="com.morgan.design.activity.TeaRoundGeneratorDashboardActivity" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.activity.TeaRoundGeneratorHomeActivity" />
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.activity.TeaRoundGeneratorCreditsActivity" />
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.activity.TeaRoundGeneratorResultsActivity" />
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.activity.TeaRoundGeneratorRunningActivity" />
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.activity.TeaRoundGeneratorStatisticsActivity" />
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.activity.TeaRoundPlayerStatisticsActivity" />
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.activity.TeaRoundGroupManagementActivity" />
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.activity.general.FormActivity" />
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:name="com.morgan.design.TeaRoundPreferences" />
+        <activity
+            android:clearTaskOnLaunch="true"
+            android:name="TeaTimerActivity" >
+        </activity>
+
+        <service android:name="com.morgan.design.alarm.service.TeaTimerService" />
+
+        <receiver android:name="com.morgan.design.widget.TeaRoundGeneratorWidgetImpl" >
+            <intent-filter >
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/tearound_appwidget_info" />
+        </receiver>
+
+        <activity
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:name="com.google.ads.AdActivity" />
+    </application>
+
+    <uses-sdk android:minSdkVersion="4" />
+
+</manifest>

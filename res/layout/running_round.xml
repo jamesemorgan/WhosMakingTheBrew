@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	android:id="@+id/LinearLayout01"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:gravity="center">
+
+	<TableLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+		<TableRow>
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:id="@+id/rotating_tea_pot" />
+		</TableRow>
+		<TableRow>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="40sp"
+				android:textStyle="bold"
+				android:textColor="#ffffff"
+				android:gravity="center_horizontal"
+				android:text="Running Tea Round..." />
+		</TableRow>
+		<TableRow
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_gravity="center"
+			android:gravity="center">
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/dashboard_tea_cup_icon"
+				android:maxWidth="48px" 
+				android:maxHeight="48px" />
+		</TableRow>
+	</TableLayout>
+</LinearLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2010 Google Inc. Licensed under the Apache License, Version 
+	2.0 (the "License"); you may not use this file except in compliance with 
+	the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/home_root"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<!-- http://commons.wikimedia.org/wiki/Coffee_and_tea_icons -->
+
+
+	<!-- <LinearLayout style="@style/TitleBar"> <ImageView style="@style/TitleBarLogo" 
+		android:contentDescription="@string/app_title" android:src="@drawable/teapot_icon" 
+		/> <ImageView style="@style/TitleBarSeparator" /> </LinearLayout> -->
+	<LinearLayout
+		style="@style/TitleBar">
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:layout_gravity="center_vertical|center_horizontal"
+		android:gravity="center_vertical|center_horizontal"
+		android:padding="6dip"
+		android:orientation="horizontal">
+		<Button
+			style="@style/HomeButton"
+			android:drawableTop="@drawable/dashboard_teapot_icon"
+			android:onClick="onBrewRoundClick"
+			android:text="@string/dashboard_brew_round"
+			android:gravity="center"
+			android:layout_weight=".5"></Button>
+		<Button
+			style="@style/HomeButton"
+			android:drawableTop="@drawable/dashboard_tea_cup_icon"
+			android:onClick="onTeaTimerClick"
+			android:text="@string/dashboard_tea_timer"
+			android:gravity="center"
+			android:layout_weight=".5"></Button>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:layout_gravity="center_vertical|center_horizontal"
+		android:gravity="center_vertical|center_horizontal"
+		android:padding="6dip"
+		android:orientation="horizontal">
+
+		<Button
+			android:drawableTop="@drawable/dashboard_brew_groups"
+			style="@style/HomeButton"
+			android:text="@string/dashboard_groups"
+			android:onClick="onBrewGroupsClick"
+			android:gravity="center"
+			android:id="@+id/action_one_button"
+			android:layout_weight=".5"></Button>
+		<Button
+			android:drawablePadding="5dip"
+			style="@style/HomeButton"
+			android:drawableTop="@drawable/dashboard_stats_icon"
+			android:onClick="onBrewStatsClick"
+			android:gravity="center"
+			android:text="@string/dashboard_stats"
+			android:layout_weight=".5"></Button>
+	</LinearLayout>
+	<LinearLayout
+		android:id="@+id/add_holder"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:id="@+id/add_holder"
+			android:layout_weight=".5"
+			android:layout_width="0dp"></LinearLayout>
+	</LinearLayout>
+</LinearLayout>
