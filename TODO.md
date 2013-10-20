@@ -9,6 +9,7 @@ Code changes
 - [ ] Update to latest Ormlite
 - [ ] Update to latest ACRA
 - [ ] change build system to use gradle/maven
+- [ ] replace customer logger with logback-android
 
 Remove dead features:
 - [x] Tea timer (maybe replaced one day!)

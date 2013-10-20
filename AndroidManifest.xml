@@ -70,9 +70,6 @@
             android:configChanges="keyboardHidden|orientation"
             android:name="com.morgan.design.TeaRoundPreferences" />
 
-        <activity
-            android:configChanges="keyboard|keyboardHidden|orientation"
-            android:name="com.google.ads.AdActivity" />
     </application>
 
     <uses-sdk android:minSdkVersion="4" />

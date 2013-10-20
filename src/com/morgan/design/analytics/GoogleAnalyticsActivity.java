@@ -12,14 +12,10 @@ public interface GoogleAnalyticsActivity {
 	void trackPageView(String pageView);
 
 	/**
-	 * @param Category
-	 *            -> "Clicks"
-	 * @param Action
-	 *            -> "Button"
-	 * @param label
-	 *            -> "clicked"
-	 * @param value
-	 *            -> 77
+	 * @param Category -> "Clicks"
+	 * @param Action -> "Button"
+	 * @param label -> "clicked"
+	 * @param value -> 77
 	 */
 	void trackEvent(String category, String action, String label, int value);
 

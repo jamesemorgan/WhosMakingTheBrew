@@ -10,9 +10,6 @@ import android.preference.PreferenceScreen;
 import com.morgan.design.helpers.Logger;
 import com.morgan.design.utils.PreferencesUtils;
 
-/**
- * @author James Edward Morgan
- */
 public class TeaRoundPreferences extends PreferenceActivity {
 
 	private static final String LOG_TAG = "TeaRoundPreferences";

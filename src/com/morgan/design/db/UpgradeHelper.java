@@ -39,8 +39,7 @@ public class UpgradeHelper {
 	/**
 	 * Get all available SQL Statements
 	 * 
-	 * @param resources
-	 *            the {@link Resources} from the given {@link Context} which maybe using the helper class
+	 * @param resources the {@link Resources} from the given {@link Context} which maybe using the helper class
 	 * @return A list of SQL statements which have been included in the
 	 */
 	public static List<String> availableUpdates(final Resources resources) {

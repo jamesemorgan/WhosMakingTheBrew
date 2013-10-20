@@ -20,9 +20,6 @@ import com.morgan.design.db.domain.BrewStats;
 import com.morgan.design.helpers.Logger;
 import com.morgan.design.ui.SeparatedListAdapter;
 
-/**
- * @author James Edward Morgan
- */
 public class TeaRoundGeneratorStatisticsActivity extends AbstractActivityAnalytic {
 
 	private final static String LOG_TAG = "BrewStats";

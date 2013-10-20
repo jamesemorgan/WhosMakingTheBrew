@@ -17,9 +17,6 @@ import com.morgan.design.analytics.AbstractActivityAnalytic;
 import com.morgan.design.db.domain.PlayerStats;
 import com.morgan.design.ui.SeparatedListAdapter;
 
-/**
- * @author James Edward Morgan
- */
 public class TeaRoundPlayerStatisticsActivity extends AbstractActivityAnalytic {
 
 	private final static String PLAYER_NAME = "player_name";

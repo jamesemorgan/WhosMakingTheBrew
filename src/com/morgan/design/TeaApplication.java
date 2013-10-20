@@ -21,9 +21,6 @@ public class TeaApplication extends Application {
 
 	public static final String PLAYER_IDS = "player_ids";
 	public static final String GROUP_ID = "group_id";
-	public static final String TEA_TIMER_BROADCAST_ACTION = "com.morgan.design.broadcaster.teatimer";
-
-	public static final int TEA_TIMER_RUNNING_NOTIFICATION = R.layout.custom_notification_layout;
 
 	@Override
 	public void onCreate() {
