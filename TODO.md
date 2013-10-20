@@ -19,3 +19,6 @@ Main goals
 ** Improve animation during game runner
 ** Remove scores for players with option to view view option
 ** Internationalise and strings
+
+* Fix all lint errors, within reason
+

@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
-import com.morgan.design.TeaTimerActivity;
 import com.morgan.design.analytics.AbstractActivityAnalytic;
 import com.morgan.design.helpers.AdViewer;
 import com.morgan.design.helpers.Changelog;
@@ -47,12 +46,6 @@ public class TeaRoundGeneratorDashboardActivity extends AbstractActivityAnalytic
 		final Intent intent = new Intent(this, TeaRoundGroupManagementActivity.class);
 		trackPageView("/TeaRoundGroupManagementActivity");
 		startActivityForResult(intent, TeaApplication.ACTIVITY_GROUP);
-	}
-
-	public void onTeaTimerClick(final View v) {
-		final Intent teaTimer = new Intent(this, TeaTimerActivity.class);
-		trackPageView("/TeaTimerActivity");
-		startActivity(teaTimer);
 	}
 
 	public void onBrewRoundClick(final View v) {

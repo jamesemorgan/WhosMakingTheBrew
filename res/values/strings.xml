@@ -24,15 +24,6 @@
     <string name="changelog_filename">changelog.html</string>
     <string name="ok">Ok</string>
     <string name="feedback">Feedback</string>
-    <string name="fourzeros">00:00</string>
-    <string name="sixzeros">00:00:00</string>
-    <string name="hhmmss">hh:mm:ss</string>
-    <string name="mmss">mm:ss</string>
-    <string name="start">Start</string>
-    <string name="stop">Stop</string>
-    <string name="tea_timer_status_bar_notifications_title">Tea Timer Running</string>
-    <string name="tea_timer_status_bar_notifications_text">Click to view timer!</string>
-    <string name="tea_timer_status_bar_notifications_complete">Timer Complete!</string>
     <string name="stats_title">Tea Round Statistics</string>
 
     <!-- DASHBOARD -->

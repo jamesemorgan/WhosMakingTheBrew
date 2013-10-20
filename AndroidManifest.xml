@@ -69,12 +69,6 @@
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation"
             android:name="com.morgan.design.TeaRoundPreferences" />
-        <activity
-            android:clearTaskOnLaunch="true"
-            android:name="TeaTimerActivity" >
-        </activity>
-
-        <service android:name="com.morgan.design.alarm.service.TeaTimerService" />
 
         <activity
             android:configChanges="keyboard|keyboardHidden|orientation"

@@ -67,6 +67,7 @@
 		android:layout_alignParentBottom="true">
 		<!--Put whatever view item you want here -->
 		<LinearLayout
+		    android:orientation="horizontal"
 			android:id="@+id/add_holder"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content">

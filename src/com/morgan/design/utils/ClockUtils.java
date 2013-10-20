@@ -4,21 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import com.morgan.design.ui.NumberPicker;
-
 public class ClockUtils {
-
-	public static int hours(final NumberPicker npHours) {
-		return npHours.getCurrent() * 60 * 60;
-	}
-
-	public static int minutes(final NumberPicker npMinutes) {
-		return npMinutes.getCurrent() * 60;
-	}
-
-	public static int seconds(final NumberPicker npSeconds) {
-		return npSeconds.getCurrent();
-	}
 
 	public static String formatIntoHHMMSS(final long secsIn) {
 		final long hours = secsIn / 3600;

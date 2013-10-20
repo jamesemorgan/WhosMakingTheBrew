@@ -39,13 +39,6 @@
 			android:text="@string/dashboard_brew_round"
 			android:gravity="center"
 			android:layout_weight=".5"></Button>
-		<Button
-			style="@style/HomeButton"
-			android:drawableTop="@drawable/dashboard_tea_cup_icon"
-			android:onClick="onTeaTimerClick"
-			android:text="@string/dashboard_tea_timer"
-			android:gravity="center"
-			android:layout_weight=".5"></Button>
 	</LinearLayout>
 
 	<LinearLayout
@@ -79,6 +72,7 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
 		<LinearLayout
+		    android:orientation="horizontal"
 			android:layout_height="wrap_content"
 			android:id="@+id/add_holder"
 			android:layout_weight=".5"
