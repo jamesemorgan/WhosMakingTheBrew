@@ -12,10 +12,6 @@ public class Constants {
 	public static final String TANGO_ICON_URL = "http://tango.freedesktop.org/Tango_Icon_Library";
 
 	public static final String GOOGLE_ANALYTIC_ACCOUNT_ID = "UA-22912453-1";
-	public static final String DEFAULT_BLANK_TIME = "00:00:00";
 
 	public static final String TEA_ROUND_WIDGET = "TEA_ROUND_WIDGET";
-
-	@Deprecated
-	public static final String ABOUT_URL = "http://www.morgan-design.com/p/about-me.html";
 }

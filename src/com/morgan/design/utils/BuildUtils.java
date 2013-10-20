@@ -15,6 +15,14 @@ public class BuildUtils {
 		return isRunningEmmulator();
 	}
 
+	public static void logBuildDetails() {
+		LOG.debug("##########################################");
+		LOG.debug(Build.VERSION.CODENAME);
+		LOG.debug(Build.VERSION.RELEASE);
+		LOG.debug(Build.VERSION.SDK);
+		LOG.debug("##########################################");
+	}
+
 	public static String getDeviceId() {
 		String AndroidID = System.getProperty(android.provider.Settings.Secure.ANDROID_ID);
 		if (AndroidID == null) {

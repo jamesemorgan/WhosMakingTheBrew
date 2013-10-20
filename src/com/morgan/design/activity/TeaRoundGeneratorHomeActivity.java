@@ -35,6 +35,7 @@ import com.morgan.design.adaptor.PlayerAdaptor;
 import com.morgan.design.analytics.AbstractListActivityAnalytic;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
+import com.morgan.design.utils.BuildUtils;
 import com.morgan.design.utils.PreferencesUtils;
 import com.morgan.design.utils.StringUtils;
 import com.morgan.design.utils.Utils;
@@ -59,7 +60,7 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 
-		Utils.logBuildDetails();
+		BuildUtils.logBuildDetails();
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tea_round_home);
