@@ -30,19 +30,21 @@ public class NotifcationUtils {
 	 * Set the icon, scrolling text and timestamp
 	 */
 	public static Notification createTeaTimerNotifcation(final Context context) {
-		return new Notification(R.drawable.dashboard_teapot_icon, context.getText(R.string.tea_timer_status_bar_notifications_title),
-				System.currentTimeMillis());
+		return new Notification(R.drawable.dashboard_teapot_icon,
+				context.getText(R.string.tea_timer_status_bar_notifications_title), System.currentTimeMillis());
 	}
 
 	/**
 	 * Set the icon, scrolling text and timestamp
 	 * 
 	 * @param context
-	 * @param titleText string.xml ID
+	 * @param titleText
+	 *            string.xml ID
 	 * @return {@link Notification}
 	 */
 	public static Notification createTeaTimerNotifcation(final Context context, final int titleText) {
-		return new Notification(R.drawable.dashboard_teapot_icon, context.getText(titleText), System.currentTimeMillis());
+		return new Notification(R.drawable.dashboard_teapot_icon, context.getText(titleText),
+				System.currentTimeMillis());
 	}
 
 	/**

@@ -40,7 +40,8 @@ public class UpgradeHelper {
 	/**
 	 * Get all available SQL Statements
 	 * 
-	 * @param resources the {@link Resources} from the given {@link Context} which maybe using the helper class
+	 * @param resources
+	 *            the {@link Resources} from the given {@link Context} which maybe using the helper class
 	 * @return A list of SQL statements which have been included in the
 	 */
 	public static List<String> availableUpdates(final Resources resources) {
@@ -66,8 +67,10 @@ public class UpgradeHelper {
 	/**
 	 * Load the given asset file, throws wrapped {@link RuntimeException} if not found
 	 * 
-	 * @param fileName of the file to load, including asset directory path and sub path if required
-	 * @param resources the {@link Resources}, usually from a {@link Context}
+	 * @param fileName
+	 *            of the file to load, including asset directory path and sub path if required
+	 * @param resources
+	 *            the {@link Resources}, usually from a {@link Context}
 	 * @return the fully loaded file as a {@link String}
 	 */
 	private static String loadAssetFile(final Resources resources, final String fileName) {

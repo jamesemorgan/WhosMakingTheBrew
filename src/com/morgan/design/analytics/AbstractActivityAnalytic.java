@@ -49,8 +49,8 @@ public class AbstractActivityAnalytic extends OrmLiteBaseActivity<DatabaseHelper
 	@Override
 	public void trackEvent(final String category, final String action, final String label, final int value) {
 		if (PreferencesUtils.getGoogleAnalyticsPref(this)) {
-			Logger.d(getClass().getSimpleName(),
-					String.format("Google Analytics is enabled | TrackEvent=[%s, %s, %s, %s]", category, action, label, value));
+			Logger.d(getClass().getSimpleName(), String.format(
+					"Google Analytics is enabled | TrackEvent=[%s, %s, %s, %s]", category, action, label, value));
 			this.tracker.trackEvent(category, action, label, value);
 		}
 	}

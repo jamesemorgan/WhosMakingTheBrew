@@ -61,7 +61,8 @@ public class TeaRoundGeneratorResultsActivity extends AbstractActivityAnalytic {
 			this.resultAdaptor = new ResultAdaptor(this, R.layout.player_results_row, this.resultsList);
 
 			// Set animation effect
-			final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this, R.anim.results_lists_layout_controller);
+			final LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(this,
+					R.anim.results_lists_layout_controller);
 			this.resultList.setLayoutAnimation(controller);
 			this.resultList.setAdapter(this.resultAdaptor);
 
@@ -108,7 +109,8 @@ public class TeaRoundGeneratorResultsActivity extends AbstractActivityAnalytic {
 				return true;
 			case R.id.email_results:
 				final Spanned emailBody = Html.fromHtml(Utils.generateResultsEmail(this.resultsList));
-				Utils.createEmailIntenet(this, "text/html", "Sending results...", "Whos Making The Brew?", new String[] {}, emailBody);
+				Utils.createEmailIntenet(this, "text/html", "Sending results...", "Whos Making The Brew?",
+						new String[] {}, emailBody);
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -117,7 +119,8 @@ public class TeaRoundGeneratorResultsActivity extends AbstractActivityAnalytic {
 
 	private void playAgain() {
 		final Intent returnIntent = new Intent();
-		// returnIntent.putExtra(TeaApplication.PLAYER_REF, new ArrayList<BrewPlayer>(this.playersList));
+		// returnIntent.putExtra(TeaApplication.PLAYER_REF, new
+		// ArrayList<BrewPlayer>(this.playersList));
 		setResult(Activity.RESULT_OK, returnIntent);
 		finish();
 	}

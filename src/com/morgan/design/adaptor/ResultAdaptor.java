@@ -39,7 +39,8 @@ public class ResultAdaptor extends ArrayAdapter<BrewPlayer> {
 	public View getView(final int position, final View convertView, final ViewGroup parent) {
 		View view = convertView;
 		if (view == null) {
-			// we first inflate the XML layout file and retrieve reference of the described View.
+			// we first inflate the XML layout file and retrieve reference of
+			// the described View.
 			final LayoutInflater vi = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = vi.inflate(R.layout.player_results_row, null);
 		}
@@ -89,7 +90,8 @@ public class ResultAdaptor extends ArrayAdapter<BrewPlayer> {
 				shortToast(player.getName() + " is making the tea...!");
 			}
 			else {
-				shortToast(player.getName() + " came " + (this.playerPosition + 1) + Utils.getSuffix(this.playerPosition + 1));
+				shortToast(player.getName() + " came " + (this.playerPosition + 1)
+						+ Utils.getSuffix(this.playerPosition + 1));
 			}
 		}
 	}

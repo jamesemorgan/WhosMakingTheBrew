@@ -13,9 +13,10 @@ import android.widget.BaseAdapter;
 
 import com.morgan.design.R;
 
-/* Copyright 2008 Jeff Sharkey
- * 
- * From: http://www.jsharkey.org/blog/2008/08/18/separating-lists-with-headers-in-android-09/ */
+/*
+ * Copyright 2008 Jeff Sharkey From:
+ * http://www.jsharkey.org/blog/2008/08/18/separating-lists-with-headers-in-android-09/
+ */
 
 public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapter {
 
@@ -41,6 +42,7 @@ public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapt
 		adapter.registerDataSetObserver(mDataSetObserver);
 	}
 
+	@Override
 	public void removeObserver() {
 		// Notify all our children that they should release their observers too.
 		for (final Map.Entry<String, Adapter> it : sections.entrySet()) {
@@ -57,6 +59,7 @@ public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapt
 		notifyDataSetInvalidated();
 	}
 
+	@Override
 	public Object getItem(int position) {
 		for (final Object section : this.sections.keySet()) {
 			final Adapter adapter = sections.get(section);
@@ -74,6 +77,7 @@ public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapt
 		return null;
 	}
 
+	@Override
 	public int getCount() {
 		// total together all sections, plus one for each section header
 		int total = 0;

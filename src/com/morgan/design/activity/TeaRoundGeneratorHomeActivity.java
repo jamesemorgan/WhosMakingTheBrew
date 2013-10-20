@@ -72,7 +72,8 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 		// Bind focus listener to attach to add player text box
 		this.addPlayerEditText.setOnKeyListener(new EnterPlayerClickListener());
 
-		this.playerAdaptor = new PlayerAdaptor(this, R.layout.player_data_row, new ArrayList<BrewPlayer>(), new TrashClickHandler());
+		this.playerAdaptor = new PlayerAdaptor(this, R.layout.player_data_row, new ArrayList<BrewPlayer>(),
+				new TrashClickHandler());
 
 		this.dataSetObserver = new DataSetObserver() {
 			@Override
@@ -326,7 +327,8 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	private void loadLastRunPlayers() {
 		this.brewPlayers = getBrewRepository().findLastRunPlayers();
 
-		if (null != this.brewPlayers && !this.brewPlayers.isEmpty() && null != this.brewPlayers.iterator().next().getBrewGroup()) {
+		if (null != this.brewPlayers && !this.brewPlayers.isEmpty()
+				&& null != this.brewPlayers.iterator().next().getBrewGroup()) {
 			this.brewGroup = this.brewPlayers.iterator().next().getBrewGroup();
 		}
 
@@ -354,9 +356,9 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	private AlertDialog showGroupDialog(final boolean editing) {
 		final LayoutInflater factory = LayoutInflater.from(this);
 		final View textEntryView = factory.inflate(R.layout.add_group_dialog, null);
-		final AlertDialog dialogGroup = new AlertDialog.Builder(this).setTitle(editing
-				? "Edit Group Name"
-				: "Add Group Name").setIcon(R.drawable.add_group).setView(textEntryView).create();
+		final AlertDialog dialogGroup = new AlertDialog.Builder(this)
+				.setTitle(editing ? "Edit Group Name" : "Add Group Name").setIcon(R.drawable.add_group)
+				.setView(textEntryView).create();
 
 		final EditText addGroupEditText = (EditText) textEntryView.findViewById(R.id.add_group_edit_text);
 
@@ -368,22 +370,21 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 		addGroupEditText.requestFocus();
 
 		showKeyBoard(addGroupEditText);
-		dialogGroup.setButton(editing
-				? getString(R.string.edit)
-				: getString(R.string.add), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int whichButton) {
-				final String groupName = addGroupEditText.getEditableText().toString();
-				hideKeyBoard(addGroupEditText);
-				addGroupEditText.clearFocus();
-				if (editing) {
-					updateGroupName(groupName);
-				}
-				else {
-					addPlayersToGroup(groupName);
-				}
-			}
-		});
+		dialogGroup.setButton(editing ? getString(R.string.edit) : getString(R.string.add),
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(final DialogInterface dialog, final int whichButton) {
+						final String groupName = addGroupEditText.getEditableText().toString();
+						hideKeyBoard(addGroupEditText);
+						addGroupEditText.clearFocus();
+						if (editing) {
+							updateGroupName(groupName);
+						}
+						else {
+							addPlayersToGroup(groupName);
+						}
+					}
+				});
 		dialogGroup.setButton2(getString(R.string.cancel), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int whichButton) {
@@ -420,22 +421,18 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 			if (0 != player.getId()) {
 				final AlertDialog.Builder builder = new AlertDialog.Builder(TeaRoundGeneratorHomeActivity.this);
 				builder.setMessage("Click 'Remove' to remove from this game, 'Delete' to delete completely")
-					.setCancelable(true)
-					.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface dialog, final int id) {
-							removeFromGame(player, position);
-						}
-					})
-					.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(final DialogInterface dialog, final int id) {
-							deletePlayer(player, position);
-						}
+						.setCancelable(true).setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(final DialogInterface dialog, final int id) {
+								removeFromGame(player, position);
+							}
+						}).setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(final DialogInterface dialog, final int id) {
+								deletePlayer(player, position);
+							}
 
-					})
-					.create()
-					.show();
+						}).create().show();
 			}
 			else {
 				removeFromGame(player, position);

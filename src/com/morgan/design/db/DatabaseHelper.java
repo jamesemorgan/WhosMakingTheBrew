@@ -51,11 +51,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	}
 
 	/**
-	 * This is called when your application is upgraded and it has a higher version number. This allows you to adjust the various data to
-	 * match the new version number.
+	 * This is called when your application is upgraded and it has a higher version number. This allows you to adjust
+	 * the various data to match the new version number.
 	 */
 	@Override
-	public void onUpgrade(final SQLiteDatabase db, final ConnectionSource connectionSource, int oldVersion, final int newVersion) {
+	public void onUpgrade(final SQLiteDatabase db, final ConnectionSource connectionSource, int oldVersion,
+			final int newVersion) {
 		Logger.i(LOG_TAG, "onUpgrade, oldVersion=[%s], newVersion=[%s]", oldVersion, newVersion);
 		try {
 

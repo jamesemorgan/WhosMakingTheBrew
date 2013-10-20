@@ -29,9 +29,7 @@ public class ClockUtils {
 	}
 
 	private static String zeroPad(final long interval) {
-		return (interval < 10
-				? "0"
-				: "");
+		return (interval < 10 ? "0" : "");
 	}
 
 	public static String formatTime(final long totalSeconds, final int timer) {

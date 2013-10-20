@@ -12,7 +12,8 @@ import com.morgan.design.analytics.AbstractActivityAnalytic;
 public class TeaRoundGeneratorRunningActivity extends AbstractActivityAnalytic {
 
 	private static final float ROTATE_FROM = 0.0f;
-	private static final float ROTATE_TO = -10.0f * 360.0f;// 3.141592654f * 32.0f;
+	private static final float ROTATE_TO = -10.0f * 360.0f;// 3.141592654f *
+															// 32.0f;
 	private static final int welcomeScreenDisplay = 2000;
 
 	private ImageView teaPot;
@@ -42,8 +43,8 @@ public class TeaRoundGeneratorRunningActivity extends AbstractActivityAnalytic {
 	}
 
 	private void rotateTeaPot() {
-		final RotateAnimation rotation =
-				new RotateAnimation(ROTATE_FROM, ROTATE_TO, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+		final RotateAnimation rotation = new RotateAnimation(ROTATE_FROM, ROTATE_TO, Animation.RELATIVE_TO_SELF, 0.5f,
+				Animation.RELATIVE_TO_SELF, 0.5f);
 		rotation.setDuration((long) 2 * 1500);
 		rotation.setRepeatCount(5);
 		this.teaPot.startAnimation(rotation);

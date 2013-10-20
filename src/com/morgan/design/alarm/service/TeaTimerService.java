@@ -89,14 +89,16 @@ public class TeaTimerService extends Service {
 				getText(R.string.tea_timer_status_bar_notifications_text));
 		this.runningNotification.contentView = this.runningRemoteView;
 
-		final Intent notificationIntent =
-				new Intent(this, TeaTimerActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		final Intent notificationIntent = new Intent(this, TeaTimerActivity.class)
+				.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-		this.runningNotification.contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+		this.runningNotification.contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+				PendingIntent.FLAG_CANCEL_CURRENT);
 		this.runningNotification.flags |= Notification.FLAG_ONGOING_EVENT | Notification.DEFAULT_LIGHTS;
 
 		// Send the notification.
-		// We use a layout id because it is a unique number. We use it later to cancel.
+		// We use a layout id because it is a unique number. We use it later to
+		// cancel.
 		NotifcationUtils.getManager(this).notify(TEA_TIMER_RUNNING_NOTIFICATION, this.runningNotification);
 	}
 
@@ -150,12 +152,15 @@ public class TeaTimerService extends Service {
 		public void run() {
 			// rT = sT � cT + duration
 			// where
-			// rT = remaining time. The time remaining to count down (in milliseconds)
+			// rT = remaining time. The time remaining to count down (in
+			// milliseconds)
 			// sT = start time. The time at which the timer started
 			// cT = current time
-			// duration = duration. The duration of the time. Example 20 minutes (In milliseconds: 20 * 60 * 1000)
+			// duration = duration. The duration of the time. Example 20 minutes
+			// (In milliseconds: 20 * 60 * 1000)
 
-			final long remaining = (TeaTimerService.this.startTime - System.currentTimeMillis()) + TeaTimerService.this.totalMills;
+			final long remaining = (TeaTimerService.this.startTime - System.currentTimeMillis())
+					+ TeaTimerService.this.totalMills;
 			TeaTimerService.this.formatIntoHHMMSS = ClockUtils.formatIntoHHMMSS(remaining / 1000);
 			TeaTimerService.this.secondsRemaining--;
 
@@ -164,7 +169,8 @@ public class TeaTimerService extends Service {
 			// Log.d(LOG_TAG, "Seconds Remaining: " + totalSeconds);
 
 			if (remaining > 0) {
-				// Making sure that there is only one Runnable in the message queue
+				// Making sure that there is only one Runnable in the message
+				// queue
 				this.handler.removeCallbacks(this);
 
 				// Repost this Runnable with a delay

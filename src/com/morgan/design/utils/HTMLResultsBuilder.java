@@ -18,24 +18,22 @@ public class HTMLResultsBuilder {
 	}
 
 	private String buildScoresEmail() {
-		//@formatter:off
+		// @formatter:off
 		final TableBuilder table = new EmailBuilder()
-			.content()
-			.h3(this.resultsList.get(0).getName() + " Won The Tea Round......!!!")
-				.p("Scores as it stands: ")
-				.table()
-					.tbodyStart()
-					.row(" #   ", " Score   ", " Name   ");
-		
+				.content()
+				.h3(this.resultsList.get(0).getName()
+						+ " Won The Tea Round......!!!")
+				.p("Scores as it stands: ").table().tbodyStart()
+				.row(" #   ", " Score   ", " Name   ");
+
 		for (int i = 0; i < this.resultsList.size(); i++) {
 			table.row(result(i), score(i), name(i));
 		}
-		
-		final EmailBuilder emailBuilder =	table.tbodyStart()
-					.endTable()
-					.p("<a href='http://www.morgan-design.com'>Morgan-Design</a>")
-					.endContent();
-		//@formatter:on
+
+		final EmailBuilder emailBuilder = table.tbodyStart().endTable()
+				.p("<a href='http://www.morgan-design.com'>Morgan-Design</a>")
+				.endContent();
+		// @formatter:on
 		return emailBuilder.build();
 	}
 

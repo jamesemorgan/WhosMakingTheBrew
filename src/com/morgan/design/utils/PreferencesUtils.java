@@ -81,35 +81,43 @@ public class PreferencesUtils {
 		activity.startActivityForResult(intent, TeaApplication.ACTIVITY_PREFERENCES);
 	}
 
-	// public static SharedPreferences.Editor getPrivateSharedPrefsEditor(final Context context) {
+	// public static SharedPreferences.Editor getPrivateSharedPrefsEditor(final
+	// Context context) {
 	// final SharedPreferences preferences = getPrivateSharedPrefs(context);
 	// final SharedPreferences.Editor editor = preferences.edit();
 	// return editor;
 	// }
 	//
-	// public static SharedPreferences getPrivateSharedPrefs(final Context context) {
-	// return context.getSharedPreferences(Constants.TEA_ROUND_SHARED_PREFS_KEY, Activity.MODE_PRIVATE);
+	// public static SharedPreferences getPrivateSharedPrefs(final Context
+	// context) {
+	// return context.getSharedPreferences(Constants.TEA_ROUND_SHARED_PREFS_KEY,
+	// Activity.MODE_PRIVATE);
 	// }
 	//
-	// public static Preference findChangeLogPref(final PreferenceActivity preferenceActivity) {
+	// public static Preference findChangeLogPref(final PreferenceActivity
+	// preferenceActivity) {
 	// return preferenceActivity.findPreference(PREF_CHANGELOG);
 	// }
 	//
 	// public static boolean getVibratePref(final Context context) {
-	// final SharedPreferences preferences = PreferencesUtils.getPrivateSharedPrefs(context);;
+	// final SharedPreferences preferences =
+	// PreferencesUtils.getPrivateSharedPrefs(context);;
 	// return preferences.getBoolean(PREF_TIMER_VIBRATE, true);
 	// }
 	//
-	// public static Preference findTimerVibrationPref(final PreferenceActivity preferenceActivity) {
+	// public static Preference findTimerVibrationPref(final PreferenceActivity
+	// preferenceActivity) {
 	// return preferenceActivity.findPreference(PREF_TIMER_VIBRATE);
 	// }
 	//
 	// public static void openPreferenecesActivity(final Activity activity) {
 	// final Intent intent = new Intent(activity, TeaRoundPreferences.class);
-	// activity.startActivityForResult(intent, TeaApplication.ACTIVITY_PREFERENCES);
+	// activity.startActivityForResult(intent,
+	// TeaApplication.ACTIVITY_PREFERENCES);
 	// }
 	//
-	// public static Preference findGoogleAnalyticsPref(final PreferenceActivity preferenceActivity) {
+	// public static Preference findGoogleAnalyticsPref(final PreferenceActivity
+	// preferenceActivity) {
 	// return preferenceActivity.findPreference(PREF_GOOGLE_ANALYTIC);
 	// }
 }

@@ -1,13 +1,11 @@
-/* Copyright (C) 2008 The Android Open Source Project
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may
- * obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
- * and limitations under the License. */
+/*
+ * Copyright (C) 2008 The Android Open Source Project Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+ * either express or implied. See the License for the specific language governing permissions and limitations under the
+ * License.
+ */
 
 package com.morgan.design.ui;
 
@@ -30,9 +28,10 @@ import android.widget.TextView;
 import com.morgan.design.R;
 
 /**
- * This class has been pulled from the Android platform source code, its an internal widget that hasn't been made public so its included in
- * the project in this fashion for use with the preferences screen; I have made a few slight modifications to the code here, I simply put a
- * MAX and MIN default in the code but these values can still be set publically by calling code.
+ * This class has been pulled from the Android platform source code, its an internal widget that hasn't been made public
+ * so its included in the project in this fashion for use with the preferences screen; I have made a few slight
+ * modifications to the code here, I simply put a MAX and MIN default in the code but these values can still be set
+ * publically by calling code.
  * 
  * @author Google
  * @author James Edward Morgan
@@ -52,16 +51,16 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 	}
 
 	/*
-	 * Use a custom NumberPicker formatting callback to use two-digit
-	 * minutes strings like "01".  Keeping a static formatter etc. is the
-	 * most efficient way to do this; it avoids creating temporary objects
-	 * on every call to format().
+	 * Use a custom NumberPicker formatting callback to use two-digit minutes strings like "01". Keeping a static
+	 * formatter etc. is the most efficient way to do this; it avoids creating temporary objects on every call to
+	 * format().
 	 */
 	public static final NumberPicker.Formatter TWO_DIGIT_FORMATTER = new NumberPicker.Formatter() {
 		final StringBuilder mBuilder = new StringBuilder();
 		final java.util.Formatter mFmt = new java.util.Formatter(mBuilder);
 		final Object[] mArgs = new Object[1];
 
+		@Override
 		public String toString(final int value) {
 			mArgs[0] = value;
 			mBuilder.delete(0, mBuilder.length());
@@ -72,6 +71,7 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 
 	private final Handler mHandler;
 	private final Runnable mRunnable = new Runnable() {
+		@Override
 		public void run() {
 			if (mIncrement) {
 				changeCurrent(mCurrent + 1);
@@ -161,8 +161,10 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 	/**
 	 * Set the range of numbers allowed for the number picker. The current value will be automatically set to the start.
 	 * 
-	 * @param start the start of the range (inclusive)
-	 * @param end the end of the range (inclusive)
+	 * @param start
+	 *            the start of the range (inclusive)
+	 * @param end
+	 *            the end of the range (inclusive)
 	 */
 	public void setRange(final int start, final int end) {
 		mStart = start;
@@ -172,12 +174,15 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 	}
 
 	/**
-	 * Set the range of numbers allowed for the number picker. The current value will be automatically set to the start. Also provide a
-	 * mapping for values used to display to the user.
+	 * Set the range of numbers allowed for the number picker. The current value will be automatically set to the start.
+	 * Also provide a mapping for values used to display to the user.
 	 * 
-	 * @param start the start of the range (inclusive)
-	 * @param end the end of the range (inclusive)
-	 * @param displayedValues the values displayed to the user.
+	 * @param start
+	 *            the start of the range (inclusive)
+	 * @param end
+	 *            the end of the range (inclusive)
+	 * @param displayedValues
+	 *            the values displayed to the user.
 	 */
 	public void setRange(final int start, final int end, final String[] displayedValues) {
 		mDisplayedValues = displayedValues;
@@ -193,12 +198,14 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 	}
 
 	/**
-	 * The speed (in milliseconds) at which the numbers will scroll when the the +/- buttons are longpressed. Default is 300ms.
+	 * The speed (in milliseconds) at which the numbers will scroll when the the +/- buttons are longpressed. Default is
+	 * 300ms.
 	 */
 	public void setSpeed(final long speed) {
 		mSpeed = speed;
 	}
 
+	@Override
 	public void onClick(final View v) {
 		validateInput(mText);
 		if (!mText.hasFocus())
@@ -214,9 +221,7 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 	}
 
 	private String formatNumber(final int value) {
-		return (mFormatter != null)
-				? mFormatter.toString(value)
-				: String.valueOf(value);
+		return (mFormatter != null) ? mFormatter.toString(value) : String.valueOf(value);
 	}
 
 	protected void changeCurrent(int current) {
@@ -243,9 +248,9 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 
 	protected void updateView() {
 
-		/* If we don't have displayed values then use the
-		 * current number else find the correct value in the
-		 * displayed values for the current number.
+		/*
+		 * If we don't have displayed values then use the current number else find the correct value in the displayed
+		 * values for the current number.
 		 */
 		if (mDisplayedValues == null) {
 			mText.setText(formatNumber(mCurrent));
@@ -253,8 +258,7 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 		else {
 			mText.setText(mDisplayedValues[mCurrent - mStart]);
 		}
-		mText.setSelection(mText.getText()
-			.length());
+		mText.setSelection(mText.getText().length());
 	}
 
 	private void validateCurrentView(final CharSequence str) {
@@ -269,10 +273,11 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 		updateView();
 	}
 
+	@Override
 	public void onFocusChange(final View v, final boolean hasFocus) {
 
-		/* When focus is lost check that the text field
-		 * has valid values.
+		/*
+		 * When focus is lost check that the text field has valid values.
 		 */
 		if (!hasFocus) {
 			validateInput(v);
@@ -294,12 +299,15 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 	}
 
 	/**
-	 * We start the long click here but rely on the {@link NumberPickerButton} to inform us when the long click has ended.
+	 * We start the long click here but rely on the {@link NumberPickerButton} to inform us when the long click has
+	 * ended.
 	 */
+	@Override
 	public boolean onLongClick(final View v) {
 
-		/* The text view may still have focus so clear it's focus which will
-		 * trigger the on focus changed and any typed values to be pulled.
+		/*
+		 * The text view may still have focus so clear it's focus which will trigger the on focus changed and any typed
+		 * values to be pulled.
 		 */
 		mText.clearFocus();
 
@@ -328,15 +336,16 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 	private final NumberPickerButton mDecrementButton;
 
 	private class NumberPickerInputFilter implements InputFilter {
-		public CharSequence filter(final CharSequence source, final int start, final int end, final Spanned dest, final int dstart,
-				final int dend) {
+		@Override
+		public CharSequence filter(final CharSequence source, final int start, final int end, final Spanned dest,
+				final int dstart, final int dend) {
 			if (mDisplayedValues == null) {
 				return mNumberInputFilter.filter(source, start, end, dest, dstart, dend);
 			}
 			final CharSequence filtered = String.valueOf(source.subSequence(start, end));
-			final String result = String.valueOf(dest.subSequence(0, dstart)) + filtered + dest.subSequence(dend, dest.length());
-			final String str = String.valueOf(result)
-				.toLowerCase();
+			final String result = String.valueOf(dest.subSequence(0, dstart)) + filtered
+					+ dest.subSequence(dend, dest.length());
+			final String str = String.valueOf(result).toLowerCase();
 			for (String val : mDisplayedValues) {
 				val = val.toLowerCase();
 				if (val.startsWith(str)) {
@@ -351,6 +360,7 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 
 		// XXX This doesn't allow for range limits when controlled by a
 		// soft input method!
+		@Override
 		public int getInputType() {
 			return InputType.TYPE_CLASS_NUMBER;
 		}
@@ -361,25 +371,25 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 		}
 
 		@Override
-		public CharSequence filter(final CharSequence source, final int start, final int end, final Spanned dest, final int dstart,
-				final int dend) {
+		public CharSequence filter(final CharSequence source, final int start, final int end, final Spanned dest,
+				final int dstart, final int dend) {
 
 			CharSequence filtered = super.filter(source, start, end, dest, dstart, dend);
 			if (filtered == null) {
 				filtered = source.subSequence(start, end);
 			}
 
-			final String result = String.valueOf(dest.subSequence(0, dstart)) + filtered + dest.subSequence(dend, dest.length());
+			final String result = String.valueOf(dest.subSequence(0, dstart)) + filtered
+					+ dest.subSequence(dend, dest.length());
 
 			if ("".equals(result)) {
 				return result;
 			}
 			final int val = getSelectedPos(result);
 
-			/* Ensure the user can't type in a value greater
-			 * than the max allowed. We have to allow less than min
-			 * as the user might want to delete some numbers
-			 * and then type a new number.
+			/*
+			 * Ensure the user can't type in a value greater than the max allowed. We have to allow less than min as the
+			 * user might want to delete some numbers and then type a new number.
 			 */
 			if (val > mEnd) {
 				return "";
@@ -399,14 +409,13 @@ public class NumberPicker extends LinearLayout implements OnClickListener, OnFoc
 
 				/* Don't force the user to type in jan when ja will do */
 				str = str.toLowerCase();
-				if (mDisplayedValues[i].toLowerCase()
-					.startsWith(str)) {
+				if (mDisplayedValues[i].toLowerCase().startsWith(str)) {
 					return mStart + i;
 				}
 			}
 
-			/* The user might have typed in a number into the month field i.e.
-			 * 10 instead of OCT so support that too.
+			/*
+			 * The user might have typed in a number into the month field i.e. 10 instead of OCT so support that too.
 			 */
 			try {
 				return Integer.parseInt(str);

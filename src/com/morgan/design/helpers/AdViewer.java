@@ -12,7 +12,7 @@ public class AdViewer {
 	public static void displayBanner(final Activity activity, final int addHolderRes) {
 		// Create the adView
 		final AdView adView = new AdView(activity, AdSize.BANNER, Constants.ADMOB_PUBLISHER_ID);
-		// Lookup your LinearLayout assuming it’s been given
+		// Lookup your LinearLayout assuming itï¿½s been given
 		// the attribute android:id="@+id/mainLayout"
 		final LinearLayout layout = (LinearLayout) activity.findViewById(addHolderRes);
 		// Add the adView to it

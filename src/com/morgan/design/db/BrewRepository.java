@@ -204,8 +204,8 @@ public class BrewRepository {
 			final BrewPlayer winner = resultsList.get(0);
 			resultsList.remove(0);
 
-			PreparedQuery<PlayerStats> preparedQuery =
-					this.playerStatsDao.queryBuilder().where().eq(PlayerStats.BREW_PLAYER_ID, winner.getId()).prepare();
+			PreparedQuery<PlayerStats> preparedQuery = this.playerStatsDao.queryBuilder().where()
+					.eq(PlayerStats.BREW_PLAYER_ID, winner.getId()).prepare();
 
 			PlayerStats winnerStats = this.playerStatsDao.queryForFirst(preparedQuery);
 
@@ -221,7 +221,8 @@ public class BrewRepository {
 
 			for (final BrewPlayer brewPlayer : resultsList) {
 
-				preparedQuery = this.playerStatsDao.queryBuilder().where().eq(PlayerStats.BREW_PLAYER_ID, brewPlayer.getId()).prepare();
+				preparedQuery = this.playerStatsDao.queryBuilder().where()
+						.eq(PlayerStats.BREW_PLAYER_ID, brewPlayer.getId()).prepare();
 
 				PlayerStats playerStats = this.playerStatsDao.queryForFirst(preparedQuery);
 
@@ -260,9 +261,7 @@ public class BrewRepository {
 	public BrewStats getBrewStats() {
 		try {
 			final List<BrewStats> stats = this.statsDao.queryForAll();
-			return (isNotNull(stats) && isNotEmpty(stats))
-					? stats.get(0)
-					: new BrewStats();
+			return (isNotNull(stats) && isNotEmpty(stats)) ? stats.get(0) : new BrewStats();
 		}
 		catch (final SQLException e) {
 			logError(e);
@@ -272,8 +271,8 @@ public class BrewRepository {
 
 	public List<PlayerStats> getPlayerStats() {
 		try {
-			final PreparedQuery<PlayerStats> preparedQuery =
-					this.playerStatsDao.queryBuilder().orderBy(PlayerStats.TOTAL_TIMES_WON, true).prepare();
+			final PreparedQuery<PlayerStats> preparedQuery = this.playerStatsDao.queryBuilder()
+					.orderBy(PlayerStats.TOTAL_TIMES_WON, true).prepare();
 			return this.playerStatsDao.query(preparedQuery);
 		}
 		catch (final SQLException e) {

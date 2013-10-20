@@ -57,7 +57,8 @@ public class PlayerAdaptor extends ArrayAdapter<BrewPlayer> {
 		View view = convertView;
 		ViewHolder holder;
 		if (view == null) {
-			// we first inflate the XML layout file and retrieve reference of the described View.
+			// we first inflate the XML layout file and retrieve reference of
+			// the described View.
 			final LayoutInflater vi = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = vi.inflate(R.layout.player_data_row, null);
 

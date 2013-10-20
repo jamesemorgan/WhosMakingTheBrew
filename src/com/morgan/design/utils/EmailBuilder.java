@@ -23,66 +23,42 @@ public class EmailBuilder {
 		}
 
 		public EmailContentBuilder h1(final String h1Val) {
-			this.getContent()
-				.append("<h1>")
-				.append(h1Val)
-				.append("</h1>");
+			this.getContent().append("<h1>").append(h1Val).append("</h1>");
 			return this;
 		}
 
 		public EmailContentBuilder h2(final String h2Val) {
-			this.getContent()
-				.append("<h2>")
-				.append(h2Val)
-				.append("</h2>");
+			this.getContent().append("<h2>").append(h2Val).append("</h2>");
 			return this;
 		}
 
 		public EmailContentBuilder h3(final String h3Val) {
-			this.getContent()
-				.append("<h3>")
-				.append(h3Val)
-				.append("</h3>");
+			this.getContent().append("<h3>").append(h3Val).append("</h3>");
 			return this;
 		}
 
 		public EmailContentBuilder h4(final String h4Val) {
-			this.getContent()
-				.append("<h4>")
-				.append(h4Val)
-				.append("</h4>");
+			this.getContent().append("<h4>").append(h4Val).append("</h4>");
 			return this;
 		}
 
 		public EmailContentBuilder h5(final String h5Val) {
-			this.getContent()
-				.append("<h5>")
-				.append(h5Val)
-				.append("</h5>");
+			this.getContent().append("<h5>").append(h5Val).append("</h5>");
 			return this;
 		}
 
 		public EmailContentBuilder h6(final String h6Val) {
-			this.getContent()
-				.append("<h6>")
-				.append(h6Val)
-				.append("</h6>");
+			this.getContent().append("<h6>").append(h6Val).append("</h6>");
 			return this;
 		}
 
 		public EmailContentBuilder sub(final String pVal) {
-			this.getContent()
-				.append("<sub>")
-				.append(pVal)
-				.append("</sub>");
+			this.getContent().append("<sub>").append(pVal).append("</sub>");
 			return this;
 		}
 
 		public EmailContentBuilder p(final String pVal) {
-			this.getContent()
-				.append("<p>")
-				.append(pVal)
-				.append("</p>");
+			this.getContent().append("<p>").append(pVal).append("</p>");
 			return this;
 		}
 
@@ -112,11 +88,7 @@ public class EmailBuilder {
 		public TableBuilder row(final List<String> cells) {
 			this.content.append("<tr>");
 			for (final String cell : cells) {
-				this.content.append("<td>")
-					.append(cell == null
-							? ""
-							: cell.toString())
-					.append("</td>");
+				this.content.append("<td>").append(cell == null ? "" : cell.toString()).append("</td>");
 			}
 			this.content.append("</tr>");
 			return this;
@@ -135,11 +107,7 @@ public class EmailBuilder {
 		public TableBuilder row(final Object... cells) {
 			this.content.append("<tr>");
 			for (final Object cell : cells) {
-				this.content.append("<td>")
-					.append(cell == null
-							? ""
-							: cell.toString())
-					.append("</td>");
+				this.content.append("<td>").append(cell == null ? "" : cell.toString()).append("</td>");
 			}
 			this.content.append("</tr>");
 			return this;
@@ -153,8 +121,7 @@ public class EmailBuilder {
 	}
 
 	public String build() {
-		return this.contentBuilder.getContent()
-			.toString();
+		return this.contentBuilder.getContent().toString();
 	}
 
 }

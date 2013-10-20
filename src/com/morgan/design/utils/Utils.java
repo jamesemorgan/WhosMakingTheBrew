@@ -26,8 +26,8 @@ import com.morgan.design.helpers.Constants;
 public class Utils {
 	private static final String LINEBREAK = "<br />";
 
-	public static void createEmailIntenet(final Activity activity, final String title, final String type, final String subject,
-			final String[] toAddresses, final Spanned body) {
+	public static void createEmailIntenet(final Activity activity, final String title, final String type,
+			final String subject, final String[] toAddresses, final Spanned body) {
 
 		final Intent emailIntent = new Intent(Intent.ACTION_SEND);
 		emailIntent.setType(type);
@@ -50,20 +50,18 @@ public class Utils {
 	}
 
 	public static String generateResultsEmail(final List<BrewPlayer> winners) {
-		//@formatter:off
+		// @formatter:off
 		final EmailBuilder endContent = new EmailBuilder().content()
-			.h3(winners.get(0).getName() + " Won The Tea Round......!!!")
-				.p("Scores as it stands: ")
-				.p("")
-				.table()
-					.row(" #   |   Score   |   Name" + LINEBREAK)
-					.row("---------------------------------------" + LINEBREAK)
-					.row(generateResultsRow(winners))
-					.row("---------------------------------------" + LINEBREAK)
+				.h3(winners.get(0).getName() + " Won The Tea Round......!!!")
+				.p("Scores as it stands: ").p("").table()
+				.row(" #   |   Score   |   Name" + LINEBREAK)
+				.row("---------------------------------------" + LINEBREAK)
+				.row(generateResultsRow(winners))
+				.row("---------------------------------------" + LINEBREAK)
 				.endTable()
 				.p("<a href='http://www.morgan-design.com'>Morgan-Design</a>")
-			.endContent();
-		//@formatter:on
+				.endContent();
+		// @formatter:on
 
 		return endContent.build();
 	}
@@ -137,7 +135,8 @@ public class Utils {
 		}
 	}
 
-	private static void sendEmail(final Activity activity, final String title, final String subject, final String[] toAddresses) {
+	private static void sendEmail(final Activity activity, final String title, final String subject,
+			final String[] toAddresses) {
 		createEmailIntenet(activity, title, "message/rfc822", subject, toAddresses);
 	}
 
@@ -145,8 +144,8 @@ public class Utils {
 		Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
 	}
 
-	private static void createEmailIntenet(final Activity activity, final String title, final String type, final String subject,
-			final String[] toAddresses) {
+	private static void createEmailIntenet(final Activity activity, final String title, final String type,
+			final String subject, final String[] toAddresses) {
 		createEmailIntenet(activity, title, type, subject, toAddresses, null);
 	}
 
@@ -154,9 +153,10 @@ public class Utils {
 		final List<String> players = new ArrayList<String>();
 
 		for (int i = 0; i < winners.size(); i++) {
-			//@formatter:off
-			players.add(result(i) + " | " + score(winners, i) + " | " + name(winners, i) + LINEBREAK);
-			//@formatter:on
+			// @formatter:off
+			players.add(result(i) + " | " + score(winners, i) + " | "
+					+ name(winners, i) + LINEBREAK);
+			// @formatter:on
 		}
 		return players;
 	}
@@ -181,7 +181,8 @@ public class Utils {
 	}
 
 	public static void openImprovement(final GoogleAnalyticsActivity activity) {
-		Utils.sendEmail(activity.getActivity(), "Send mail...", "Who's Making The Brew : Improvement", Constants.MY_EMAIL);
+		Utils.sendEmail(activity.getActivity(), "Send mail...", "Who's Making The Brew : Improvement",
+				Constants.MY_EMAIL);
 		activity.trackPageView("/OpenImprovmentEmail|" + activity.getClass().getCanonicalName());
 	}
 

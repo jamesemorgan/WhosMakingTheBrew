@@ -122,7 +122,8 @@ public class TeaTimerActivity extends AbstractActivityAnalytic {
 
 		this.totalSeconds = getTotalSecondsCountdown();
 		// Log.d(LOG_TAG, "totalSeconds : " + Integer.toString(totalSeconds));
-		// Log.d(LOG_TAG, "total time selected = " + Utils.formatIntoHHMMSS(totalSeconds));
+		// Log.d(LOG_TAG, "total time selected = " +
+		// Utils.formatIntoHHMMSS(totalSeconds));
 
 		if (isZero(this.totalSeconds)) {
 			Utils.shortToast(this, "Nothing to time...");
