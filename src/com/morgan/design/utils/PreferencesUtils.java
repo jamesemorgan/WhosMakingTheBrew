@@ -70,6 +70,7 @@ public class PreferencesUtils {
 		return fields;
 	}
 
+	@Deprecated
 	public static void setTimerFields(final Context context, final TimeFields timeFields) {
 		getPrefs(context).edit().putInt(HOUR_KEY, timeFields.getHour()).commit();
 		getPrefs(context).edit().putInt(MINUTE_KEY, timeFields.getMinute()).commit();

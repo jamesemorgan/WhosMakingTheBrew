@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,12 +20,11 @@ import android.widget.SimpleAdapter;
 import com.morgan.design.R;
 import com.morgan.design.analytics.AbstractActivityAnalytic;
 import com.morgan.design.db.domain.BrewStats;
-import com.morgan.design.helpers.Logger;
 import com.morgan.design.ui.SeparatedListAdapter;
 
 public class TeaRoundGeneratorStatisticsActivity extends AbstractActivityAnalytic {
 
-	private final static String LOG_TAG = "BrewStats";
+	private final Logger LOG = LoggerFactory.getLogger(TeaRoundGeneratorStatisticsActivity.class);
 
 	private final static String ITEM_TITLE = "title";
 	private final static String ITEM_CAPTION = "caption";
@@ -54,7 +56,7 @@ public class TeaRoundGeneratorStatisticsActivity extends AbstractActivityAnalyti
 	}
 
 	public void onPlayerStatsClick(final View view) {
-		Logger.d(LOG_TAG, "Player stats clicked");
+		LOG.debug("Player stats clicked");
 		final Intent playerStats = new Intent(this, TeaRoundPlayerStatisticsActivity.class);
 		trackPageView("/TeaRoundPlayerStatisticsActivity");
 		startActivity(playerStats);

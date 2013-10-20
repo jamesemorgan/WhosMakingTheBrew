@@ -3,6 +3,9 @@ package com.morgan.design.db;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -14,11 +17,11 @@ import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.db.domain.BrewStats;
 import com.morgan.design.db.domain.PlayerStats;
-import com.morgan.design.helpers.Logger;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
-	private static final String LOG_TAG = DatabaseHelper.class.getSimpleName();
+	private final Logger LOG = LoggerFactory.getLogger(DatabaseHelper.class);
+
 	private static final String DATABASE_NAME = "tea_round.db";
 
 	private static final int DATABASE_VERSION = 2;
@@ -37,7 +40,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	@Override
 	public void onCreate(final SQLiteDatabase db, final ConnectionSource connectionSource) {
-		Logger.i(LOG_TAG, "onCreate");
+		LOG.info("onCreate");
 		try {
 			dropTablesIfExists(connectionSource);
 			TableUtils.createTableIfNotExists(connectionSource, BrewPlayer.class);
@@ -46,7 +49,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTableIfNotExists(connectionSource, PlayerStats.class);
 		}
 		catch (final SQLException e) {
-			Logger.e(LOG_TAG, "Can't create database", e);
+			LOG.error("Can't create database", e);
 		}
 	}
 
@@ -55,9 +58,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	 * the various data to match the new version number.
 	 */
 	@Override
-	public void onUpgrade(final SQLiteDatabase db, final ConnectionSource connectionSource, int oldVersion,
-			final int newVersion) {
-		Logger.i(LOG_TAG, "onUpgrade, oldVersion=[%s], newVersion=[%s]", oldVersion, newVersion);
+	public void onUpgrade(final SQLiteDatabase db, final ConnectionSource connectionSource, int oldVersion, final int newVersion) {
+		LOG.info("onUpgrade, oldVersion=[{}], newVersion=[{}]", oldVersion, newVersion);
 		try {
 
 			if (newVersion == 1) {
@@ -79,13 +81,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 				}
 			}
 
-			final List<String> availableUpdates = UpgradeHelper.availableUpdates(this.context.getResources());
-			Logger.d(LOG_TAG, "Found a total of %s update statements", availableUpdates.size());
+			final List<String> availableUpdates = UpgradeHelper.availableUpdates(context.getResources());
+			LOG.debug("Found a total of {} update statements", availableUpdates.size());
 
 			for (final String statement : availableUpdates) {
 				db.beginTransaction();
 				try {
-					Logger.d(LOG_TAG, "Executing statement: %s", statement);
+					LOG.debug("Executing statement: {}", statement);
 					db.execSQL(statement);
 					db.setTransactionSuccessful();
 				}
@@ -95,15 +97,15 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			}
 		}
 		catch (final SQLException e) {
-			Logger.e(LOG_TAG, "Can't migrate databases, bootstrap database, data will be lost", e);
+			LOG.error("Can't migrate databases, bootstrap database, data will be lost", e);
 			onCreate(db, connectionSource);
 		}
 		catch (final android.database.SQLException e) {
-			Logger.e(LOG_TAG, "Can't migrate databases, bootstrap database, data will be lost", e);
+			LOG.error("Can't migrate databases, bootstrap database, data will be lost", e);
 			onCreate(db, connectionSource);
 		}
 		catch (final Exception e) {
-			Logger.e(LOG_TAG, "Can't migrate databases, bootstrap database, data will be lost", e);
+			LOG.error("Can't migrate databases, bootstrap database, data will be lost", e);
 			onCreate(db, connectionSource);
 		}
 	}
@@ -118,26 +120,26 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	@Override
 	public void close() {
 		super.close();
-		this.groupDao = null;
-		this.playerDao = null;
-		this.statsDao = null;
-		this.playerStatsDao = null;
+		groupDao = null;
+		playerDao = null;
+		statsDao = null;
+		playerStatsDao = null;
 	}
 
 	public Dao<BrewPlayer, Integer> getPlayerDao() throws SQLException {
-		return loadDao(this.playerDao, BrewPlayer.class);
+		return loadDao(playerDao, BrewPlayer.class);
 	}
 
 	public Dao<BrewGroup, Integer> getGroupDao() throws SQLException {
-		return loadDao(this.groupDao, BrewGroup.class);
+		return loadDao(groupDao, BrewGroup.class);
 	}
 
 	public Dao<BrewStats, Integer> getStatsDao() throws SQLException {
-		return loadDao(this.statsDao, BrewStats.class);
+		return loadDao(statsDao, BrewStats.class);
 	}
 
 	public Dao<PlayerStats, Integer> getPlayerStatsDao() throws SQLException {
-		return loadDao(this.playerStatsDao, PlayerStats.class);
+		return loadDao(playerStatsDao, PlayerStats.class);
 	}
 
 	private <T> Dao<T, Integer> loadDao(Dao<T, Integer> t, final Class<T> clazz) throws SQLException {

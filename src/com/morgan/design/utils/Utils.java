@@ -3,10 +3,14 @@ package com.morgan.design.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Vibrator;
 import android.text.Spanned;
 import android.view.View;
@@ -22,10 +26,13 @@ import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.helpers.Constants;
 
 public class Utils {
+
+	private final static Logger LOG = LoggerFactory.getLogger(Utils.class);
+
 	private static final String LINEBREAK = "<br />";
 
-	public static void createEmailIntenet(final Activity activity, final String title, final String type,
-			final String subject, final String[] toAddresses, final Spanned body) {
+	public static void createEmailIntenet(final Activity activity, final String title, final String type, final String subject,
+			final String[] toAddresses, final Spanned body) {
 
 		final Intent emailIntent = new Intent(Intent.ACTION_SEND);
 		emailIntent.setType(type);
@@ -133,8 +140,7 @@ public class Utils {
 		}
 	}
 
-	private static void sendEmail(final Activity activity, final String title, final String subject,
-			final String[] toAddresses) {
+	private static void sendEmail(final Activity activity, final String title, final String subject, final String[] toAddresses) {
 		createEmailIntenet(activity, title, "message/rfc822", subject, toAddresses);
 	}
 
@@ -142,8 +148,8 @@ public class Utils {
 		Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
 	}
 
-	private static void createEmailIntenet(final Activity activity, final String title, final String type,
-			final String subject, final String[] toAddresses) {
+	private static void createEmailIntenet(final Activity activity, final String title, final String type, final String subject,
+			final String[] toAddresses) {
 		createEmailIntenet(activity, title, type, subject, toAddresses, null);
 	}
 
@@ -179,9 +185,16 @@ public class Utils {
 	}
 
 	public static void openImprovement(final GoogleAnalyticsActivity activity) {
-		Utils.sendEmail(activity.getActivity(), "Send mail...", "Who's Making The Brew : Improvement",
-				Constants.MY_EMAIL);
+		Utils.sendEmail(activity.getActivity(), "Send mail...", "Who's Making The Brew : Improvement", Constants.MY_EMAIL);
 		activity.trackPageView("/OpenImprovmentEmail|" + activity.getClass().getCanonicalName());
+	}
+
+	public static void logBuildDetails() {
+		LOG.debug("##########################################");
+		LOG.debug(Build.VERSION.CODENAME);
+		LOG.debug(Build.VERSION.RELEASE);
+		LOG.debug(Build.VERSION.SDK);
+		LOG.debug("##########################################");
 	}
 
 }

@@ -2,6 +2,9 @@ package com.morgan.design.adaptor;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,11 +20,10 @@ import android.widget.Toast;
 import com.morgan.design.R;
 import com.morgan.design.activity.TeaRoundGroupManagementActivity;
 import com.morgan.design.db.domain.BrewGroup;
-import com.morgan.design.helpers.Logger;
 
 public class GroupAdaptor extends ArrayAdapter<BrewGroup> {
 
-	private final String LOG_TAG = "GroupAdapter";
+	private final Logger LOG = LoggerFactory.getLogger(GroupAdaptor.class);
 
 	private final List<BrewGroup> groups;
 	private final Activity context;
@@ -37,7 +39,7 @@ public class GroupAdaptor extends ArrayAdapter<BrewGroup> {
 		View view = convertView;
 		ViewHolder holder;
 		if (view == null) {
-			final LayoutInflater vi = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			final LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = vi.inflate(R.layout.group_data_row, null);
 
 			holder = new ViewHolder();
@@ -60,8 +62,8 @@ public class GroupAdaptor extends ArrayAdapter<BrewGroup> {
 
 		holder.trashButton.setOnClickListener(new TrashClickHandler(position));
 
-		final BrewGroup group = this.groups.get(position);
-		Logger.d(this.LOG_TAG, group.getName());
+		final BrewGroup group = groups.get(position);
+		LOG.debug(group.getName());
 
 		if (group != null) {
 			final TextView nameTextView = (TextView) view.findViewById(R.id.name_text_view);
@@ -94,19 +96,19 @@ public class GroupAdaptor extends ArrayAdapter<BrewGroup> {
 
 		@Override
 		public void onClick(final View v) {
-			Logger.d(GroupAdaptor.this.LOG_TAG, "Trash clicked");
+			LOG.debug("Trash clicked");
 
-			Logger.d(GroupAdaptor.this.LOG_TAG, "Trash clicked");
-			final BrewGroup group = GroupAdaptor.this.groups.get(this.position);
+			LOG.debug("Trash clicked");
+			final BrewGroup group = groups.get(position);
 			shortToast("Removed group: " + group.getName());
-			GroupAdaptor.this.groups.remove(this.position);
+			groups.remove(position);
 			notifyDataSetChanged();
-			final TeaRoundGroupManagementActivity activity = (TeaRoundGroupManagementActivity) GroupAdaptor.this.context;
+			final TeaRoundGroupManagementActivity activity = (TeaRoundGroupManagementActivity) context;
 			activity.removeGroup(group);
 		}
 	}
 
 	public void shortToast(final CharSequence message) {
-		Toast.makeText(this.context, message, Toast.LENGTH_SHORT).show();
+		Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 	}
 }

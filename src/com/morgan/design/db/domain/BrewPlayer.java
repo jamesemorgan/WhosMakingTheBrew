@@ -87,9 +87,8 @@ public class BrewPlayer implements Serializable, Comparable<BrewPlayer> {
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
-		builder.append("BrewPlayer [id=").append(this.id).append(", name=").append(this.name).append(", score=")
-				.append(this.score).append(", lastRun=").append(this.lastRun).append(", brewGroup=")
-				.append(this.brewGroup).append("]");
+		builder.append("BrewPlayer [id=").append(this.id).append(", name=").append(this.name).append(", score=").append(this.score)
+				.append(", lastRun=").append(this.lastRun).append(", brewGroup=").append(this.brewGroup).append("]");
 		return builder.toString();
 	}
 

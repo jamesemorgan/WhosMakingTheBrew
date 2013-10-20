@@ -3,6 +3,9 @@ package com.morgan.design.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -19,12 +22,11 @@ import com.morgan.design.adaptor.GroupAdaptor;
 import com.morgan.design.analytics.AbstractListActivityAnalytic;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
-import com.morgan.design.helpers.Logger;
 import com.morgan.design.utils.Utils;
 
 public class TeaRoundGroupManagementActivity extends AbstractListActivityAnalytic {
 
-	private static final String LOG_TAG = "Group";
+	private final Logger LOG = LoggerFactory.getLogger(TeaRoundGroupManagementActivity.class);
 
 	private static final int MENU_LOAD = Menu.FIRST + 1;
 	private static final int MENU_DELETE = Menu.FIRST + 2;
@@ -49,7 +51,7 @@ public class TeaRoundGroupManagementActivity extends AbstractListActivityAnalyti
 	public void onCreateContextMenu(final ContextMenu menu, final View v, final ContextMenuInfo menuInfo) {
 		if (v.getId() == getListView().getId()) {
 			final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-			final String groupName = this.groups.get(info.position).getName();
+			final String groupName = groups.get(info.position).getName();
 			menu.setHeaderTitle(groupName);
 			menu.add(Menu.NONE, MENU_LOAD, MENU_LOAD, "Load Group");
 			menu.add(Menu.NONE, MENU_DELETE, MENU_DELETE, "Delete Group");
@@ -60,10 +62,10 @@ public class TeaRoundGroupManagementActivity extends AbstractListActivityAnalyti
 	public boolean onContextItemSelected(final MenuItem item) {
 		final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 		final int menuItemIndex = item.getItemId();
-		final BrewGroup group = this.groups.get(info.position);
+		final BrewGroup group = groups.get(info.position);
 
 		if (menuItemIndex == MENU_LOAD) {
-			Logger.d(LOG_TAG, "Loading players");
+			LOG.debug("Loading players");
 			final Intent returnIntent = new Intent();
 			returnIntent.putExtra(TeaApplication.GROUP_ID, group.getId());
 			setResult(RESULT_OK, returnIntent);
@@ -79,7 +81,7 @@ public class TeaRoundGroupManagementActivity extends AbstractListActivityAnalyti
 	@Override
 	public boolean onKeyDown(final int keyCode, final KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-			Logger.d(LOG_TAG, "back button pressed");
+			LOG.debug("back button pressed");
 			finish();
 			return true;
 		}
@@ -87,12 +89,12 @@ public class TeaRoundGroupManagementActivity extends AbstractListActivityAnalyti
 	}
 
 	private void loadGroups() {
-		this.groups.clear();
-		this.groups = getBrewRepository().findAllBrewGroups();
-		this.groupAdaptor = new GroupAdaptor(this, R.layout.group_data_row, this.groups);
-		setListAdapter(this.groupAdaptor);
+		groups.clear();
+		groups = getBrewRepository().findAllBrewGroups();
+		groupAdaptor = new GroupAdaptor(this, R.layout.group_data_row, groups);
+		setListAdapter(groupAdaptor);
 		registerForContextMenu(getListView());
-		this.groupAdaptor.notifyDataSetChanged();
+		groupAdaptor.notifyDataSetChanged();
 	}
 
 	public void removeGroup(final BrewGroup group) {

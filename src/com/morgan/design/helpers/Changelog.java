@@ -1,5 +1,8 @@
 package com.morgan.design.helpers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,7 +16,7 @@ import com.morgan.design.utils.Utils;
 
 public class Changelog {
 
-	private static final String LOG_TAG = "Changelog";
+	private final static Logger LOG = LoggerFactory.getLogger(Changelog.class);
 
 	public static boolean show(final Activity activity) {
 
@@ -21,7 +24,7 @@ public class Changelog {
 		int currentVersion = 0;
 
 		final boolean overrideChangeLog = BuildUtils.isRunningEmmulator();
-		Logger.d(LOG_TAG, "Overriding ChangeLog: " + overrideChangeLog);
+		LOG.debug("Overriding ChangeLog: {}", overrideChangeLog);
 
 		final boolean showChangeLog = PreferencesUtils.getChangelogPref(activity);
 
@@ -30,7 +33,7 @@ public class Changelog {
 			currentVersion = pi.versionCode;
 		}
 		catch (final NameNotFoundException e) {
-			Logger.e(LOG_TAG, "Package name not found", e);
+			LOG.error("Package name not found", e);
 			return false;
 		}
 
@@ -49,8 +52,7 @@ public class Changelog {
 	protected static void showChangelogDialog(final Activity activity) {
 		new AlertDialog.Builder(activity).setIcon(android.R.drawable.ic_dialog_info).setTitle(R.string.changelog_title)
 				.setView(Utils.dialogWebView(activity, activity.getString(R.string.changelog_filename)))
-				.setPositiveButton(R.string.ok, null)
-				.setNegativeButton(R.string.feedback, new DialogInterface.OnClickListener() {
+				.setPositiveButton(R.string.ok, null).setNegativeButton(R.string.feedback, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(final DialogInterface dialog, final int which) {
 						Utils.openFeedback(activity);

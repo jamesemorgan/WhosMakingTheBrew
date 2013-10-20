@@ -44,8 +44,7 @@ public class FormActivity extends Activity {
 		// Take the fields and format the message contents
 		final String subject = formatFeedbackSubject(feedbackType);
 
-		final String message = formatFeedbackMessage(feedbackType, name, email, feedback, bRequiresResponse,
-				BuildUtils.getVersion(this));
+		final String message = formatFeedbackMessage(feedbackType, name, email, feedback, bRequiresResponse, BuildUtils.getVersion(this));
 
 		// Create the message
 		sendFeedbackMessage(subject, message);
@@ -56,11 +55,10 @@ public class FormActivity extends Activity {
 		return String.format(strFeedbackSubjectFormat, feedbackType);
 	}
 
-	protected String formatFeedbackMessage(final String feedbackType, final String name, final String email,
-			final String feedback, final boolean bRequiresResponse, final String version) {
-		return String.format("Type: %s \n\n %s \n\n %s (%s) - %s \n\n Version: %s \n\n Android Version: %s",
-				feedbackType, feedback, name, email, getResponseString(bRequiresResponse), version,
-				Build.VERSION.RELEASE);
+	protected String formatFeedbackMessage(final String feedbackType, final String name, final String email, final String feedback,
+			final boolean bRequiresResponse, final String version) {
+		return String.format("Type: %s \n\n %s \n\n %s (%s) - %s \n\n Version: %s \n\n Android Version: %s", feedbackType, feedback, name,
+				email, getResponseString(bRequiresResponse), version, Build.VERSION.RELEASE);
 
 	}
 

@@ -2,6 +2,9 @@ package com.morgan.design.adaptor;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.app.Activity;
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -16,12 +19,11 @@ import android.widget.TextView;
 import com.morgan.design.R;
 import com.morgan.design.activity.TeaRoundGeneratorHomeActivity.TrashClickHandler;
 import com.morgan.design.db.domain.BrewPlayer;
-import com.morgan.design.helpers.Logger;
 import com.morgan.design.utils.SmileyIconUtils;
 
 public class PlayerAdaptor extends ArrayAdapter<BrewPlayer> {
 
-	private final static String LOG_TAG = "PlayerAdapter";
+	private final Logger LOG = LoggerFactory.getLogger(PlayerAdaptor.class);
 
 	private final List<BrewPlayer> players;
 	private final Activity context;
@@ -59,7 +61,7 @@ public class PlayerAdaptor extends ArrayAdapter<BrewPlayer> {
 		if (view == null) {
 			// we first inflate the XML layout file and retrieve reference of
 			// the described View.
-			final LayoutInflater vi = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			final LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = vi.inflate(R.layout.player_data_row, null);
 
 			holder = new ViewHolder();
@@ -78,10 +80,10 @@ public class PlayerAdaptor extends ArrayAdapter<BrewPlayer> {
 		}
 
 		holder.trashButton.setTag(position);
-		holder.trashButton.setOnClickListener(this.trashClickHandlerListener);
+		holder.trashButton.setOnClickListener(trashClickHandlerListener);
 
-		final BrewPlayer player = this.players.get(position);
-		Logger.d(LOG_TAG, player.getName());
+		final BrewPlayer player = players.get(position);
+		LOG.debug(player.getName());
 
 		if (player != null) {
 			final TextView nameTextView = (TextView) view.findViewById(R.id.name_text_view);

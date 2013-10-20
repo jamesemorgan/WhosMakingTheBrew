@@ -2,15 +2,15 @@ package com.morgan.design;
 
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import android.app.Application;
-
-import com.morgan.design.helpers.Logger;
 
 @ReportsCrashes(formKey = "dHlyYXloTmQ4X0lObDhEeHRnY2Eyd2c6MQ")
 public class TeaApplication extends Application {
 
-	public static final String LOG_TAG = "BaseApplication";
+	private final Logger LOG = LoggerFactory.getLogger(TeaApplication.class);
 
 	public static final int ACTIVITY_HOME = 1;
 	public static final int ACTIVITY_RUNNING = 2;
@@ -24,15 +24,15 @@ public class TeaApplication extends Application {
 
 	@Override
 	public void onCreate() {
-		// The following line triggers the initialization of ACRA
+		// The following line triggers the initialisation of ACRA
 		ACRA.init(this);
 		super.onCreate();
-		Logger.d(LOG_TAG, "APPLICATION onCreate");
+		LOG.debug("APPLICATION onCreate");
 	}
 
 	@Override
 	public void onTerminate() {
-		Logger.d(LOG_TAG, "APPLICATION onTerminate");
+		LOG.debug("APPLICATION onTerminate");
 		super.onTerminate();
 	}
 

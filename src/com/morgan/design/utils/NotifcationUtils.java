@@ -35,8 +35,7 @@ public class NotifcationUtils {
 	 * @return {@link Notification}
 	 */
 	public static Notification createTeaTimerNotifcation(final Context context, final int titleText) {
-		return new Notification(R.drawable.dashboard_teapot_icon, context.getText(titleText),
-				System.currentTimeMillis());
+		return new Notification(R.drawable.dashboard_teapot_icon, context.getText(titleText), System.currentTimeMillis());
 	}
 
 	/**

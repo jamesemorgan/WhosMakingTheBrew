@@ -8,10 +8,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.morgan.design.helpers.Logger;
 import com.morgan.design.utils.StringUtils;
 
 /**
@@ -21,7 +23,7 @@ import com.morgan.design.utils.StringUtils;
  */
 public class UpgradeHelper {
 
-	private static final String LOG_TAG = "UpgradeHelper";
+	private static final Logger LOG = LoggerFactory.getLogger(UpgradeHelper.class);
 
 	protected static final Set<Integer> VERSION;
 	static {
@@ -32,7 +34,7 @@ public class UpgradeHelper {
 	 * Add the given version to the list of available updates
 	 */
 	public static final void addUpgrade(final int version) {
-		Logger.d(LOG_TAG, "Adding %s to upgrade path", version);
+		LOG.debug("Adding {} to upgrade path", version);
 		VERSION.add(version);
 	}
 
@@ -48,7 +50,7 @@ public class UpgradeHelper {
 		for (final Integer version : VERSION) {
 			final String fileName = String.format("updates/migration-%s.sql", version);
 
-			Logger.d(LOG_TAG, "Adding db version [%s] to update list, loading file [%s]", version, fileName);
+			LOG.debug("Adding db version [{}] to update list, loading file [{}]", version, fileName);
 
 			final String sqlStatements = loadAssetFile(resources, fileName);
 
@@ -83,7 +85,7 @@ public class UpgradeHelper {
 			return os.toString();
 		}
 		catch (final IOException e) {
-			Logger.e(LOG_TAG, "IOException: ", e);
+			LOG.error("IOException: ", e);
 			throw new RuntimeException(e);
 		}
 	}

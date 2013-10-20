@@ -5,13 +5,15 @@ import static com.morgan.design.utils.ObjectUtils.isNotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -33,14 +35,13 @@ import com.morgan.design.adaptor.PlayerAdaptor;
 import com.morgan.design.analytics.AbstractListActivityAnalytic;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
-import com.morgan.design.helpers.Logger;
 import com.morgan.design.utils.PreferencesUtils;
 import com.morgan.design.utils.StringUtils;
 import com.morgan.design.utils.Utils;
 
 public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic {
 
-	private final static String LOG_TAG = "Home";
+	private final Logger LOG = LoggerFactory.getLogger(TeaRoundGeneratorHomeActivity.class);
 
 	private EditText addPlayerEditText;
 	private Button runTeaRoundButton;
@@ -58,10 +59,7 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 
-		Logger.d(LOG_TAG, "##########################################");
-		Logger.d(LOG_TAG, Build.VERSION.CODENAME);
-		Logger.d(LOG_TAG, Build.VERSION.RELEASE);
-		Logger.d(LOG_TAG, "##########################################");
+		Utils.logBuildDetails();
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tea_round_home);
@@ -69,12 +67,11 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 		findAllViewsById();
 
 		// Bind focus listener to attach to add player text box
-		this.addPlayerEditText.setOnKeyListener(new EnterPlayerClickListener());
+		addPlayerEditText.setOnKeyListener(new EnterPlayerClickListener());
 
-		this.playerAdaptor = new PlayerAdaptor(this, R.layout.player_data_row, new ArrayList<BrewPlayer>(),
-				new TrashClickHandler());
+		playerAdaptor = new PlayerAdaptor(this, R.layout.player_data_row, new ArrayList<BrewPlayer>(), new TrashClickHandler());
 
-		this.dataSetObserver = new DataSetObserver() {
+		dataSetObserver = new DataSetObserver() {
 			@Override
 			public void onChanged() {
 				super.onChanged();
@@ -82,8 +79,8 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 				setPlayerDetailHeader();
 			}
 		};
-		this.playerAdaptor.registerDataSetObserver(this.dataSetObserver);
-		setListAdapter(this.playerAdaptor);
+		playerAdaptor.registerDataSetObserver(dataSetObserver);
+		setListAdapter(playerAdaptor);
 
 		final Bundle bundle = getIntent().getExtras();
 		if (isNotNull(bundle)) {
@@ -100,14 +97,14 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		this.playerAdaptor.unregisterDataSetObserver(this.dataSetObserver);
+		playerAdaptor.unregisterDataSetObserver(dataSetObserver);
 	}
 
 	@Override
 	public boolean onPrepareOptionsMenu(final Menu menu) {
 		menu.clear();
 		final MenuInflater inflater = getMenuInflater();
-		if (null != this.brewGroup) {
+		if (null != brewGroup) {
 			inflater.inflate(R.menu.brew_round_menu_edit_group, menu);
 		}
 		else {
@@ -178,7 +175,7 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 				if (resultCode == RESULT_OK) {
 					final Intent resultsIntent = new Intent(this, TeaRoundGeneratorResultsActivity.class);
 					final ArrayList<Integer> playerIds = new ArrayList<Integer>();
-					for (final BrewPlayer player : this.brewPlayers) {
+					for (final BrewPlayer player : brewPlayers) {
 						playerIds.add(player.getId());
 					}
 					final Bundle bundle = new Bundle();
@@ -213,12 +210,12 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	}
 
 	public void enableDisableButtonRunTeaRound() {
-		this.runTeaRoundButton.setEnabled(validNumberOfPlayers());
+		runTeaRoundButton.setEnabled(validNumberOfPlayers());
 	}
 
 	private void clearBrewBroupIfRequired() {
-		if (this.playerAdaptor.isEmpty() && null != this.brewGroup) {
-			this.brewGroup = null;
+		if (playerAdaptor.isEmpty() && null != brewGroup) {
+			brewGroup = null;
 		}
 	}
 
@@ -233,20 +230,20 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	public void setPlayerDetailHeader() {
 		final StringBuilder builder = new StringBuilder();
 
-		if (this.playerAdaptor.isEmpty()) {
+		if (playerAdaptor.isEmpty()) {
 			builder.append(getResources().getString(R.string.no_players));
 		}
 		else {
-			builder.append("Players(" + this.playerAdaptor.getCount() + ")");
-			if (null != this.brewGroup && StringUtils.isNotBlank(this.brewGroup.getName())) {
-				builder.append(" | Group: ").append(this.brewGroup.getName());
+			builder.append("Players(" + playerAdaptor.getCount() + ")");
+			if (null != brewGroup && StringUtils.isNotBlank(brewGroup.getName())) {
+				builder.append(" | Group: ").append(brewGroup.getName());
 			}
 		}
-		this.playerDetailHeader.setText(builder.toString());
+		playerDetailHeader.setText(builder.toString());
 	}
 
 	private void addPlayer() {
-		final String playerName = this.addPlayerEditText.getText().toString();
+		final String playerName = addPlayerEditText.getText().toString();
 
 		if (notNullEmpyOrValue(playerName, R.string.add_player)) {
 			Utils.shortToast(this, "Invalid player name");
@@ -257,21 +254,21 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 		player.setName(playerName);
 
 		if (!checkAlreadyPlaying(player)) {
-			Logger.d(LOG_TAG, "Added player, name:" + player.getName());
+			LOG.debug("Added player, name: {}", player.getName());
 
-			this.brewPlayers.add(player);
-			this.playerAdaptor.add(player);
+			brewPlayers.add(player);
+			playerAdaptor.add(player);
 
-			this.addPlayerEditText.setText("");
-			this.addPlayerEditText.clearComposingText();
-			this.addPlayerEditText.requestFocus();
+			addPlayerEditText.setText("");
+			addPlayerEditText.clearComposingText();
+			addPlayerEditText.requestFocus();
 
 			// TODO set brew group if present
 			getBrewRepository().saveBrewPlayer(player);
 		}
 		else {
 			Utils.shortToast(this, player.getName() + " already playing");
-			Logger.d(LOG_TAG, player.getName() + " already playing");
+			LOG.debug("{} already playing", player.getName());
 		}
 		enableDisableButtonRunTeaRound();
 		setPlayerDetailHeader();
@@ -282,16 +279,16 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 			Utils.shortToast(this, "Invalid Group Name");
 			return;
 		}
-		this.brewGroup = getBrewRepository().saveGroup(groupName, this.brewPlayers);
+		brewGroup = getBrewRepository().saveGroup(groupName, brewPlayers);
 		Utils.shortToast(this, "Create Group: " + groupName);
 		setPlayerDetailHeader();
 	}
 
 	private boolean checkAlreadyPlaying(final BrewPlayer player) {
-		if (null == this.brewPlayers) {
+		if (null == brewPlayers) {
 			return false;
 		}
-		for (final BrewPlayer existingPlayer : this.brewPlayers) {
+		for (final BrewPlayer existingPlayer : brewPlayers) {
 			if (existingPlayer.getName().equals(player.getName())) {
 				return true;
 			}
@@ -300,9 +297,9 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	}
 
 	private void findAllViewsById() {
-		this.playerDetailHeader = (TextView) findViewById(R.id.player_detail_header);
-		this.addPlayerEditText = (EditText) findViewById(R.id.add_player_text);
-		this.runTeaRoundButton = (Button) findViewById(R.id.run_tea_round);
+		playerDetailHeader = (TextView) findViewById(R.id.player_detail_header);
+		addPlayerEditText = (EditText) findViewById(R.id.add_player_text);
+		runTeaRoundButton = (Button) findViewById(R.id.run_tea_round);
 	}
 
 	private void hideKeyBoard(final View view) {
@@ -311,12 +308,12 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	}
 
 	private void loadGroup(final Integer groupId) {
-		this.brewGroup = getBrewRepository().findGroupById(groupId);
-		if (null != this.brewGroup) {
-			this.brewPlayers = this.brewGroup.getBrewPlayers();
-			this.playerAdaptor.clear();
-			for (final BrewPlayer player : this.brewGroup.getBrewPlayers()) {
-				this.playerAdaptor.add(player);
+		brewGroup = getBrewRepository().findGroupById(groupId);
+		if (null != brewGroup) {
+			brewPlayers = brewGroup.getBrewPlayers();
+			playerAdaptor.clear();
+			for (final BrewPlayer player : brewGroup.getBrewPlayers()) {
+				playerAdaptor.add(player);
 			}
 		}
 		setPlayerDetailHeader();
@@ -324,17 +321,16 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	}
 
 	private void loadLastRunPlayers() {
-		this.brewPlayers = getBrewRepository().findLastRunPlayers();
+		brewPlayers = getBrewRepository().findLastRunPlayers();
 
-		if (null != this.brewPlayers && !this.brewPlayers.isEmpty()
-				&& null != this.brewPlayers.iterator().next().getBrewGroup()) {
-			this.brewGroup = this.brewPlayers.iterator().next().getBrewGroup();
+		if (null != brewPlayers && !brewPlayers.isEmpty() && null != brewPlayers.iterator().next().getBrewGroup()) {
+			brewGroup = brewPlayers.iterator().next().getBrewGroup();
 		}
 
-		if (this.brewPlayers != null && !this.brewPlayers.isEmpty()) {
-			this.playerAdaptor.clear();
-			for (final BrewPlayer player : this.brewPlayers) {
-				this.playerAdaptor.add(player);
+		if (brewPlayers != null && !brewPlayers.isEmpty()) {
+			playerAdaptor.clear();
+			for (final BrewPlayer player : brewPlayers) {
+				playerAdaptor.add(player);
 			}
 		}
 		// Set no players
@@ -355,35 +351,33 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	private AlertDialog showGroupDialog(final boolean editing) {
 		final LayoutInflater factory = LayoutInflater.from(this);
 		final View textEntryView = factory.inflate(R.layout.add_group_dialog, null);
-		final AlertDialog dialogGroup = new AlertDialog.Builder(this)
-				.setTitle(editing ? "Edit Group Name" : "Add Group Name").setIcon(R.drawable.add_group)
-				.setView(textEntryView).create();
+		final AlertDialog dialogGroup = new AlertDialog.Builder(this).setTitle(editing ? "Edit Group Name" : "Add Group Name")
+				.setIcon(R.drawable.add_group).setView(textEntryView).create();
 
 		final EditText addGroupEditText = (EditText) textEntryView.findViewById(R.id.add_group_edit_text);
 
 		if (editing) {
-			addGroupEditText.setText(this.brewGroup.getName());
+			addGroupEditText.setText(brewGroup.getName());
 		}
 
 		addGroupEditText.setFocusable(true);
 		addGroupEditText.requestFocus();
 
 		showKeyBoard(addGroupEditText);
-		dialogGroup.setButton(editing ? getString(R.string.edit) : getString(R.string.add),
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(final DialogInterface dialog, final int whichButton) {
-						final String groupName = addGroupEditText.getEditableText().toString();
-						hideKeyBoard(addGroupEditText);
-						addGroupEditText.clearFocus();
-						if (editing) {
-							updateGroupName(groupName);
-						}
-						else {
-							addPlayersToGroup(groupName);
-						}
-					}
-				});
+		dialogGroup.setButton(editing ? getString(R.string.edit) : getString(R.string.add), new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(final DialogInterface dialog, final int whichButton) {
+				final String groupName = addGroupEditText.getEditableText().toString();
+				hideKeyBoard(addGroupEditText);
+				addGroupEditText.clearFocus();
+				if (editing) {
+					updateGroupName(groupName);
+				}
+				else {
+					addPlayersToGroup(groupName);
+				}
+			}
+		});
 		dialogGroup.setButton2(getString(R.string.cancel), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int whichButton) {
@@ -401,12 +395,12 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	}
 
 	private void updateGroupName(final String groupName) {
-		this.brewGroup.setName(groupName);
-		getBrewRepository().updateGroup(this.brewGroup);
+		brewGroup.setName(groupName);
+		getBrewRepository().updateGroup(brewGroup);
 	}
 
 	private boolean validNumberOfPlayers() {
-		return this.playerAdaptor.getCount() >= 2;
+		return playerAdaptor.getCount() >= 2;
 	}
 
 	public class TrashClickHandler implements OnClickListener {
@@ -414,13 +408,13 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 		@Override
 		public void onClick(final View v) {
 			final Integer position = (Integer) v.getTag();
-			Logger.d(LOG_TAG, "Trash clicked, position %s", position);
-			final BrewPlayer player = TeaRoundGeneratorHomeActivity.this.playerAdaptor.getItem(position);
+			LOG.debug("Trash clicked, position {}", position);
+			final BrewPlayer player = playerAdaptor.getItem(position);
 
 			if (0 != player.getId()) {
 				final AlertDialog.Builder builder = new AlertDialog.Builder(TeaRoundGeneratorHomeActivity.this);
-				builder.setMessage("Click 'Remove' to remove from this game, 'Delete' to delete completely")
-						.setCancelable(true).setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+				builder.setMessage("Click 'Remove' to remove from this game, 'Delete' to delete completely").setCancelable(true)
+						.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(final DialogInterface dialog, final int id) {
 								removeFromGame(player, position);
@@ -441,7 +435,7 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 
 	private void deletePlayer(final BrewPlayer player, final int playerPosition) {
 		shortToast("Deleted " + player.getName() + " from game");
-		this.playerAdaptor.remove(player);
+		playerAdaptor.remove(player);
 		getBrewRepository().deletePlayer(player);
 		getBrewRepository().removePlayerStats(player);
 		clearBrewBroupIfRequired();
@@ -449,7 +443,7 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 
 	private void removeFromGame(final BrewPlayer player, final int playerPosition) {
 		shortToast("Removed " + player.getName() + " from game");
-		this.playerAdaptor.remove(player);
+		playerAdaptor.remove(player);
 		clearBrewBroupIfRequired();
 	}
 
@@ -462,9 +456,9 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 		public boolean onKey(final View v, final int keyCode, final KeyEvent event) {
 			if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 				addPlayer();
-				TeaRoundGeneratorHomeActivity.this.addPlayerEditText.setFocusableInTouchMode(true);
-				TeaRoundGeneratorHomeActivity.this.addPlayerEditText.requestFocusFromTouch();
-				TeaRoundGeneratorHomeActivity.this.addPlayerEditText.setSelected(true);
+				addPlayerEditText.setFocusableInTouchMode(true);
+				addPlayerEditText.requestFocusFromTouch();
+				addPlayerEditText.setSelected(true);
 				return true;
 			}
 			return false;

@@ -25,8 +25,8 @@ public class TeaRoundPlayerStatisticsActivity extends AbstractActivityAnalytic {
 	private final static String HIGHEST_SCORE = "highest_score";
 	private final static String LOWEST_SCORE = "lowest_score";
 
-	private static final int[] TO = new int[] { R.id.player_name, R.id.num_games_entered, R.id.num_games_won,
-			R.id.highest_score, R.id.lowest_score };
+	private static final int[] TO = new int[] { R.id.player_name, R.id.num_games_entered, R.id.num_games_won, R.id.highest_score,
+			R.id.lowest_score };
 	private static final String[] FROM = new String[] { PLAYER_NAME, NUM_ENTERED, NUM_WON, HIGHEST_SCORE, LOWEST_SCORE };
 
 	@Override
@@ -51,8 +51,7 @@ public class TeaRoundPlayerStatisticsActivity extends AbstractActivityAnalytic {
 			}
 		}
 
-		adapter.addSection("Player Statistics",
-				new SimpleAdapter(this, stats, R.layout.list_player_stats_row, FROM, TO));
+		adapter.addSection("Player Statistics", new SimpleAdapter(this, stats, R.layout.list_player_stats_row, FROM, TO));
 
 		list.setAdapter(adapter);
 	}
