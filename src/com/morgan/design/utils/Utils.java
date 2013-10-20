@@ -1,7 +1,5 @@
 package com.morgan.design.utils;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +19,6 @@ import com.morgan.design.TeaApplication;
 import com.morgan.design.activity.TeaRoundGeneratorCreditsActivity;
 import com.morgan.design.activity.general.FormActivity;
 import com.morgan.design.analytics.GoogleAnalyticsActivity;
-import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.helpers.Constants;
 
 public class Utils {
@@ -131,20 +128,6 @@ public class Utils {
 	private static void createEmailIntenet(final Activity activity, final String title, final String type, final String subject,
 			final String[] toAddresses) {
 		createEmailIntenet(activity, title, type, subject, toAddresses, null);
-	}
-
-	private static String name(final List<BrewPlayer> winners, final int index) {
-		return winners.get(index).getName();
-
-	}
-
-	private static String result(final int index) {
-		final int position = index + 1;
-		return StringUtils.rightPad(position + Utils.getSuffix(position), 4);
-	}
-
-	private static String score(final List<BrewPlayer> winners, final int index) {
-		return StringUtils.rightPad(Integer.toString(winners.get(index).getScore()), 5);
 	}
 
 	public static void openBug(final GoogleAnalyticsActivity activity) {

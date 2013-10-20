@@ -15,6 +15,7 @@ Code changes
 - [ ] Rework animation view
 - [ ] Rework groups view
 - [ ] Rework stats page
+- [ ] Rework Google Analytics integration and what is recorded
 
 Remove dead features:
 - [x] Tea timer (maybe replaced one day!)

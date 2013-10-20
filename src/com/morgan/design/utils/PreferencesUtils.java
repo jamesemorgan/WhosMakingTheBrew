@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 
 import com.morgan.design.TeaApplication;
 import com.morgan.design.TeaRoundPreferences;
-import com.morgan.design.db.domain.TimeFields;
 
 public class PreferencesUtils {
 
@@ -57,68 +56,9 @@ public class PreferencesUtils {
 		return getPrefs(context).edit().putInt(PREF_APP_VERSION, value).commit();
 	}
 
-	public static TimeFields getTimerFields(final Context context) {
-		final TimeFields fields = new TimeFields();
-		try {
-			fields.setHour(getPrefs(context).getInt(HOUR_KEY, 00));
-			fields.setMinute(getPrefs(context).getInt(MINUTE_KEY, 00));
-			fields.setSecond(getPrefs(context).getInt(SECOND_KEY, 00));
-		}
-		catch (final Exception e) {
-			//
-		}
-		return fields;
-	}
-
-	@Deprecated
-	public static void setTimerFields(final Context context, final TimeFields timeFields) {
-		getPrefs(context).edit().putInt(HOUR_KEY, timeFields.getHour()).commit();
-		getPrefs(context).edit().putInt(MINUTE_KEY, timeFields.getMinute()).commit();
-		getPrefs(context).edit().putInt(SECOND_KEY, timeFields.getSecond()).commit();
-	}
-
 	public static void openPreferenecesActivity(final Activity activity) {
 		final Intent intent = new Intent(activity, TeaRoundPreferences.class);
 		activity.startActivityForResult(intent, TeaApplication.ACTIVITY_PREFERENCES);
 	}
 
-	// public static SharedPreferences.Editor getPrivateSharedPrefsEditor(final
-	// Context context) {
-	// final SharedPreferences preferences = getPrivateSharedPrefs(context);
-	// final SharedPreferences.Editor editor = preferences.edit();
-	// return editor;
-	// }
-	//
-	// public static SharedPreferences getPrivateSharedPrefs(final Context
-	// context) {
-	// return context.getSharedPreferences(Constants.TEA_ROUND_SHARED_PREFS_KEY,
-	// Activity.MODE_PRIVATE);
-	// }
-	//
-	// public static Preference findChangeLogPref(final PreferenceActivity
-	// preferenceActivity) {
-	// return preferenceActivity.findPreference(PREF_CHANGELOG);
-	// }
-	//
-	// public static boolean getVibratePref(final Context context) {
-	// final SharedPreferences preferences =
-	// PreferencesUtils.getPrivateSharedPrefs(context);;
-	// return preferences.getBoolean(PREF_TIMER_VIBRATE, true);
-	// }
-	//
-	// public static Preference findTimerVibrationPref(final PreferenceActivity
-	// preferenceActivity) {
-	// return preferenceActivity.findPreference(PREF_TIMER_VIBRATE);
-	// }
-	//
-	// public static void openPreferenecesActivity(final Activity activity) {
-	// final Intent intent = new Intent(activity, TeaRoundPreferences.class);
-	// activity.startActivityForResult(intent,
-	// TeaApplication.ACTIVITY_PREFERENCES);
-	// }
-	//
-	// public static Preference findGoogleAnalyticsPref(final PreferenceActivity
-	// preferenceActivity) {
-	// return preferenceActivity.findPreference(PREF_GOOGLE_ANALYTIC);
-	// }
 }
