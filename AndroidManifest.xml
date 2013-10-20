@@ -76,16 +76,6 @@
 
         <service android:name="com.morgan.design.alarm.service.TeaTimerService" />
 
-        <receiver android:name="com.morgan.design.widget.TeaRoundGeneratorWidgetImpl" >
-            <intent-filter >
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/tearound_appwidget_info" />
-        </receiver>
-
         <activity
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:name="com.google.ads.AdActivity" />
