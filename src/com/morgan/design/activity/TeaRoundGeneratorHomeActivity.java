@@ -5,8 +5,6 @@ import static com.morgan.design.utils.ObjectUtils.isNotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.commons.lang.StringUtils;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -37,6 +35,7 @@ import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.helpers.Logger;
 import com.morgan.design.utils.PreferencesUtils;
+import com.morgan.design.utils.StringUtils;
 import com.morgan.design.utils.Utils;
 
 public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic {
@@ -86,7 +85,7 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 		this.playerAdaptor.registerDataSetObserver(this.dataSetObserver);
 		setListAdapter(this.playerAdaptor);
 
-		final Bundle bundle = this.getIntent().getExtras();
+		final Bundle bundle = getIntent().getExtras();
 		if (isNotNull(bundle)) {
 			final Integer groupId = bundle.getInt(TeaApplication.GROUP_ID);
 			if (null != groupId) {

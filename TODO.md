@@ -14,7 +14,7 @@ Remove dead features:
 - [x] Tea timer (maybe replaced one day!)
 - [x] Pointless widget etc
 - [x] Remove any advertisements
-- [ ] Remove commons-lang, replace with Guava if needed
+- [X] Remove commons-lang - replaced with copy of source class from commons-lang
 
 Keep main features including:
 - [ ] Running a game of selected players

@@ -8,12 +8,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
-
 import android.content.Context;
 import android.content.res.Resources;
 
 import com.morgan.design.helpers.Logger;
+import com.morgan.design.utils.StringUtils;
 
 /**
  * Used as a aid in the migration process for, loading required SQL files as specified by a given version

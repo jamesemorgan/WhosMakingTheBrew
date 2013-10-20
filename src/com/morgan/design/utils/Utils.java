@@ -3,8 +3,6 @@ package com.morgan.design.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
