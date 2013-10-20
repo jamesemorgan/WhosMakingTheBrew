@@ -1,6 +1,5 @@
 package com.morgan.design.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -29,8 +28,6 @@ public class Utils {
 
 	private final static Logger LOG = LoggerFactory.getLogger(Utils.class);
 
-	private static final String LINEBREAK = "<br />";
-
 	public static void createEmailIntenet(final Activity activity, final String title, final String type, final String subject,
 			final String[] toAddresses, final Spanned body) {
 
@@ -52,23 +49,6 @@ public class Utils {
 		final WebView web = (WebView) view.findViewById(R.id.wv_dialog);
 		web.loadUrl("file:///android_asset/" + fileName);
 		return view;
-	}
-
-	public static String generateResultsEmail(final List<BrewPlayer> winners) {
-		// @formatter:off
-		final EmailBuilder endContent = new EmailBuilder().content()
-				.h3(winners.get(0).getName() + " Won The Tea Round......!!!")
-				.p("Scores as it stands: ").p("").table()
-				.row(" #   |   Score   |   Name" + LINEBREAK)
-				.row("---------------------------------------" + LINEBREAK)
-				.row(generateResultsRow(winners))
-				.row("---------------------------------------" + LINEBREAK)
-				.endTable()
-				.p("<a href='http://www.morgan-design.com'>Morgan-Design</a>")
-				.endContent();
-		// @formatter:on
-
-		return endContent.build();
 	}
 
 	public static String getSuffix(final int n) {
@@ -151,18 +131,6 @@ public class Utils {
 	private static void createEmailIntenet(final Activity activity, final String title, final String type, final String subject,
 			final String[] toAddresses) {
 		createEmailIntenet(activity, title, type, subject, toAddresses, null);
-	}
-
-	private static List<String> generateResultsRow(final List<BrewPlayer> winners) {
-		final List<String> players = new ArrayList<String>();
-
-		for (int i = 0; i < winners.size(); i++) {
-			// @formatter:off
-			players.add(result(i) + " | " + score(winners, i) + " | "
-					+ name(winners, i) + LINEBREAK);
-			// @formatter:on
-		}
-		return players;
 	}
 
 	private static String name(final List<BrewPlayer> winners, final int index) {

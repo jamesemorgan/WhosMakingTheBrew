@@ -10,12 +10,18 @@ Code changes
 - [ ] Update to latest ACRA
 - [ ] Change build system to use gradle/maven
 - [x] Replace customer logger with logback-android
+- [ ] Rework results view
+- [ ] Rework add players view
+- [ ] Rework animation view
+- [ ] Rework groups view
+- [ ] Rework stats page
 
 Remove dead features:
 - [x] Tea timer (maybe replaced one day!)
 - [x] Pointless widget etc
 - [x] Remove any advertisements
-- [X] Remove commons-lang - replaced with copy of source class from commons-lang
+- [x] Remove commons-lang - replaced with copy of source class from commons-lang
+- [x] Remove email results feature
 
 Keep main features including:
 - [ ] Running a game of selected players

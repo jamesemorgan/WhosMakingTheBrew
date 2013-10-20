@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -104,10 +102,6 @@ public class TeaRoundGeneratorResultsActivity extends AbstractActivityAnalytic {
 		switch (item.getItemId()) {
 			case R.id.play_again:
 				playAgain();
-				return true;
-			case R.id.email_results:
-				final Spanned emailBody = Html.fromHtml(Utils.generateResultsEmail(resultsList));
-				Utils.createEmailIntenet(this, "text/html", "Sending results...", "Whos Making The Brew?", new String[] {}, emailBody);
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);

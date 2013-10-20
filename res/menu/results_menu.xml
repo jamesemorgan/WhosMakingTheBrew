@@ -6,9 +6,5 @@
 		android:id="@+id/play_again"
 		android:title="@string/play_again"
 		android:icon="@drawable/menu_play_again" />
-	<item
-		android:id="@+id/email_results"
-		android:title="@string/email_results"
-		android:icon="@drawable/menu_email" />
 
 </menu>
