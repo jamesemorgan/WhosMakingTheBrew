@@ -7,14 +7,16 @@ Code changes
 - [ ] Make project work with latest version of Android
 - [ ] Update all libraries it uses, including assessing alternatives
 - [ ] Update to latest Ormlite
-- [ ] Update to latest ACRA
-- [ ] Change build system to use gradle/maven
+- [ ] Update to latest ACRA, is it the best option
+- [ ] Rework what is reported by ACRA
+- [ ] Change build system to use Gradle
 - [x] Replace customer logger with logback-android
-- [ ] Rework results view
 - [ ] Rework add players view
 - [ ] Rework animation view
+- [ ] Rework results view
 - [ ] Rework groups view
-- [ ] Rework stats page
+- [ ] Rework stats view
+- [ ] Rework feedback form
 - [ ] Rework Google Analytics integration and what is recorded
 
 Remove dead features:
