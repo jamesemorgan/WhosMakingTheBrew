@@ -10,7 +10,7 @@ import android.view.View;
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
 import com.morgan.design.helpers.Changelog;
-import com.morgan.design.utils.PreferencesUtils;
+import com.morgan.design.utils.Prefs;
 import com.morgan.design.utils.Utils;
 
 public class TeaRoundGeneratorDashboardActivity extends BaseBrewActivity {
@@ -54,7 +54,7 @@ public class TeaRoundGeneratorDashboardActivity extends BaseBrewActivity {
 				Utils.openFeedback(this);
 				return true;
 			case R.id.db_settings:
-				PreferencesUtils.openPreferenecesActivity(this);
+				Prefs.openPreferenecesActivity(this);
 				return true;
 			case R.id.db_changelog:
 				Changelog.show(this);

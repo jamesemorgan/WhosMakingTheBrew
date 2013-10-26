@@ -11,7 +11,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 
 import com.morgan.design.R;
 import com.morgan.design.utils.BuildUtils;
-import com.morgan.design.utils.PreferencesUtils;
+import com.morgan.design.utils.Prefs;
 import com.morgan.design.utils.Utils;
 
 public class Changelog {
@@ -20,13 +20,13 @@ public class Changelog {
 
 	public static boolean show(final Activity activity) {
 
-		final int prefVersion = PreferencesUtils.getAppVersionPref(activity);
+		final int prefVersion = Prefs.getAppVersionPref(activity);
 		int currentVersion = 0;
 
 		final boolean overrideChangeLog = BuildUtils.isRunningEmmulator();
 		LOG.debug("Overriding ChangeLog: {}", overrideChangeLog);
 
-		final boolean showChangeLog = PreferencesUtils.getChangelogPref(activity);
+		final boolean showChangeLog = Prefs.getChangelogPref(activity);
 
 		try {
 			final PackageInfo pi = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
@@ -45,7 +45,7 @@ public class Changelog {
 		else if (overrideChangeLog || (showChangeLog && currentVersion > prefVersion)) {
 			showChangelogDialog(activity);
 		}
-		PreferencesUtils.setAppVersionPref(activity, currentVersion);
+		Prefs.setAppVersionPref(activity, currentVersion);
 		return true;
 	}
 

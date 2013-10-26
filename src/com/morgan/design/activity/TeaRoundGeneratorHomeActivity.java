@@ -35,7 +35,7 @@ import com.morgan.design.adaptor.PlayerAdaptor;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.utils.BuildUtils;
-import com.morgan.design.utils.PreferencesUtils;
+import com.morgan.design.utils.Prefs;
 import com.morgan.design.utils.StringUtils;
 import com.morgan.design.utils.Utils;
 
@@ -127,7 +127,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 				Utils.openFeedback(this);
 				return true;
 			case R.id.br_settings:
-				PreferencesUtils.openPreferenecesActivity(this);
+				Prefs.openPreferenecesActivity(this);
 				return true;
 			case R.id.br_add_group:
 				if (validNumberOfPlayers()) {
