@@ -17,13 +17,6 @@
 	<!-- http://commons.wikimedia.org/wiki/Coffee_and_tea_icons -->
 
 
-	<!-- <LinearLayout style="@style/TitleBar"> <ImageView style="@style/TitleBarLogo" 
-		android:contentDescription="@string/app_title" android:src="@drawable/teapot_icon" 
-		/> <ImageView style="@style/TitleBarSeparator" /> </LinearLayout> -->
-	<LinearLayout
-		style="@style/TitleBar">
-	</LinearLayout>
-
 	<LinearLayout
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"

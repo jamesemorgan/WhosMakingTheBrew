@@ -21,12 +21,11 @@ import android.widget.TextView;
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
 import com.morgan.design.adaptor.ResultAdaptor;
-import com.morgan.design.analytics.AbstractActivityAnalytic;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.db.domain.TeaRound;
 import com.morgan.design.utils.Utils;
 
-public class TeaRoundGeneratorResultsActivity extends AbstractActivityAnalytic {
+public class TeaRoundGeneratorResultsActivity extends BaseBrewActivity {
 
 	private final Logger LOG = LoggerFactory.getLogger(TeaRoundGeneratorResultsActivity.class);
 

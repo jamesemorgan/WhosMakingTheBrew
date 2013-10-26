@@ -32,7 +32,6 @@ import android.widget.Toast;
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
 import com.morgan.design.adaptor.PlayerAdaptor;
-import com.morgan.design.analytics.AbstractListActivityAnalytic;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.utils.BuildUtils;
@@ -40,7 +39,7 @@ import com.morgan.design.utils.PreferencesUtils;
 import com.morgan.design.utils.StringUtils;
 import com.morgan.design.utils.Utils;
 
-public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic {
+public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 
 	private final Logger LOG = LoggerFactory.getLogger(TeaRoundGeneratorHomeActivity.class);
 
@@ -344,7 +343,6 @@ public class TeaRoundGeneratorHomeActivity extends AbstractListActivityAnalytic 
 	}
 
 	private void runTeaRound() {
-		trackEvent("Clicks", "Button", "RunTeaRound", 1);
 		final Intent splash = new Intent(this, TeaRoundGeneratorRunningActivity.class);
 		startActivityForResult(splash, TeaApplication.ACTIVITY_RUNNING);
 	}

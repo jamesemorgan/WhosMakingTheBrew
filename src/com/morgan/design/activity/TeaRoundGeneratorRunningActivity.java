@@ -7,9 +7,8 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
 import com.morgan.design.R;
-import com.morgan.design.analytics.AbstractActivityAnalytic;
 
-public class TeaRoundGeneratorRunningActivity extends AbstractActivityAnalytic {
+public class TeaRoundGeneratorRunningActivity extends BaseBrewActivity {
 
 	private static final float ROTATE_FROM = 0.0f;
 	private static final float ROTATE_TO = -10.0f * 360.0f;// 3.141592654f *
@@ -36,10 +35,10 @@ public class TeaRoundGeneratorRunningActivity extends AbstractActivityAnalytic {
 	}
 
 	private void findAllViewsById() {
-		this.teaPot = (ImageView) findViewById(R.id.rotating_tea_pot);
-		this.teaPot.setImageResource(R.drawable.teapot_spinning_icon);
-		this.teaPot.setAdjustViewBounds(true);
-		this.teaPot.setPadding(2, 2, 2, 2);
+		teaPot = (ImageView) findViewById(R.id.rotating_tea_pot);
+		teaPot.setImageResource(R.drawable.teapot_spinning_icon);
+		teaPot.setAdjustViewBounds(true);
+		teaPot.setPadding(2, 2, 2, 2);
 	}
 
 	private void rotateTeaPot() {
@@ -47,7 +46,7 @@ public class TeaRoundGeneratorRunningActivity extends AbstractActivityAnalytic {
 				Animation.RELATIVE_TO_SELF, 0.5f);
 		rotation.setDuration((long) 2 * 1500);
 		rotation.setRepeatCount(5);
-		this.teaPot.startAnimation(rotation);
+		teaPot.startAnimation(rotation);
 	}
 
 }

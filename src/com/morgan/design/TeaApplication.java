@@ -26,6 +26,7 @@ public class TeaApplication extends Application {
 	public void onCreate() {
 		// The following line triggers the initialisation of ACRA
 		ACRA.init(this);
+
 		super.onCreate();
 		LOG.debug("APPLICATION onCreate");
 	}

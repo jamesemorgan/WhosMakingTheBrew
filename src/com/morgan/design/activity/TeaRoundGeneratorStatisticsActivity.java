@@ -18,11 +18,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.morgan.design.R;
-import com.morgan.design.analytics.AbstractActivityAnalytic;
 import com.morgan.design.db.domain.BrewStats;
 import com.morgan.design.ui.SeparatedListAdapter;
 
-public class TeaRoundGeneratorStatisticsActivity extends AbstractActivityAnalytic {
+public class TeaRoundGeneratorStatisticsActivity extends BaseBrewActivity {
 
 	private final Logger LOG = LoggerFactory.getLogger(TeaRoundGeneratorStatisticsActivity.class);
 
@@ -58,7 +57,6 @@ public class TeaRoundGeneratorStatisticsActivity extends AbstractActivityAnalyti
 	public void onPlayerStatsClick(final View view) {
 		LOG.debug("Player stats clicked");
 		final Intent playerStats = new Intent(this, TeaRoundPlayerStatisticsActivity.class);
-		trackPageView("/TeaRoundPlayerStatisticsActivity");
 		startActivity(playerStats);
 	}
 

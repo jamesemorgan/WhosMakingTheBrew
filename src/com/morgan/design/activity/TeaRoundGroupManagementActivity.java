@@ -19,12 +19,11 @@ import android.widget.AdapterView;
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
 import com.morgan.design.adaptor.GroupAdaptor;
-import com.morgan.design.analytics.AbstractListActivityAnalytic;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.utils.Utils;
 
-public class TeaRoundGroupManagementActivity extends AbstractListActivityAnalytic {
+public class TeaRoundGroupManagementActivity extends BaseBrewListActivity {
 
 	private final Logger LOG = LoggerFactory.getLogger(TeaRoundGroupManagementActivity.class);
 

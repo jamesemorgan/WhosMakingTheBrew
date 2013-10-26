@@ -13,13 +13,12 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.morgan.design.R;
-import com.morgan.design.analytics.AbstractActivityAnalytic;
 import com.morgan.design.helpers.Constants;
 import com.morgan.design.ui.SeparatedListAdapter;
 import com.morgan.design.utils.BuildUtils;
 import com.morgan.design.utils.Utils;
 
-public class TeaRoundGeneratorCreditsActivity extends AbstractActivityAnalytic {
+public class TeaRoundGeneratorCreditsActivity extends BaseBrewActivity {
 
 	private final static String ITEM_TITLE = "title";
 	private final static String ITEM_CAPTION = "caption";
@@ -35,8 +34,8 @@ public class TeaRoundGeneratorCreditsActivity extends AbstractActivityAnalytic {
 		super.onCreate(savedInstanceState);
 
 		// create our list and custom adapter
-		this.adapter = new SeparatedListAdapter(this, R.layout.list_header);
-		this.list = new ListView(this);
+		adapter = new SeparatedListAdapter(this, R.layout.list_header);
+		list = new ListView(this);
 
 		final List<Map<String, ?>> credits = new LinkedList<Map<String, ?>>();
 		credits.add(createImageItem("Twitter", "Follow me", Constants.TWITTER_URL, Constants.TWITTER_URL, R.drawable.twitter_logo));
@@ -47,35 +46,35 @@ public class TeaRoundGeneratorCreditsActivity extends AbstractActivityAnalytic {
 		credits.add(createImageItem("Rate Me", "Who's Making The Brew", Constants.MARKET_LINK_URL, R.drawable.rate_me_icon));
 		credits.add(createImageItem("Icons", "Tango Icon Library", Constants.TANGO_ICON_URL, R.drawable.tango_icon));
 
-		this.adapter.addSection("Credits", new SimpleAdapter(this, credits, R.layout.list_complex_sub_with_image, new String[] {
-				ITEM_TITLE, ITEM_CAPTION, SUB_CAPTION, URL, ITEM_IMAGE }, new int[] { R.id.list_complex_title, R.id.list_complex_caption,
+		adapter.addSection("Credits", new SimpleAdapter(this, credits, R.layout.list_complex_sub_with_image, new String[] { ITEM_TITLE,
+				ITEM_CAPTION, SUB_CAPTION, URL, ITEM_IMAGE }, new int[] { R.id.list_complex_title, R.id.list_complex_caption,
 				R.id.list_complex_sub_caption, R.id.list_complex_url, R.id.list_complex_image }));
 
 		final List<Map<String, ?>> version = new LinkedList<Map<String, ?>>();
 		version.add(createSimple(BuildUtils.getVersion(this)));
 
-		this.adapter.addSection("Version", new SimpleAdapter(this, version, R.layout.list_simple, new String[] { ITEM_TITLE },
+		adapter.addSection("Version", new SimpleAdapter(this, version, R.layout.list_simple, new String[] { ITEM_TITLE },
 				new int[] { R.id.list_simple_title }));
 
 		final List<Map<String, ?>> deviceId = new LinkedList<Map<String, ?>>();
 		deviceId.add(createSimple(BuildUtils.getDeviceId()));
 
-		this.adapter.addSection("Device ID", new SimpleAdapter(this, deviceId, R.layout.list_simple, new String[] { ITEM_TITLE },
+		adapter.addSection("Device ID", new SimpleAdapter(this, deviceId, R.layout.list_simple, new String[] { ITEM_TITLE },
 				new int[] { R.id.list_simple_title }));
 
-		this.list.setOnItemClickListener(new OnItemClickListener() {
+		list.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long duration) {
 				@SuppressWarnings("unchecked")
-				final HashMap<String, ?> item = (HashMap<String, ?>) TeaRoundGeneratorCreditsActivity.this.adapter.getItem(position);
+				final HashMap<String, ?> item = (HashMap<String, ?>) adapter.getItem(position);
 				if (item.containsKey(URL) && null != item.get(URL)) {
 					Utils.openUrl(TeaRoundGeneratorCreditsActivity.this, item.get(URL).toString());
 				}
 			}
 		});
 
-		this.list.setAdapter(this.adapter);
-		setContentView(this.list);
+		list.setAdapter(adapter);
+		setContentView(list);
 	}
 
 	private Map<String, ?> createImageItem(final String title, final String caption, final String url, final int imageId) {

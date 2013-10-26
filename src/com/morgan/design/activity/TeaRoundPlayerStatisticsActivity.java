@@ -13,11 +13,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.morgan.design.R;
-import com.morgan.design.analytics.AbstractActivityAnalytic;
 import com.morgan.design.db.domain.PlayerStats;
 import com.morgan.design.ui.SeparatedListAdapter;
 
-public class TeaRoundPlayerStatisticsActivity extends AbstractActivityAnalytic {
+public class TeaRoundPlayerStatisticsActivity extends BaseBrewActivity {
 
 	private final static String PLAYER_NAME = "player_name";
 	private final static String NUM_ENTERED = "num_games_entered";

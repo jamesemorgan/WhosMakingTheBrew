@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ga_trackingId">UA-22912453-1</string>
+    
+    <!-- Application Version -->
+    <string name="ga_appVersion">2.0</string>
+
+    <!-- The verbosity of the SDK logger. error,warning,info, verbose. warning by default. -->
+    <string name="ga_logLevel">warning</string>
+
+    <!-- Writing debug information to log, false by default. -->
+    <bool name="ga_debug">true</bool>
+
+    <!-- Enable automatic activity tracking -->
+    <bool name="ga_autoActivityTracking">true</bool>
+
+    <!-- Enable automatic exception tracking -->
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+
+</resources>

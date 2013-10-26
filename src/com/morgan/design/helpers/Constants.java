@@ -13,5 +13,4 @@ public class Constants {
 
 	public static final String GOOGLE_ANALYTIC_ACCOUNT_ID = "UA-22912453-1";
 
-	public static final String TEA_ROUND_WIDGET = "TEA_ROUND_WIDGET";
 }

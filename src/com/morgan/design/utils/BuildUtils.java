@@ -19,7 +19,7 @@ public class BuildUtils {
 		LOG.debug("##########################################");
 		LOG.debug(Build.VERSION.CODENAME);
 		LOG.debug(Build.VERSION.RELEASE);
-		LOG.debug(Build.VERSION.SDK);
+		LOG.debug(Integer.toString(Build.VERSION.SDK_INT));
 		LOG.debug("##########################################");
 	}
 

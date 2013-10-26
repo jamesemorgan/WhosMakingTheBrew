@@ -9,52 +9,31 @@ import android.view.View;
 
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
-import com.morgan.design.analytics.AbstractActivityAnalytic;
 import com.morgan.design.helpers.Changelog;
-import com.morgan.design.helpers.Constants;
 import com.morgan.design.utils.PreferencesUtils;
 import com.morgan.design.utils.Utils;
 
-public class TeaRoundGeneratorDashboardActivity extends AbstractActivityAnalytic {
-
-	// http://www.androiduipatterns.com/2011/02/ui-design-pattern-dashboard.html
+public class TeaRoundGeneratorDashboardActivity extends BaseBrewActivity {
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dashboard);
-
 		Changelog.show(this);
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		// Check opening location
-		final Bundle bundle = getIntent().getExtras();
-		if (null != bundle) {
-			final boolean openedFromWidget = bundle.getBoolean(Constants.TEA_ROUND_WIDGET);
-			if (openedFromWidget) {
-				trackEvent("Clicks", "Button", "OpenedFromWidget", 1);
-			}
-		}
 	}
 
 	public void onBrewGroupsClick(final View v) {
 		final Intent intent = new Intent(this, TeaRoundGroupManagementActivity.class);
-		trackPageView("/TeaRoundGroupManagementActivity");
 		startActivityForResult(intent, TeaApplication.ACTIVITY_GROUP);
 	}
 
 	public void onBrewRoundClick(final View v) {
 		final Intent home = new Intent(this, TeaRoundGeneratorHomeActivity.class);
-		trackPageView("/TeaRoundGeneratorHomeActivity");
 		startActivity(home);
 	}
 
 	public void onBrewStatsClick(final View v) {
 		final Intent home = new Intent(this, TeaRoundGeneratorStatisticsActivity.class);
-		trackPageView("/TeaRoundGeneratorStatisticsActivity");
 		startActivity(home);
 	}
 

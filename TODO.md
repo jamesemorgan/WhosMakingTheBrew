@@ -3,6 +3,7 @@ Main goals
 
 Code changes
 - [ ] Modernise and clean code
+- [x] Set target version to latest android version (18)
 - [ ] Alter domain logic and clean up Brew*.java 
 - [ ] Make project work with latest version of Android
 - [ ] Update all libraries it uses, including assessing alternatives
@@ -17,7 +18,8 @@ Code changes
 - [ ] Rework groups view
 - [ ] Rework stats view
 - [ ] Rework feedback form
-- [ ] Rework Google Analytics integration and what is recorded
+- [x] Rework Google Analytics integration and what is recorded
+- [x] Remove abstract activities  
 
 Remove dead features:
 - [x] Tea timer (maybe replaced one day!)
@@ -37,6 +39,7 @@ Gui changes
 - [ ] Remove unused images and assets
 - [ ] Internationalise and strings
 - [ ] Fix all lint errors, within reason
+- [ ] Animate between views - http://developer.android.com/training/animation/index.html
 
 
 Questions
