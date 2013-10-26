@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
@@ -28,7 +29,8 @@
             android:layout_weight="50"
             android:drawableLeft="@drawable/add_player_button_icon"
             android:onClick="onAddPlayer"
-            android:text="@string/add_player" />
+            android:text="@string/add_player"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/run_tea_round"
@@ -37,7 +39,8 @@
             android:drawableLeft="@drawable/button_tea_cup"
             android:enabled="false"
             android:onClick="onRunTeaRound"
-            android:text="@string/run_tea_round" />
+            android:text="@string/run_tea_round"
+            tools:ignore="ButtonStyle" />
     </TableRow>
 
     <TextView

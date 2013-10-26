@@ -14,19 +14,19 @@ public class PlayerStats {
 	@DatabaseField(generatedId = true)
 	private int id;
 
-	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = BREW_PLAYER_ID)
+	@DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = true, columnName = BREW_PLAYER_ID)
 	private BrewPlayer brewPlayer;
 
-	@DatabaseField(canBeNull = true)
+	@DatabaseField(canBeNull = true, defaultValue = "0")
 	private int totalTimesRun;
 
-	@DatabaseField(canBeNull = true, columnName = TOTAL_TIMES_WON)
+	@DatabaseField(canBeNull = true, defaultValue = "0", columnName = TOTAL_TIMES_WON)
 	private int totalTimesWon;
 
-	@DatabaseField(canBeNull = true)
+	@DatabaseField(canBeNull = true, defaultValue = "0")
 	private int highestScore;
 
-	@DatabaseField(canBeNull = true)
+	@DatabaseField(canBeNull = true, defaultValue = "0")
 	private int lowestScore;
 
 	public PlayerStats() {
@@ -34,27 +34,27 @@ public class PlayerStats {
 	}
 
 	public final int getId() {
-		return this.id;
+		return id;
 	}
 
 	public final BrewPlayer getBrewPlayer() {
-		return this.brewPlayer;
+		return brewPlayer;
 	}
 
 	public final int getTotalTimesRun() {
-		return this.totalTimesRun;
+		return totalTimesRun;
 	}
 
 	public final int getTotalTimesWon() {
-		return this.totalTimesWon;
+		return totalTimesWon;
 	}
 
 	public final int getHighestScore() {
-		return this.highestScore;
+		return highestScore;
 	}
 
 	public final int getLowestScore() {
-		return this.lowestScore;
+		return lowestScore;
 	}
 
 	public void setBrewPlayer(final BrewPlayer brewPlayer) {
@@ -62,22 +62,22 @@ public class PlayerStats {
 	}
 
 	public void incrementTotalTimesRun() {
-		this.totalTimesRun++;
+		totalTimesRun++;
 	}
 
 	public void incrementTotalTimesWon() {
-		this.totalTimesWon++;
+		totalTimesWon++;
 	}
 
 	public void determineHighestScore(final int score) {
-		if (this.highestScore < score) {
-			this.highestScore = score;
+		if (highestScore < score) {
+			highestScore = score;
 		}
 	}
 
 	public void determineLowestScore(final int score) {
-		if (isZero(this.lowestScore) || this.lowestScore > score) {
-			this.lowestScore = score;
+		if (isZero(lowestScore) || lowestScore > score) {
+			lowestScore = score;
 		}
 	}
 

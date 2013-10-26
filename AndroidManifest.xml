@@ -25,7 +25,7 @@
     </supports-screens>
 
     <application
-        android:name="TeaApplication"
+        android:name="com.morgan.design.TeaApplication"
         android:allowBackup="true"
         android:configChanges="keyboardHidden|orientation"
         android:icon="@drawable/dashboard_teapot_icon"
@@ -76,6 +76,10 @@
             android:name="com.morgan.design.activity.preferences.SettingsActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation" />
+        <activity
+            android:name="com.morgan.design.CreditsActivity"
+            android:label="@string/title_activity_credits" >
+        </activity>
     </application>
 
 </manifest>

@@ -21,13 +21,13 @@ public class BrewPlayer implements Serializable, Comparable<BrewPlayer> {
 	@DatabaseField(canBeNull = false)
 	private String name;
 
-	@DatabaseField(canBeNull = true)
+	@DatabaseField(canBeNull = true, defaultValue = "0")
 	private int score;
 
-	@DatabaseField(canBeNull = true, columnName = LAST_RUN)
+	@DatabaseField(canBeNull = true, defaultValue = "false", columnName = LAST_RUN)
 	private boolean lastRun = false;
 
-	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = BREW_GROUP_ID)
+	@DatabaseField(canBeNull = true, foreign = true, foreignAutoRefresh = true, columnName = BREW_GROUP_ID)
 	private BrewGroup brewGroup;
 
 	public BrewPlayer() {
@@ -35,7 +35,7 @@ public class BrewPlayer implements Serializable, Comparable<BrewPlayer> {
 	}
 
 	public final int getId() {
-		return this.id;
+		return id;
 	}
 
 	public final void setId(final int id) {
@@ -43,7 +43,7 @@ public class BrewPlayer implements Serializable, Comparable<BrewPlayer> {
 	}
 
 	public final String getName() {
-		return this.name;
+		return name;
 	}
 
 	public final void setName(final String name) {
@@ -51,7 +51,7 @@ public class BrewPlayer implements Serializable, Comparable<BrewPlayer> {
 	}
 
 	public final int getScore() {
-		return this.score;
+		return score;
 	}
 
 	public final void setScore(final int score) {
@@ -59,7 +59,7 @@ public class BrewPlayer implements Serializable, Comparable<BrewPlayer> {
 	}
 
 	public boolean isLastRun() {
-		return this.lastRun;
+		return lastRun;
 	}
 
 	public void setLastRun(final boolean lastRun) {
@@ -67,7 +67,7 @@ public class BrewPlayer implements Serializable, Comparable<BrewPlayer> {
 	}
 
 	public BrewGroup getBrewGroup() {
-		return this.brewGroup;
+		return brewGroup;
 	}
 
 	public void setBrewGroup(final BrewGroup brewGroup) {
@@ -76,20 +76,15 @@ public class BrewPlayer implements Serializable, Comparable<BrewPlayer> {
 
 	@Override
 	public int compareTo(final BrewPlayer player) {
-		if (this.getScore() < player.getScore())
+		if (getScore() < player.getScore()) {
 			return 1;
-		else if (this.getScore() > player.getScore())
+		}
+		else if (getScore() > player.getScore()) {
 			return -1;
-		else
+		}
+		else {
 			return 0;
-	}
-
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder();
-		builder.append("BrewPlayer [id=").append(this.id).append(", name=").append(this.name).append(", score=").append(this.score)
-				.append(", lastRun=").append(this.lastRun).append(", brewGroup=").append(this.brewGroup).append("]");
-		return builder.toString();
+		}
 	}
 
 }

@@ -37,12 +37,7 @@ public class TeaRoundGroupManagementActivity extends BaseBrewListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.group_management);
 
-		findAllViewsById();
 		loadGroups();
-	}
-
-	private void findAllViewsById() {
-		//
 	}
 
 	@Override

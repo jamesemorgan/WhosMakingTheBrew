@@ -16,29 +16,31 @@ import com.morgan.design.utils.BuildUtils;
 
 public class FormActivity extends Activity {
 
+	private EditText nameField;
+	private EditText emailField;
+	private EditText feedbackField;
+	private Spinner feedbackSpinner;
+	private CheckBox responseCheckbox;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.feedback_form);
 
+		nameField = (EditText) findViewById(R.id.EditTextName);
+		emailField = (EditText) findViewById(R.id.EditTextEmail);
+		feedbackField = (EditText) findViewById(R.id.EditTextFeedbackBody);
+		feedbackSpinner = (Spinner) findViewById(R.id.SpinnerFeedbackType);
+		responseCheckbox = (CheckBox) findViewById(R.id.CheckBoxResponse);
 	}
 
 	public void onSendFeedback(final View button) {
 
-		final EditText nameField = (EditText) findViewById(R.id.EditTextName);
 		final String name = nameField.getText().toString();
-
-		final EditText emailField = (EditText) findViewById(R.id.EditTextEmail);
 		final String email = emailField.getText().toString();
-
-		final EditText feedbackField = (EditText) findViewById(R.id.EditTextFeedbackBody);
 		final String feedback = feedbackField.getText().toString();
-
-		final Spinner feedbackSpinner = (Spinner) findViewById(R.id.SpinnerFeedbackType);
 		final String feedbackType = feedbackSpinner.getSelectedItem().toString();
-
-		final CheckBox responseCheckbox = (CheckBox) findViewById(R.id.CheckBoxResponse);
 		final boolean bRequiresResponse = responseCheckbox.isChecked();
 
 		// Take the fields and format the message contents

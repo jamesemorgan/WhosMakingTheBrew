@@ -22,14 +22,13 @@
     <string name="dashboard_brew_round">Brew Round</string>
     <string name="changelog_title">Change Log</string>
     <string name="changelog_filename">changelog.html</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="feedback">Feedback</string>
     <string name="stats_title">Tea Round Statistics</string>
 
     <!-- DASHBOARD -->
 
-    <string name="feedbacktitle">Enter feedback details:
-    </string>
+    <string name="feedbacktitle">Enter feedback details:</string>
     <string name="feedbackname">Name</string>
     <string name="feedbackemail">Email (not required)</string>
     <string name="feedbackbody">Details...</string>
@@ -39,9 +38,11 @@
     <string name="feedbacktype1">Improvement</string>
     <string name="feedbacktype2">Suggestion</string>
     <string name="feedbacktype3">Bug</string>
-    <string name="feedbacktype4">Other</string>
     <string name="feedbackmessagebody_responseyes">Requires a response</string>
     <string name="feedbackmessagebody_responseno">Does not require a response</string>
     <string name="feedbackmessagesubject_format">Application Feedback (%1$s)</string>
+    <string name="title_activity_credits">CreditsActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

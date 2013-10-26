@@ -24,6 +24,13 @@ public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapt
 	public final ArrayAdapter<String> headers;
 	public final static int TYPE_SECTION_HEADER = 0;
 
+	private final DataSetObserver mDataSetObserver = new DataSetObserver() {
+		@Override
+		public void onChanged() {
+			notifyDataSetChanged();
+		}
+	};
+
 	public SeparatedListAdapter(final Context context) {
 		headers = new ArrayAdapter<String>(context, R.layout.list_header);
 	}
@@ -34,8 +41,8 @@ public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapt
 	}
 
 	public void addSection(final String section, final Adapter adapter) {
-		this.headers.add(section);
-		this.sections.put(section, adapter);
+		headers.add(section);
+		sections.put(section, adapter);
 
 		// Register an observer so we can call notifyDataSetChanged() when our
 		// children adapters are modified, otherwise no change will be visible.
@@ -61,16 +68,17 @@ public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapt
 
 	@Override
 	public Object getItem(int position) {
-		for (final Object section : this.sections.keySet()) {
+		for (final Object section : sections.keySet()) {
 			final Adapter adapter = sections.get(section);
 			final int size = adapter.getCount() + 1;
 
 			// check if position inside this section
-			if (position == 0)
+			if (position == 0) {
 				return section;
-			if (position < size)
+			}
+			if (position < size) {
 				return adapter.getItem(position - 1);
-
+			}
 			// otherwise jump into next section
 			position -= size;
 		}
@@ -81,8 +89,9 @@ public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapt
 	public int getCount() {
 		// total together all sections, plus one for each section header
 		int total = 0;
-		for (final Adapter adapter : this.sections.values())
+		for (final Adapter adapter : sections.values()) {
 			total += adapter.getCount() + 1;
+		}
 		return total;
 	}
 
@@ -90,7 +99,7 @@ public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapt
 	public int getViewTypeCount() {
 		// assume that headers count as one, then total all sections
 		int total = 1;
-		for (final Adapter adapter : this.sections.values()) {
+		for (final Adapter adapter : sections.values()) {
 			total += adapter.getViewTypeCount();
 		}
 		return total;
@@ -99,15 +108,17 @@ public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapt
 	@Override
 	public int getItemViewType(int position) {
 		int type = 1;
-		for (final Object section : this.sections.keySet()) {
+		for (final Object section : sections.keySet()) {
 			final Adapter adapter = sections.get(section);
 			final int size = adapter.getCount() + 1;
 
 			// check if position inside this section
-			if (position == 0)
+			if (position == 0) {
 				return TYPE_SECTION_HEADER;
-			if (position < size)
+			}
+			if (position < size) {
 				return type + adapter.getItemViewType(position - 1);
+			}
 
 			// otherwise jump into next section
 			position -= size;
@@ -122,7 +133,7 @@ public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapt
 
 	@Override
 	public boolean areAllItemsEnabled() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -132,21 +143,23 @@ public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapt
 
 	@Override
 	public boolean isEmpty() {
-		return getCount() == 0;
+		return sections.size() == 0;
 	}
 
 	@Override
 	public View getView(int position, final View convertView, final ViewGroup parent) {
 		int sectionnum = 0;
-		for (final Object section : this.sections.keySet()) {
+		for (final Object section : sections.keySet()) {
 			final Adapter adapter = sections.get(section);
 			final int size = adapter.getCount() + 1;
 
 			// check if position inside this section
-			if (position == 0)
+			if (position == 0) {
 				return headers.getView(sectionnum, convertView, parent);
-			if (position < size)
+			}
+			if (position < size) {
 				return adapter.getView(position - 1, convertView, parent);
+			}
 
 			// otherwise jump into next section
 			position -= size;
@@ -162,14 +175,6 @@ public class SeparatedListAdapter extends BaseAdapter implements ObservableAdapt
 
 	@Override
 	public boolean hasStableIds() {
-		return false;
+		return true;
 	}
-
-	private final DataSetObserver mDataSetObserver = new DataSetObserver() {
-		@Override
-		public void onChanged() {
-			notifyDataSetChanged();
-		}
-	};
-
 }

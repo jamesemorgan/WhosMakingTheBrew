@@ -1,71 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/ScrollView01"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	android:scrollbars="vertical"
-	android:padding="10dip">
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:orientation="vertical"
-		android:layout_height="fill_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:scrollbars="vertical" >
 
-		<TextView
-			android:id="@+id/TextViewTitle"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:text="@string/feedbacktitle"
-			android:textSize="10pt"
-			android:paddingBottom="5dip"></TextView>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
+        <TextView
+            android:id="@+id/TextViewTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dip"
+            android:text="@string/feedbacktitle"
+            android:textSize="10pt" >
+        </TextView>
 
-		<EditText
-			android:id="@+id/EditTextName"
-			android:layout_height="wrap_content"
-			android:hint="@string/feedbackname"
-			android:inputType="textPersonName"
-			android:layout_width="fill_parent"
-			android:paddingBottom="5dip"></EditText>
+        <EditText
+            android:id="@+id/EditTextName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/feedbackname"
+            android:inputType="textPersonName"
+            android:paddingBottom="5dip" >
+        </EditText>
 
-		<EditText
-			android:id="@+id/EditTextEmail"
-			android:layout_height="wrap_content"
-			android:hint="@string/feedbackemail"
-			android:inputType="textEmailAddress"
-			android:layout_width="fill_parent"
-			android:paddingBottom="5dip"></EditText>
+        <EditText
+            android:id="@+id/EditTextEmail"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/feedbackemail"
+            android:inputType="textEmailAddress"
+            android:paddingBottom="5dip" >
+        </EditText>
 
-		<Spinner
-			android:id="@+id/SpinnerFeedbackType"
-			android:layout_height="wrap_content"
-			android:prompt="@string/feedbacktype"
-			android:layout_width="fill_parent"
-			android:entries="@array/feedbacktypelist"
-			android:paddingBottom="5dip"></Spinner>
+        <Spinner
+            android:id="@+id/SpinnerFeedbackType"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/feedbacktypelist"
+            android:paddingBottom="5dip"
+            android:prompt="@string/feedbacktype" >
+        </Spinner>
 
-		<EditText
-			android:id="@+id/EditTextFeedbackBody"
-			android:layout_height="wrap_content"
-			android:hint="@string/feedbackbody"
-			android:inputType="textMultiLine"
-			android:lines="5"
-			android:layout_width="fill_parent"
-			android:paddingBottom="5dip"></EditText>
+        <EditText
+            android:id="@+id/EditTextFeedbackBody"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/feedbackbody"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:paddingBottom="5dip" >
+        </EditText>
 
-		<CheckBox
-			android:id="@+id/CheckBoxResponse"
-			android:layout_height="wrap_content"
-			android:text="@string/feedbackresponse"
-			android:layout_width="fill_parent"
-			android:paddingBottom="5dip"></CheckBox>
+        <CheckBox
+            android:id="@+id/CheckBoxResponse"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dip"
+            android:text="@string/feedbackresponse" >
+        </CheckBox>
 
-		<Button
-			android:id="@+id/ButtonSendFeedback"
-			android:layout_height="wrap_content"
-			android:text="@string/feedbackbutton"
-			android:onClick="onSendFeedback"
-			android:layout_width="fill_parent"></Button>
+        <Button
+            android:id="@+id/ButtonSendFeedback"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSendFeedback"
+            android:text="@string/feedbackbutton" >
+        </Button>
+    </LinearLayout>
 
-	</LinearLayout>
 </ScrollView>

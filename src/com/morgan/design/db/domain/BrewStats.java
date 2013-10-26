@@ -9,19 +9,19 @@ public class BrewStats {
 	@DatabaseField(generatedId = true)
 	private int id;
 
-	@DatabaseField(canBeNull = true)
+	@DatabaseField(canBeNull = true, defaultValue = "0")
 	private int totalTimesRun;
 
-	@DatabaseField(canBeNull = true)
+	@DatabaseField(canBeNull = true, defaultValue = "0")
 	private int highestScore;
 
-	@DatabaseField(canBeNull = true)
+	@DatabaseField(canBeNull = true, defaultValue = "0")
 	private int lowestScore;
 
-	@DatabaseField(canBeNull = true)
+	@DatabaseField(canBeNull = true, defaultValue = "0")
 	private int totalScore;
 
-	@DatabaseField(canBeNull = true)
+	@DatabaseField(canBeNull = true, defaultValue = "0")
 	private int totalNumPlayers;
 
 	public BrewStats() {
@@ -29,7 +29,7 @@ public class BrewStats {
 	}
 
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(final int id) {
@@ -37,7 +37,7 @@ public class BrewStats {
 	}
 
 	public final int getTotalTimesRun() {
-		return this.totalTimesRun;
+		return totalTimesRun;
 	}
 
 	public final void setTotalTimesRun(final int totalTimesRun) {
@@ -45,7 +45,7 @@ public class BrewStats {
 	}
 
 	public final int getHighestScore() {
-		return this.highestScore;
+		return highestScore;
 	}
 
 	public final void setHighestScore(final int highestScore) {
@@ -53,7 +53,7 @@ public class BrewStats {
 	}
 
 	public final int getLowestScore() {
-		return this.lowestScore;
+		return lowestScore;
 	}
 
 	public final void setLowestScore(final int lowestScore) {
@@ -61,7 +61,7 @@ public class BrewStats {
 	}
 
 	public final int getTotalScore() {
-		return this.totalScore;
+		return totalScore;
 	}
 
 	public final void setTotalScore(final int totalScore) {
@@ -69,7 +69,7 @@ public class BrewStats {
 	}
 
 	public final int getTotalNumPlayers() {
-		return this.totalNumPlayers;
+		return totalNumPlayers;
 	}
 
 	public final void setTotalNumPlayers(final int totalNumPlayers) {
@@ -97,10 +97,10 @@ public class BrewStats {
 	}
 
 	public void incrementTotalTimesRun() {
-		this.totalTimesRun++;
+		totalTimesRun++;
 	}
 
 	public void addTotalNumberOfPlayers(final int size) {
-		this.totalNumPlayers = this.totalNumPlayers + size;
+		totalNumPlayers = totalNumPlayers + size;
 	}
 }

@@ -108,8 +108,6 @@ public class TeaRoundGeneratorResultsActivity extends BaseBrewActivity {
 
 	private void playAgain() {
 		final Intent returnIntent = new Intent();
-		// returnIntent.putExtra(TeaApplication.PLAYER_REF, new
-		// ArrayList<BrewPlayer>(this.playersList));
 		setResult(Activity.RESULT_OK, returnIntent);
 		finish();
 	}
