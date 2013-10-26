@@ -23,7 +23,6 @@ import com.morgan.design.TeaApplication;
 import com.morgan.design.adaptor.ResultAdaptor;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.db.domain.TeaRound;
-import com.morgan.design.utils.Utils;
 
 public class TeaRoundGeneratorResultsActivity extends BaseBrewActivity {
 
@@ -48,7 +47,7 @@ public class TeaRoundGeneratorResultsActivity extends BaseBrewActivity {
 		final ArrayList<Integer> playerIds = getIntent().getExtras().getIntegerArrayList(TeaApplication.PLAYER_IDS);
 		playersList = getBrewRepository().getPlayersByIds(playerIds);
 		if (playersList.isEmpty()) {
-			Utils.shortToast(this, "Unable to determine winner, no players found");
+			shortToast("Unable to determine winner, no players found");
 		}
 		else {
 			resultsList = TeaRound.determineWinner(playersList);

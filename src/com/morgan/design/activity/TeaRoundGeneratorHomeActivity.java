@@ -134,7 +134,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 					showDialog(DIALOG_ADD_GROUP);
 				}
 				else {
-					Utils.shortToast(this, "Not enough players, minimum 2!");
+					shortToast("Not enough players, minimum 2!");
 				}
 				return true;
 			case R.id.br_edit_group:
@@ -246,7 +246,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 		final String playerName = addPlayerEditText.getText().toString();
 
 		if (notNullEmpyOrValue(playerName, R.string.add_player)) {
-			Utils.shortToast(this, "Invalid player name");
+			shortToast("Invalid player name");
 			return;
 		}
 
@@ -267,7 +267,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 			getBrewRepository().saveBrewPlayer(player);
 		}
 		else {
-			Utils.shortToast(this, player.getName() + " already playing");
+			shortToast(player.getName() + " already playing");
 			LOG.debug("{} already playing", player.getName());
 		}
 		enableDisableButtonRunTeaRound();
@@ -276,11 +276,11 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 
 	private void addPlayersToGroup(final String groupName) {
 		if (notNullEmpyOrValue(groupName, R.string.group_management)) {
-			Utils.shortToast(this, "Invalid Group Name");
+			shortToast("Invalid Group Name");
 			return;
 		}
 		brewGroup = getBrewRepository().saveGroup(groupName, brewPlayers);
-		Utils.shortToast(this, "Create Group: " + groupName);
+		shortToast("Create Group: " + groupName);
 		setPlayerDetailHeader();
 	}
 

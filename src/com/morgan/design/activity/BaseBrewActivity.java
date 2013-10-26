@@ -1,6 +1,7 @@
 package com.morgan.design.activity;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
@@ -36,5 +37,9 @@ public class BaseBrewActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	public final BrewRepository getBrewRepository() {
 		return mBrewRepository;
+	}
+
+	public void shortToast(final CharSequence message) {
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
 }

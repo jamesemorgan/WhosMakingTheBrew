@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Vibrator;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -38,10 +37,6 @@ public class Utils {
 		}
 	}
 
-	public static final Vibrator getVibrator(final Context context) {
-		return (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-	}
-
 	public static void openCredits(final Activity activity) {
 		try {
 			activity.startActivity(new Intent(activity, TeaRoundGeneratorCreditsActivity.class));
@@ -69,7 +64,7 @@ public class Utils {
 		}
 	}
 
-	public static void shortToast(final Activity activity, final CharSequence message) {
+	private static void shortToast(final Activity activity, final CharSequence message) {
 		Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
 	}
 

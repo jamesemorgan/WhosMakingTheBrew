@@ -21,7 +21,6 @@ import com.morgan.design.TeaApplication;
 import com.morgan.design.adaptor.GroupAdaptor;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
-import com.morgan.design.utils.Utils;
 
 public class TeaRoundGroupManagementActivity extends BaseBrewListActivity {
 
@@ -71,7 +70,7 @@ public class TeaRoundGroupManagementActivity extends BaseBrewListActivity {
 			finish();
 		}
 		else if (menuItemIndex == MENU_DELETE) {
-			Utils.shortToast(this, "Removed group: " + group.getName());
+			shortToast("Removed group: " + group.getName());
 			removeGroup(group);
 		}
 		return true;

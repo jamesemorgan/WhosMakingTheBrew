@@ -1,6 +1,7 @@
 package com.morgan.design.activity;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.morgan.design.db.BrewRepository;
@@ -23,5 +24,9 @@ public class BaseBrewListActivity extends OrmLiteBaseListActivity<DatabaseHelper
 
 	public final BrewRepository getBrewRepository() {
 		return mBrewRepository;
+	}
+
+	public void shortToast(final CharSequence message) {
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
 }
