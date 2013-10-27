@@ -44,7 +44,6 @@ public class Prefs {
 	}
 
 	public static void openPreferenecesActivity(final Activity activity) {
-		// final Intent intent = new Intent(activity, TeaRoundPreferences.class);
 		final Intent intent = new Intent(activity, SettingsActivity.class);
 		activity.startActivityForResult(intent, TeaApplication.ACTIVITY_PREFERENCES);
 	}
