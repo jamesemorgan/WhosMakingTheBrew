@@ -22,6 +22,7 @@ Code changes
 - [x] Rework Settings
 - [x] Rework Google Analytics integration and what is recorded
 - [x] Remove abstract activities  
+- [ ] Replace alerts and dialogs with DialogFragments, remove deprecation
 
 Remove dead features:
 - [x] Tea timer (maybe replaced one day!)

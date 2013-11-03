@@ -47,7 +47,9 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 	private Button runTeaRoundButton;
 	private TextView playerDetailHeader;
 
+	@Deprecated
 	private static final int DIALOG_ADD_GROUP = 0;
+	@Deprecated
 	private static final int DIALOG_EDIT_GROUP = 1;
 
 	private PlayerAdaptor playerAdaptor;
@@ -274,7 +276,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 		setPlayerDetailHeader();
 	}
 
-	private void addPlayersToGroup(final String groupName) {
+	public void addPlayersToGroup(final String groupName) {
 		if (notNullEmpyOrValue(groupName, R.string.group_management)) {
 			shortToast("Invalid Group Name");
 			return;
@@ -302,7 +304,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 		runTeaRoundButton = (Button) findViewById(R.id.run_tea_round);
 	}
 
-	private void hideKeyBoard(final View view) {
+	public void hideKeyBoard(final View view) {
 		final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
@@ -388,12 +390,12 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 		return dialogGroup;
 	}
 
-	private void showKeyBoard(final View view) {
+	public void showKeyBoard(final View view) {
 		final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
 	}
 
-	private void updateGroupName(final String groupName) {
+	public void updateGroupName(final String groupName) {
 		brewGroup.setName(groupName);
 		getBrewRepository().updateGroup(brewGroup);
 	}
@@ -446,6 +448,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 		clearBrewBroupIfRequired();
 	}
 
+	@Override
 	public void shortToast(final CharSequence message) {
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
