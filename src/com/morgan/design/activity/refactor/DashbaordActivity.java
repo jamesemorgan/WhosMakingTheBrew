@@ -28,6 +28,8 @@ import com.morgan.design.R;
 import com.morgan.design.activity.BaseBrewFragmentActivity;
 import com.morgan.design.adaptor.refactor.BrewGroupsExpandableListAdapter;
 import com.morgan.design.db.domain.BrewGroup;
+import com.morgan.design.db.domain.BrewStats;
+import com.morgan.design.db.domain.PlayerStats;
 
 public class DashbaordActivity extends BaseBrewFragmentActivity implements ActionBar.TabListener {
 
@@ -39,12 +41,14 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 	 * fragment in memory. If this becomes too memory intensive, it may be best to switch to a 
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
-	SectionsPagerAdapter mSectionsPagerAdapter;
+	private SectionsPagerAdapter mSectionsPagerAdapter;
 
 	/** The {@link ViewPager} that will host the section contents. */
-	ViewPager mViewPager;
+	private ViewPager mViewPager;
 
 	private List<BrewGroup> groups;
+	private BrewStats brewStats;
+	private List<PlayerStats> playerStats;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,8 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		groups = getBrewRepository().findAllBrewGroups();
+		brewStats = getBrewRepository().getBrewStats();
+		playerStats = getBrewRepository().getPlayerStats();
 
 		// Create the adapter that will return a fragment for each of the three primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -128,6 +134,11 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 					fragment = new BrewGroupsFragment();
 					((BrewGroupsFragment) fragment).setBrewGroups(groups);
 					break;
+				case 2:
+					fragment = new BrewStatsFragments();
+					((BrewStatsFragments) fragment).setBrewStats(brewStats);
+					((BrewStatsFragments) fragment).setPlayerStats(playerStats);
+					break;
 				default:
 					fragment = new DummySectionFragment();
 					Bundle args = new Bundle();
@@ -160,9 +171,45 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 		}
 	}
 
+	public static class BrewStatsFragments extends Fragment {
+
+		private BrewStats brewStats;
+		private List<PlayerStats> playerStats;
+
+		public void setBrewStats(BrewStats brewStats) {
+			this.brewStats = brewStats;
+		}
+
+		public void setPlayerStats(List<PlayerStats> playerStats) {
+			this.playerStats = playerStats;
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_dashboard_brew_stats, container, false);
+
+			TextView totalRoundsRun = (TextView) rootView.findViewById(R.id.total_rounds_run);
+			totalRoundsRun.setText("" + brewStats.getTotalTimesRun());
+
+			TextView highestScore = (TextView) rootView.findViewById(R.id.highest_score);
+			highestScore.setText("" + brewStats.getHighestScore());
+
+			TextView lowestScore = (TextView) rootView.findViewById(R.id.lowest_score);
+			lowestScore.setText("" + brewStats.getLowestScore());
+
+			TextView avgPlayerScore = (TextView) rootView.findViewById(R.id.avg_player_score);
+			avgPlayerScore.setText("" + brewStats.getAverageScore());
+
+			TextView avgPlayersPerRound = (TextView) rootView.findViewById(R.id.avg_players_per_round);
+			avgPlayersPerRound.setText("" + brewStats.getAverageNumberOfPlayers());
+
+			return rootView;
+		}
+
+	}
+
 	public static class BrewGroupsFragment extends Fragment implements OnLongClickListener {
 
-		public static final String ARG_SECTION_NUMBER = "section_number";
 		private ExpandableListAdapter adapter;
 		private List<BrewGroup> brewGroups;
 
@@ -179,6 +226,8 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 
 			listView.setAdapter(adapter);
 
+			// TODO check this works?
+			// TODO on long click prompt for rename, deletion actions
 			listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 				@Override
 				public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {

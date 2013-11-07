@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboard_fragment_brew_stats"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".DashbaordActivity$BrewStats" >
+
+    <TextView
+        android:id="@+id/game_stats_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Game Statistics"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/total_rounds_run_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/game_stats_id"
+        android:layout_alignRight="@+id/highest_score_label"
+        android:layout_below="@+id/game_stats_id"
+        android:gravity="right"
+        android:text="Total Rounds Run:" />
+
+    <TextView
+        android:id="@+id/total_rounds_run"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/total_rounds_run_label"
+        android:layout_toRightOf="@+id/total_rounds_run_label"
+        android:gravity="center_horizontal"
+        android:text="value" />
+
+    <TextView
+        android:id="@+id/highest_score_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/avg_player_score_label"
+        android:layout_below="@+id/total_rounds_run_label"
+        android:gravity="right"
+        android:text="Highest Score:" />
+
+    <TextView
+        android:id="@+id/highest_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/highest_score_label"
+        android:layout_alignBottom="@+id/highest_score_label"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/highest_score_label"
+        android:gravity="center_horizontal"
+        android:text="value" />
+
+    <TextView
+        android:id="@+id/lowest_score_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/highest_score_label"
+        android:layout_below="@+id/highest_score_label"
+        android:gravity="right"
+        android:text="Lowest Score:" />
+
+    <TextView
+        android:id="@+id/lowest_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lowest_score_label"
+        android:layout_alignBottom="@+id/lowest_score_label"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/highest_score_label"
+        android:gravity="center_horizontal"
+        android:text="value" />
+
+    <TextView
+        android:id="@+id/avg_player_score_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/avg_players_per_round_label"
+        android:layout_below="@+id/lowest_score_label"
+        android:gravity="right"
+        android:text="Avg Player Score:" />
+
+    <TextView
+        android:id="@+id/avg_player_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/avg_player_score_label"
+        android:layout_alignBottom="@+id/avg_player_score_label"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/highest_score_label"
+        android:gravity="center_horizontal"
+        android:text="value" />
+
+    <TextView
+        android:id="@+id/avg_players_per_round_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/avg_player_score_label"
+        android:gravity="right"
+        android:text="Avg Players Per Round:" />
+
+    <TextView
+        android:id="@+id/avg_players_per_round"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/avg_players_per_round_label"
+        android:layout_alignBottom="@+id/avg_players_per_round_label"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/highest_score_label"
+        android:gravity="center_horizontal"
+        android:text="value" />
+
+    <TextView
+        android:id="@+id/player_stats_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/avg_players_per_round_label"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="Player Statistics"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ExpandableListView
+        android:id="@+id/player_stats_expandable_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/player_stats_title"
+        android:layout_centerHorizontal="true" >
+    </ExpandableListView>
+
+</RelativeLayout>
