@@ -9,10 +9,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/add_player_text"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ems="10"
         android:hint="@string/add_player"
         android:imeOptions="actionDone|flagNoEnterAction"
         android:inputType="textPersonName"
@@ -20,7 +21,7 @@
 
         <requestFocus>
         </requestFocus>
-    </EditText>
+    </AutoCompleteTextView>
 
     <TableRow
         android:id="@+id/table"
@@ -59,6 +60,7 @@
     <ListView
         android:id="@+id/players_list_adator"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/player_data_row" />
 
 </LinearLayout>

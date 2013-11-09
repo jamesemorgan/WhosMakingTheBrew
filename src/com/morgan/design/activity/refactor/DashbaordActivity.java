@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.morgan.design.R;
+import com.morgan.design.TeaApplication;
 import com.morgan.design.activity.BaseBrewFragmentActivity;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewStats;
@@ -31,6 +33,10 @@ import com.morgan.design.utils.Utils;
 public class DashbaordActivity extends BaseBrewFragmentActivity implements ActionBar.TabListener {
 
 	private static Logger LOG = LoggerFactory.getLogger(DashbaordActivity.class);
+
+	public static final int DASHBOARD_GROUPS = 0;
+	public static final int DASHBOARD_HOME = 1;
+	public static final int DASHBOARD_STATS = 2;
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the sections. 
@@ -84,8 +90,10 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 			actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}
 
-		// Set selected tab to brew round
-		actionBar.setSelectedNavigationItem(1);
+		Intent intent = getIntent();
+		int selectedView = intent.getIntExtra(TeaApplication.EXTRA_DASHBOARD_VIEW, DASHBOARD_HOME);
+
+		actionBar.setSelectedNavigationItem(selectedView);
 	}
 
 	@Override
@@ -139,14 +147,14 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 		public Fragment getItem(int position) {
 			Fragment fragment = null;
 			switch (position) {
-				case 0:
+				case DASHBOARD_GROUPS:
 					fragment = new BrewGroupsFragment();
 					((BrewGroupsFragment) fragment).setBrewGroups(groups);
 					break;
-				case 1:
+				case DASHBOARD_HOME:
 					fragment = new BrewHomePageFragments();
 					break;
-				case 2:
+				case DASHBOARD_STATS:
 					fragment = new BrewStatsFragments();
 					((BrewStatsFragments) fragment).setBrewStats(brewStats);
 					((BrewStatsFragments) fragment).setPlayerStats(playerStats);
@@ -164,11 +172,11 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 		public CharSequence getPageTitle(int position) {
 			Locale l = Locale.getDefault();
 			switch (position) {
-				case 0:
+				case DASHBOARD_GROUPS:
 					return getString(R.string.dashboard_groups).toUpperCase(l);
-				case 1:
+				case DASHBOARD_HOME:
 					return getString(R.string.dashboard_brew_round).toUpperCase(l);
-				case 2:
+				case DASHBOARD_STATS:
 					return getString(R.string.dashboard_stats).toUpperCase(l);
 			}
 			return null;

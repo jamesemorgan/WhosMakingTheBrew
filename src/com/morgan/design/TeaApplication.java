@@ -12,6 +12,7 @@ public class TeaApplication extends Application {
 
 	private final Logger LOG = LoggerFactory.getLogger(TeaApplication.class);
 
+	// List of Activity result flags
 	public static final int ACTIVITY_HOME = 1;
 	public static final int ACTIVITY_RUNNING = 2;
 	public static final int ACTIVITY_RESULTS = 3;
@@ -19,6 +20,10 @@ public class TeaApplication extends Application {
 	public static final int ACTIVITY_GROUP = 5;
 	public static final int ACTIVITY_CREDITS = 6;
 
+	// List of keys used in intent extras
+	public static final String EXTRA_DASHBOARD_VIEW = "EXTRA_DASHBOARD_VIEW";
+
+	// List of domain constants
 	public static final String PLAYER_IDS = "player_ids";
 	public static final String GROUP_ID = "group_id";
 

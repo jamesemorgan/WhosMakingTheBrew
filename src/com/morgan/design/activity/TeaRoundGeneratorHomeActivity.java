@@ -4,6 +4,7 @@ import static com.morgan.design.utils.ObjectUtils.isNotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +14,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,6 +27,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -32,6 +37,7 @@ import android.widget.Toast;
 
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
+import com.morgan.design.activity.refactor.DashbaordActivity;
 import com.morgan.design.adaptor.PlayerAdaptor;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
@@ -44,7 +50,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 
 	private final Logger LOG = LoggerFactory.getLogger(TeaRoundGeneratorHomeActivity.class);
 
-	private EditText addPlayerEditText;
+	private AutoCompleteTextView addPlayerEditText;
 	private Button runTeaRoundButton;
 	private TextView playerDetailHeader;
 	private ListView playersListAdapter;
@@ -73,6 +79,10 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 		// Bind focus listener to attach to add player text box
 		addPlayerEditText.setOnKeyListener(new EnterPlayerClickListener());
 
+		// Load the Contact Name from List into the AutoCompleteTextView
+		addPlayerEditText.setAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.single_contact_view,
+				R.id.single_contact_view_name, getAllContactNames()));
+
 		playerAdaptor = new PlayerAdaptor(this, new ArrayList<BrewPlayer>(), new TrashClickHandler());
 
 		dataSetObserver = new DataSetObserver() {
@@ -98,6 +108,24 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 		}
 	}
 
+	private List<String> getAllContactNames() {
+		List<String> lContactNamesList = new ArrayList<String>();
+		try {
+			// Get all Contacts
+			Cursor lPeople = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+			if (lPeople != null) {
+				while (lPeople.moveToNext()) {
+					// Add Contact's Name into the List
+					lContactNamesList.add(lPeople.getString(lPeople.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+				}
+			}
+		}
+		catch (NullPointerException e) {
+			LOG.error("Unable to get contacts", e.getMessage());
+		}
+		return lContactNamesList;
+	}
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -121,7 +149,8 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.br_manage_groups:
-				final Intent intent = new Intent(this, TeaRoundGroupManagementActivity.class);
+				final Intent intent = new Intent(this, DashbaordActivity.class);
+				intent.putExtra(TeaApplication.EXTRA_DASHBOARD_VIEW, DashbaordActivity.DASHBOARD_GROUPS);
 				startActivityForResult(intent, TeaApplication.ACTIVITY_GROUP);
 				return true;
 			case R.id.br_credits:
@@ -302,7 +331,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 
 	private void findAllViewsById() {
 		playerDetailHeader = (TextView) findViewById(R.id.player_detail_header);
-		addPlayerEditText = (EditText) findViewById(R.id.add_player_text);
+		addPlayerEditText = (AutoCompleteTextView) findViewById(R.id.add_player_text);
 		runTeaRoundButton = (Button) findViewById(R.id.run_tea_round);
 		playersListAdapter = (ListView) findViewById(R.id.players_list_adator);
 	}
