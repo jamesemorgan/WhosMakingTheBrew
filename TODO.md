@@ -3,7 +3,7 @@ Main goals
 
 Code changes
 - [ ] Modernise and clean code
-- [x] Set target version to latest android version (18)
+- [x] Set target version to latest android version (19)
 - [x] Set minimum version to android version (11)
 - [ ] Alter domain logic and clean up Brew*.java 
 - [ ] Make project work with latest version of Android

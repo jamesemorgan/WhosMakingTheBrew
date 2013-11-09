@@ -7,6 +7,7 @@ import com.j256.ormlite.android.apptools.OrmLiteBaseListActivity;
 import com.morgan.design.db.BrewRepository;
 import com.morgan.design.db.DatabaseHelper;
 
+@Deprecated
 public class BaseBrewListActivity extends OrmLiteBaseListActivity<DatabaseHelper> {
 
 	private BrewRepository mBrewRepository;

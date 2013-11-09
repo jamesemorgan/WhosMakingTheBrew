@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,14 +25,15 @@ public class PlayerAdaptor extends ArrayAdapter<BrewPlayer> {
 
 	private final Logger LOG = LoggerFactory.getLogger(PlayerAdaptor.class);
 
+	private static final int PLAYER_DATA_ROW = R.layout.player_data_row;
+
 	private final List<BrewPlayer> players;
 	private final Activity context;
 
 	private final TrashClickHandler trashClickHandlerListener;
 
-	public PlayerAdaptor(final Activity context, final int textViewResourceId, final List<BrewPlayer> players,
-			final TrashClickHandler trashClickHandlerListener) {
-		super(context, textViewResourceId, players);
+	public PlayerAdaptor(final Activity context, final List<BrewPlayer> players, final TrashClickHandler trashClickHandlerListener) {
+		super(context, PLAYER_DATA_ROW, players);
 		this.context = context;
 		this.players = players;
 		this.trashClickHandlerListener = trashClickHandlerListener;
@@ -62,17 +63,9 @@ public class PlayerAdaptor extends ArrayAdapter<BrewPlayer> {
 			// we first inflate the XML layout file and retrieve reference of
 			// the described View.
 			final LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = vi.inflate(R.layout.player_data_row, null);
+			view = vi.inflate(PLAYER_DATA_ROW, null);
 
-			holder = new ViewHolder();
-			holder.playerName = (TextView) view.findViewById(R.id.name_text_view);
-			holder.playerScore = (TextView) view.findViewById(R.id.score_text_view);
-			holder.trashButton = (Button) view.findViewById(R.id.remove_player);
-
-			holder.playerSmileyIcon = (ImageView) view.findViewById(R.id.player_smiley_icon);
-			holder.playerSmileyIcon.setImageResource(SmileyIconUtils.getDefaultSmiley());
-			holder.playerSmileyIcon.setAdjustViewBounds(true);
-
+			holder = new ViewHolder(view);
 			view.setTag(holder);
 		}
 		else {
@@ -86,11 +79,8 @@ public class PlayerAdaptor extends ArrayAdapter<BrewPlayer> {
 		LOG.debug(player.getName());
 
 		if (player != null) {
-			final TextView nameTextView = (TextView) view.findViewById(R.id.name_text_view);
-			nameTextView.setText("Name: " + player.getName());
-
-			final TextView ratingTextView = (TextView) view.findViewById(R.id.score_text_view);
-			ratingTextView.setText("Score: " + player.getScore());
+			holder.playerName.setText("Name: " + player.getName());
+			holder.playerScore.setText("Score: " + player.getScore());
 		}
 
 		return view;
@@ -99,8 +89,18 @@ public class PlayerAdaptor extends ArrayAdapter<BrewPlayer> {
 	class ViewHolder {
 		TextView playerName;
 		TextView playerScore;
-		Button trashButton;
+		ImageButton trashButton;
 		ImageView playerSmileyIcon;
+
+		public ViewHolder(View view) {
+			playerName = (TextView) view.findViewById(R.id.player_data_player_name);
+			playerScore = (TextView) view.findViewById(R.id.player_data_player_details);
+			trashButton = (ImageButton) view.findViewById(R.id.player_data_remove_player);
+
+			playerSmileyIcon = (ImageView) view.findViewById(R.id.player_data_player_icon);
+			playerSmileyIcon.setImageResource(SmileyIconUtils.getDefaultSmiley());
+			// playerSmileyIcon.setAdjustViewBounds(true);
+		}
 	}
 
 }

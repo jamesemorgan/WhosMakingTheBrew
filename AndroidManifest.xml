@@ -17,6 +17,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <!-- Contacts Lookup -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    
+    <!-- TODO What is this? -->
     <supports-screens
         android:largeScreens="true"
         android:normalScreens="true"
@@ -30,16 +34,6 @@
         android:configChanges="keyboardHidden|orientation"
         android:icon="@drawable/dashboard_teapot_icon"
         android:label="@string/app_name" >
-        <!-- <activity
-            android:name="com.morgan.design.activity.TeaRoundGeneratorDashboardActivity"
-            android:clearTaskOnLaunch="true"
-            android:label="@string/app_title" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>-->
         <!-- START New Activities -->
         <activity
             android:name="com.morgan.design.activity.refactor.DashbaordActivity"
@@ -68,14 +62,6 @@
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation" />
         <activity
-            android:name="com.morgan.design.activity.TeaRoundGeneratorStatisticsActivity"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="keyboardHidden|orientation" />
-        <activity
-            android:name="com.morgan.design.activity.TeaRoundPlayerStatisticsActivity"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="keyboardHidden|orientation" />
-        <activity
             android:name="com.morgan.design.activity.TeaRoundGroupManagementActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation" />
@@ -87,10 +73,6 @@
             android:name="com.morgan.design.activity.preferences.SettingsActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation" />
-        <activity
-            android:name="com.morgan.design.CreditsActivity"
-            android:label="@string/title_activity_credits" >
-        </activity>
     </application>
 
 </manifest>

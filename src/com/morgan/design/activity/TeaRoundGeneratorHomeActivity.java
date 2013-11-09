@@ -26,6 +26,7 @@ import android.view.View.OnKeyListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,13 +40,14 @@ import com.morgan.design.utils.Prefs;
 import com.morgan.design.utils.StringUtils;
 import com.morgan.design.utils.Utils;
 
-public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
+public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 
 	private final Logger LOG = LoggerFactory.getLogger(TeaRoundGeneratorHomeActivity.class);
 
 	private EditText addPlayerEditText;
 	private Button runTeaRoundButton;
 	private TextView playerDetailHeader;
+	private ListView playersListAdapter;
 
 	@Deprecated
 	private static final int DIALOG_ADD_GROUP = 0;
@@ -71,7 +73,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 		// Bind focus listener to attach to add player text box
 		addPlayerEditText.setOnKeyListener(new EnterPlayerClickListener());
 
-		playerAdaptor = new PlayerAdaptor(this, R.layout.player_data_row, new ArrayList<BrewPlayer>(), new TrashClickHandler());
+		playerAdaptor = new PlayerAdaptor(this, new ArrayList<BrewPlayer>(), new TrashClickHandler());
 
 		dataSetObserver = new DataSetObserver() {
 			@Override
@@ -82,7 +84,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 			}
 		};
 		playerAdaptor.registerDataSetObserver(dataSetObserver);
-		setListAdapter(playerAdaptor);
+		playersListAdapter.setAdapter(playerAdaptor);
 
 		final Bundle bundle = getIntent().getExtras();
 		if (isNotNull(bundle)) {
@@ -97,7 +99,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 	}
 
 	@Override
-	protected void onDestroy() {
+	public void onDestroy() {
 		super.onDestroy();
 		playerAdaptor.unregisterDataSetObserver(dataSetObserver);
 	}
@@ -302,6 +304,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewListActivity {
 		playerDetailHeader = (TextView) findViewById(R.id.player_detail_header);
 		addPlayerEditText = (EditText) findViewById(R.id.add_player_text);
 		runTeaRoundButton = (Button) findViewById(R.id.run_tea_round);
+		playersListAdapter = (ListView) findViewById(R.id.players_list_adator);
 	}
 
 	public void hideKeyBoard(final View view) {

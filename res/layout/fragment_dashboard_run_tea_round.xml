@@ -36,6 +36,8 @@
         android:layout_below="@+id/brew_round_dashboard_home_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Whos Making The Brew?" />
+        android:drawableLeft="@drawable/button_tea_cup"
+        android:text=" Whos Making The Brew?" />
+
 
 </RelativeLayout>

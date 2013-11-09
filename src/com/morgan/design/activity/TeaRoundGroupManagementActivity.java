@@ -22,6 +22,7 @@ import com.morgan.design.adaptor.GroupAdaptor;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
 
+@Deprecated
 public class TeaRoundGroupManagementActivity extends BaseBrewListActivity {
 
 	private final Logger LOG = LoggerFactory.getLogger(TeaRoundGroupManagementActivity.class);
