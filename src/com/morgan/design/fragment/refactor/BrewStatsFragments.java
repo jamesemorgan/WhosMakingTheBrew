@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -31,7 +30,7 @@ public class BrewStatsFragments extends BaseBrewFragment {
 	private TextView avgPlayerScore;
 	private TextView avgPlayersPerRound;
 
-	private ExpandableListAdapter adapter;
+	private BrewPlayerStatsExpandableListAdapter adapter;
 	private ExpandableListView playerStatsExpandableListView;
 
 	@Override
@@ -46,6 +45,8 @@ public class BrewStatsFragments extends BaseBrewFragment {
 		super.onResume();
 		playerStats = getBrewRepository().getPlayerStats();
 		brewStats = getBrewRepository().getBrewStats();
+
+		adapter.setPlayerStats(playerStats);
 
 		populateGameStats();
 	}

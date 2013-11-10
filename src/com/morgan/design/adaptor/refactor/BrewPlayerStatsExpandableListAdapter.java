@@ -16,11 +16,16 @@ public class BrewPlayerStatsExpandableListAdapter extends BaseExpandableListAdap
 
 	public LayoutInflater inflater;
 
-	private final List<PlayerStats> playerStats;
+	private List<PlayerStats> playerStats;
 
 	public BrewPlayerStatsExpandableListAdapter(List<PlayerStats> playerStats, Context context) {
 		this.playerStats = playerStats;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	}
+
+	public void setPlayerStats(List<PlayerStats> playerStats) {
+		this.playerStats = playerStats;
+		notifyDataSetChanged();
 	}
 
 	@Override
