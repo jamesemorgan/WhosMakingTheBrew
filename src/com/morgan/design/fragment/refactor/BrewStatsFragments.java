@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import com.morgan.design.R;
 import com.morgan.design.db.domain.BrewStats;
 import com.morgan.design.db.domain.PlayerStats;
 
-public class BrewStatsFragments extends Fragment {
+public class BrewStatsFragments extends BaseBrewFragment {
 
 	private static Logger LOG = LoggerFactory.getLogger(BrewStatsFragments.class);
 
@@ -27,12 +26,18 @@ public class BrewStatsFragments extends Fragment {
 
 	private ExpandableListAdapter adapter;
 
-	public void setBrewStats(BrewStats brewStats) {
-		this.brewStats = brewStats;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		playerStats = getBrewRepository().getPlayerStats();
+		brewStats = getBrewRepository().getBrewStats();
 	}
 
-	public void setPlayerStats(List<PlayerStats> playerStats) {
-		this.playerStats = playerStats;
+	@Override
+	public void onResume() {
+		super.onResume();
+		playerStats = getBrewRepository().getPlayerStats();
+		brewStats = getBrewRepository().getBrewStats();
 	}
 
 	@Override

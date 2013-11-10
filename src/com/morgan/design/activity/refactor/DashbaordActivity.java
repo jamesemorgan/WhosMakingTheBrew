@@ -1,6 +1,5 @@
 package com.morgan.design.activity.refactor;
 
-import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -20,9 +19,6 @@ import android.view.MenuItem;
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
 import com.morgan.design.activity.BaseBrewFragmentActivity;
-import com.morgan.design.db.domain.BrewGroup;
-import com.morgan.design.db.domain.BrewStats;
-import com.morgan.design.db.domain.PlayerStats;
 import com.morgan.design.fragment.refactor.BrewGroupsFragment;
 import com.morgan.design.fragment.refactor.BrewHomePageFragments;
 import com.morgan.design.fragment.refactor.BrewStatsFragments;
@@ -38,20 +34,9 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 	public static final int DASHBOARD_HOME = 1;
 	public static final int DASHBOARD_STATS = 2;
 
-	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide fragments for each of the sections. 
-	 * We use a {@link android.support.v4.app.FragmentPagerAdapter} derivative, which will keep every loaded 
-	 * fragment in memory. If this becomes too memory intensive, it may be best to switch to a 
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-	 */
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 
-	/** The {@link ViewPager} that will host the section contents. */
 	private ViewPager mViewPager;
-
-	private List<BrewGroup> groups;
-	private BrewStats brewStats;
-	private List<PlayerStats> playerStats;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,10 +46,6 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-		groups = getBrewRepository().findAllBrewGroups();
-		brewStats = getBrewRepository().getBrewStats();
-		playerStats = getBrewRepository().getPlayerStats();
 
 		// Create the adapter that will return a fragment for each of the three primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -98,7 +79,6 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.dashboard_menu, menu);
 		return true;
 	}
@@ -125,7 +105,6 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 
 	@Override
 	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-		// When the given tab is selected, switch to the corresponding page in the ViewPager.
 		mViewPager.setCurrentItem(tab.getPosition());
 	}
 
@@ -149,15 +128,12 @@ public class DashbaordActivity extends BaseBrewFragmentActivity implements Actio
 			switch (position) {
 				case DASHBOARD_GROUPS:
 					fragment = new BrewGroupsFragment();
-					((BrewGroupsFragment) fragment).setBrewGroups(groups);
 					break;
 				case DASHBOARD_HOME:
 					fragment = new BrewHomePageFragments();
 					break;
 				case DASHBOARD_STATS:
 					fragment = new BrewStatsFragments();
-					((BrewStatsFragments) fragment).setBrewStats(brewStats);
-					((BrewStatsFragments) fragment).setPlayerStats(playerStats);
 					break;
 			}
 			return fragment;

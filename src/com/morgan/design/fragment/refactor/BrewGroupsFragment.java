@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -20,15 +19,23 @@ import com.morgan.design.R;
 import com.morgan.design.adaptor.refactor.BrewGroupsExpandableListAdapter;
 import com.morgan.design.db.domain.BrewGroup;
 
-public class BrewGroupsFragment extends Fragment implements OnLongClickListener {
+public class BrewGroupsFragment extends BaseBrewFragment implements OnLongClickListener {
 
 	private static Logger LOG = LoggerFactory.getLogger(BrewGroupsFragment.class);
 
 	private ExpandableListAdapter adapter;
 	private List<BrewGroup> brewGroups;
 
-	public void setBrewGroups(List<BrewGroup> brewGroups) {
-		this.brewGroups = brewGroups;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		brewGroups = getBrewRepository().findAllBrewGroups();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		brewGroups = getBrewRepository().findAllBrewGroups();
 	}
 
 	@Override
