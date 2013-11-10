@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.morgan.design.R;
@@ -18,7 +19,10 @@ public class BrewPlayerStatsExpandableListAdapter extends BaseExpandableListAdap
 
 	private List<PlayerStats> playerStats;
 
-	public BrewPlayerStatsExpandableListAdapter(List<PlayerStats> playerStats, Context context) {
+	private final ExpandableListView listView;
+
+	public BrewPlayerStatsExpandableListAdapter(ExpandableListView listView, List<PlayerStats> playerStats, Context context) {
+		this.listView = listView;
 		this.playerStats = playerStats;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -59,6 +63,18 @@ public class BrewPlayerStatsExpandableListAdapter extends BaseExpandableListAdap
 		parentView.playerName.setText(playerStat.getBrewPlayer().getName());
 
 		return view;
+	}
+
+	private int lastExpandedGroupPosition;
+
+	@Override
+	public void onGroupExpanded(int groupPosition) {
+		// collapse the old expanded group, if not the same as new group to expand
+		if (groupPosition != lastExpandedGroupPosition) {
+			listView.collapseGroup(lastExpandedGroupPosition);
+		}
+		super.onGroupExpanded(groupPosition);
+		lastExpandedGroupPosition = groupPosition;
 	}
 
 	@Override

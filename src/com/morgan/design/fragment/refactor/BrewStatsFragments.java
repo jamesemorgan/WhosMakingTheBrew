@@ -71,7 +71,7 @@ public class BrewStatsFragments extends BaseBrewFragment {
 
 		playerStatsExpandableListView = (ExpandableListView) rootView.findViewById(R.id.player_stats_expandable_list);
 
-		adapter = new BrewPlayerStatsExpandableListAdapter(playerStats, getActivity());
+		adapter = new BrewPlayerStatsExpandableListAdapter(playerStatsExpandableListView, playerStats, getActivity());
 		playerStatsExpandableListView.setAdapter(adapter);
 
 		return rootView;
