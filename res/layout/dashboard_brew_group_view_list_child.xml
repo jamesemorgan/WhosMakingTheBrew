@@ -12,8 +12,8 @@
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/brew_round_icon"
         android:gravity="center_vertical"
-        android:textAlignment="center"
         android:text="Player Name"
+        android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageView
@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:contentDescription="remove player"
         android:src="@drawable/trashbin_button_icon" />
 
 </RelativeLayout>

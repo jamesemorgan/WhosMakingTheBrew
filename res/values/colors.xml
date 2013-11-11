@@ -25,17 +25,6 @@
     <color name="background3">#ffe3e8f1</color>
     <color name="title_separator">#40ffffff</color>
 
-    <color name="session_foreground_past">#ff999999</color>
-
-    <color name="pinned_header_background">#ff202020</color>
-    
-    
-    
-    <color name="white">@android:color/white</color>
-    <color name="gray">#aaa</color>
     <color name="gray_dark">#333</color>
-    <color name="black">@android:color/black</color>
-    <color name="indian_red_1">#F75D59</color>
-    
     
 </resources>
