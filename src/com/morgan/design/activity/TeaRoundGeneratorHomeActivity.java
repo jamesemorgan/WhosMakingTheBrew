@@ -4,7 +4,9 @@ import static com.morgan.design.utils.ObjectUtils.isNotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,7 @@ import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.Contacts.Data;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -109,21 +112,31 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 	}
 
 	private List<String> getAllContactNames() {
-		List<String> lContactNamesList = new ArrayList<String>();
+		Set<String> lContactNamesList = new HashSet<String>();
 		try {
+			String[] projection = new String[] { Data._ID, ContactsContract.Contacts.DISPLAY_NAME,
+					ContactsContract.Contacts.PHOTO_THUMBNAIL_URI };
+
 			// Get all Contacts
-			Cursor lPeople = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+			Cursor lPeople = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, projection, null, null, null);
 			if (lPeople != null) {
 				while (lPeople.moveToNext()) {
 					// Add Contact's Name into the List
-					lContactNamesList.add(lPeople.getString(lPeople.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+					int index = lPeople.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+					String value = lPeople.getString(index);
+					LOG.debug("Lookup index {} : value {}", index, value);
+					if (value != null) {
+						lContactNamesList.add(value);
+					}
 				}
 			}
 		}
 		catch (NullPointerException e) {
 			LOG.error("Unable to get contacts", e.getMessage());
 		}
-		return lContactNamesList;
+		List<String> values = new ArrayList<String>();
+		values.addAll(lContactNamesList);
+		return values;
 	}
 
 	@Override
