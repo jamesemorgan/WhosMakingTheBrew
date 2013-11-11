@@ -15,16 +15,17 @@ import com.morgan.design.db.domain.PlayerStats;
 
 public class BrewPlayerStatsExpandableListAdapter extends BaseExpandableListAdapter {
 
-	public LayoutInflater inflater;
 
 	private List<PlayerStats> playerStats;
+	private int lastExpandedGroupPosition;
 
+	private final LayoutInflater inflater;
 	private final ExpandableListView listView;
 
 	public BrewPlayerStatsExpandableListAdapter(ExpandableListView listView, List<PlayerStats> playerStats, Context context) {
 		this.listView = listView;
 		this.playerStats = playerStats;
-		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	public void setPlayerStats(List<PlayerStats> playerStats) {
@@ -64,8 +65,6 @@ public class BrewPlayerStatsExpandableListAdapter extends BaseExpandableListAdap
 
 		return view;
 	}
-
-	private int lastExpandedGroupPosition;
 
 	@Override
 	public void onGroupExpanded(int groupPosition) {

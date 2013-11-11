@@ -23,6 +23,7 @@ Code changes
 - [x] Rework Google Analytics integration and what is recorded
 - [x] Remove abstract activities  
 - [ ] Replace alerts and dialogs with DialogFragments, remove deprecation
+- [ ] Add details about this to verison and logs http://source.android.com/devices/tech/dalvik/art.html
 
 Remove dead features:
 - [x] Tea timer (maybe replaced one day!)

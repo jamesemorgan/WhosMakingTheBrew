@@ -14,12 +14,24 @@
         android:id="@+id/brew_groups_expandable_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/brew_groups_title"
         android:layout_centerHorizontal="true"
         android:clickable="true"
         android:longClickable="true"
         tools:listheader="@layout/dashboard_brew_group_view_list_parent"
         tools:listitem="@layout/dashboard_brew_group_view_list_child" >
+
     </ExpandableListView>
+
+    <TextView
+        android:id="@+id/brew_groups_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
+        android:text="Brew Groups"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
