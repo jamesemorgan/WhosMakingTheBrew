@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.os.Build;
+import android.provider.Settings;
 
 public class BuildUtils {
 
@@ -20,15 +21,17 @@ public class BuildUtils {
 		LOG.debug(Build.VERSION.CODENAME);
 		LOG.debug(Build.VERSION.RELEASE);
 		LOG.debug(Integer.toString(Build.VERSION.SDK_INT));
+		LOG.debug(Build.DEVICE);
+		LOG.debug(Build.MANUFACTURER);
 		LOG.debug("##########################################");
 	}
 
 	public static String getDeviceId() {
-		String AndroidID = System.getProperty(android.provider.Settings.Secure.ANDROID_ID);
+		String AndroidID = System.getProperty(Settings.Secure.ANDROID_ID);
 		if (AndroidID == null) {
-			AndroidID = "a23456790112345b";
+			AndroidID = Build.UNKNOWN;
 		}
-		final String Android_ID = Build.ID + "-" + android.os.Build.PRODUCT + "-" + AndroidID;
+		final String Android_ID = Build.ID + "-" + Build.PRODUCT + "-" + AndroidID;
 		LOG.debug("#########################################");
 		LOG.debug("Android_ID = {}", Android_ID);
 		LOG.debug("#########################################");

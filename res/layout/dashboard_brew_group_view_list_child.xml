@@ -7,22 +7,21 @@
         android:id="@+id/brew_group_player_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/brew_round_icon"
+        android:layout_alignBottom="@+id/brew_round_remove_player"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/brew_round_icon"
+        android:layout_toLeftOf="@+id/brew_round_remove_player"
         android:gravity="center_vertical"
         android:text="Player Name"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ImageView
-        android:id="@+id/brew_round_icon"
+    <ImageButton
+        android:id="@+id/brew_round_remove_player"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:contentDescription="remove player"
         android:src="@drawable/trashbin_button_icon" />
 
 </RelativeLayout>

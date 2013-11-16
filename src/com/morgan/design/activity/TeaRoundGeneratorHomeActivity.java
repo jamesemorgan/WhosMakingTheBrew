@@ -4,9 +4,6 @@ import static com.morgan.design.utils.ObjectUtils.isNotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +13,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.provider.ContactsContract.Contacts.Data;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,6 +38,7 @@ import com.morgan.design.activity.refactor.DashbaordActivity;
 import com.morgan.design.adaptor.PlayerAdaptor;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
+import com.morgan.design.helpers.ContactsLoader;
 import com.morgan.design.utils.BuildUtils;
 import com.morgan.design.utils.Prefs;
 import com.morgan.design.utils.StringUtils;
@@ -71,7 +66,6 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
-
 		BuildUtils.logBuildDetails();
 
 		super.onCreate(savedInstanceState);
@@ -84,7 +78,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 
 		// Load the Contact Name from List into the AutoCompleteTextView
 		addPlayerEditText.setAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.single_contact_view,
-				R.id.single_contact_view_name, getAllContactNames()));
+				R.id.single_contact_view_name, ContactsLoader.getAllContactNames(getContentResolver())));
 
 		playerAdaptor = new PlayerAdaptor(this, new ArrayList<BrewPlayer>(), new TrashClickHandler());
 
@@ -109,34 +103,6 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 		else {
 			loadLastRunPlayers();
 		}
-	}
-
-	private List<String> getAllContactNames() {
-		Set<String> lContactNamesList = new HashSet<String>();
-		try {
-			String[] projection = new String[] { Data._ID, ContactsContract.Contacts.DISPLAY_NAME,
-					ContactsContract.Contacts.PHOTO_THUMBNAIL_URI };
-
-			// Get all Contacts
-			Cursor lPeople = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, projection, null, null, null);
-			if (lPeople != null) {
-				while (lPeople.moveToNext()) {
-					// Add Contact's Name into the List
-					int index = lPeople.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
-					String value = lPeople.getString(index);
-					LOG.debug("Lookup index {} : value {}", index, value);
-					if (value != null) {
-						lContactNamesList.add(value);
-					}
-				}
-			}
-		}
-		catch (NullPointerException e) {
-			LOG.error("Unable to get contacts", e.getMessage());
-		}
-		List<String> values = new ArrayList<String>();
-		values.addAll(lContactNamesList);
-		return values;
 	}
 
 	@Override

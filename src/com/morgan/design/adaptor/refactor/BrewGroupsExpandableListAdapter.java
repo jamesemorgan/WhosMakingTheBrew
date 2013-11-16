@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.common.collect.Iterators;
@@ -16,26 +17,39 @@ import com.morgan.design.db.domain.BrewPlayer;
 
 public class BrewGroupsExpandableListAdapter extends BaseExpandableListAdapter {
 
+	public interface OnRemovePlayerFromGroup {
+		void onTrashClicked(BrewPlayer player, int groupPosition, int childPosition);
+	}
+
 	public LayoutInflater inflater;
 
 	private final List<BrewGroup> brewGroups;
+	private final OnRemovePlayerFromGroup onRemovePlayerFromGroup;
 
-	public BrewGroupsExpandableListAdapter(List<BrewGroup> brewGroups, Context context) {
+	public BrewGroupsExpandableListAdapter(List<BrewGroup> brewGroups, Context context, OnRemovePlayerFromGroup onRemovePlayerFromGroup) {
 		this.brewGroups = brewGroups;
+		this.onRemovePlayerFromGroup = onRemovePlayerFromGroup;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
-	public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+	public View getChildView(final int groupPosition, final int childPosition, final boolean isLastChild, final View convertView,
+			final ViewGroup parent) {
 		View view = convertView;
 		if (view == null) {
 			view = inflater.inflate(R.layout.dashboard_brew_group_view_list_child, null);
 		}
 
-		BrewPlayer player = (BrewPlayer) getChild(groupPosition, childPosition);
+		final BrewPlayer player = (BrewPlayer) getChild(groupPosition, childPosition);
 
 		ChildViewHolder childView = new ChildViewHolder(view);
 		childView.playerName.setText(player.getName());
+		childView.brewRoundIcon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				onRemovePlayerFromGroup.onTrashClicked(player, groupPosition, childPosition);
+			}
+		});
 
 		return view;
 	}
@@ -98,9 +112,11 @@ public class BrewGroupsExpandableListAdapter extends BaseExpandableListAdapter {
 
 	class ChildViewHolder {
 		TextView playerName;
+		ImageView brewRoundIcon;
 
 		public ChildViewHolder(View view) {
 			playerName = (TextView) view.findViewById(R.id.brew_group_player_name);
+			brewRoundIcon = (ImageView) view.findViewById(R.id.brew_round_remove_player);
 		}
 	}
 
