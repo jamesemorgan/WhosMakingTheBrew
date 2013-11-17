@@ -64,11 +64,15 @@ public class TeaRoundGeneratorResultsActivity extends BaseBrewActivity {
 			winnerText.setText(winner.getName());
 			winnerScore.setText(Integer.toString(winner.getScore()));
 
-			getBrewRepository().deleteAllLastRunEntries();
-			getBrewRepository().insertLastRunEntry(resultsList);
-			getBrewRepository().saveBrewStats(resultsList);
-			getBrewRepository().savePlayerStats(resultsList);
+			saveAndCleanUpDB();
 		}
+	}
+
+	private void saveAndCleanUpDB() {
+		getBrewRepository().deleteAllLastRunEntries();
+		getBrewRepository().insertLastRunEntry(resultsList);
+		getBrewRepository().saveBrewStats(resultsList);
+		getBrewRepository().savePlayerStats(resultsList);
 	}
 
 	private void findAllViewsById() {

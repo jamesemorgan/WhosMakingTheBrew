@@ -19,8 +19,8 @@ public class BuildUtils {
 	public static void logBuildDetails() {
 		LOG.debug("##########################################");
 		LOG.debug(Build.VERSION.CODENAME);
-		LOG.debug(Build.VERSION.RELEASE);
 		LOG.debug(Integer.toString(Build.VERSION.SDK_INT));
+		LOG.debug(Build.VERSION.RELEASE);
 		LOG.debug(Build.DEVICE);
 		LOG.debug(Build.MANUFACTURER);
 		LOG.debug("##########################################");

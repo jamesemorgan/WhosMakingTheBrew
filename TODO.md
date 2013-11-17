@@ -16,8 +16,8 @@ Code changes
 - [ ] Rework add players view
 - [ ] Rework animation view
 - [ ] Rework results view
-- [ ] Rework groups view
-- [ ] Rework stats view
+- [x] Rework groups view
+- [x] Rework stats view
 - [ ] Rework feedback form
 - [x] Rework Settings
 - [x] Rework Google Analytics integration and what is recorded
