@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.morgan.design.R;
-import com.morgan.design.activity.TeaRoundGeneratorHomeActivity.TrashClickHandler;
+import com.morgan.design.activity.TeaRoundHomeActivity.TrashClickHandler;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.utils.SmileyIconUtils;
 

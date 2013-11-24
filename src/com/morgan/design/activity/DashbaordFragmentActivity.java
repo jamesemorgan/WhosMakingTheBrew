@@ -1,4 +1,4 @@
-package com.morgan.design.fragment.refactor;
+package com.morgan.design.activity;
 
 import java.util.Locale;
 
@@ -15,12 +15,14 @@ import android.view.MenuItem;
 
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
-import com.morgan.design.activity.BaseBrewFragmentActivity;
+import com.morgan.design.activity.fragment.BrewGroupsFragment;
+import com.morgan.design.activity.fragment.BrewHomePageFragments;
+import com.morgan.design.activity.fragment.BrewStatsFragments;
 import com.morgan.design.helpers.Changelog;
 import com.morgan.design.utils.Prefs;
 import com.morgan.design.utils.Utils;
 
-public class DashbaordActivity extends BaseBrewFragmentActivity implements ActionBar.TabListener {
+public class DashbaordFragmentActivity extends BaseBrewFragmentActivity implements ActionBar.TabListener {
 
 	public static final int DASHBOARD_GROUPS = 0;
 	public static final int DASHBOARD_HOME = 1;

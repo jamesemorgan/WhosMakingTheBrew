@@ -12,7 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.morgan.design.R;
-import com.morgan.design.activity.TeaRoundGeneratorHomeActivity;
+import com.morgan.design.activity.TeaRoundHomeActivity;
 
 public class ManageGroupDialogFragment extends DialogFragment {
 
@@ -58,10 +58,10 @@ public class ManageGroupDialogFragment extends DialogFragment {
 						addGroupEditText.clearFocus();
 
 						if (editing) {
-							((TeaRoundGeneratorHomeActivity) getActivity()).updateBrewGroup(groupName);
+							((TeaRoundHomeActivity) getActivity()).updateBrewGroup(groupName);
 						}
 						else {
-							((TeaRoundGeneratorHomeActivity) getActivity()).createBrewGroup(groupName);
+							((TeaRoundHomeActivity) getActivity()).createBrewGroup(groupName);
 						}
 					}
 				});

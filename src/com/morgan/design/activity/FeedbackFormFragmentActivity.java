@@ -1,4 +1,4 @@
-package com.morgan.design.fragment.refactor;
+package com.morgan.design.activity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -14,7 +14,7 @@ import com.morgan.design.R;
 import com.morgan.design.helpers.Constants;
 import com.morgan.design.utils.BuildUtils;
 
-public class FeedbackFormActivity extends FragmentActivity {
+public class FeedbackFormFragmentActivity extends FragmentActivity {
 
 	private EditText nameField;
 	private EditText emailField;

@@ -33,14 +33,13 @@ import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.dialog.fragment.ManageGroupDialogFragment;
 import com.morgan.design.dialog.fragment.ManageGroupDialogFragment.ManageGroupDialogFragmentActions;
-import com.morgan.design.fragment.refactor.DashbaordActivity;
 import com.morgan.design.helpers.ContactsLoader;
 import com.morgan.design.utils.BuildUtils;
 import com.morgan.design.utils.Prefs;
 import com.morgan.design.utils.StringUtils;
 import com.morgan.design.utils.Utils;
 
-public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity implements ManageGroupDialogFragmentActions {
+public class TeaRoundHomeActivity extends BaseBrewFragmentActivity implements ManageGroupDialogFragmentActions {
 
 	private AutoCompleteTextView addPlayerEditText;
 	private Button runTeaRoundButton;
@@ -117,8 +116,8 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity impl
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.br_manage_groups:
-				final Intent intent = new Intent(this, DashbaordActivity.class);
-				intent.putExtra(TeaApplication.EXTRA_DASHBOARD_VIEW, DashbaordActivity.DASHBOARD_GROUPS);
+				final Intent intent = new Intent(this, DashbaordFragmentActivity.class);
+				intent.putExtra(TeaApplication.EXTRA_DASHBOARD_VIEW, DashbaordFragmentActivity.DASHBOARD_GROUPS);
 				startActivityForResult(intent, TeaApplication.ACTIVITY_GROUP);
 				return true;
 			case R.id.br_credits:
@@ -160,7 +159,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity impl
 			}
 			case TeaApplication.ACTIVITY_RUNNING: {
 				if (resultCode == RESULT_OK) {
-					final Intent resultsIntent = new Intent(this, TeaRoundGeneratorResultsActivity.class);
+					final Intent resultsIntent = new Intent(this, TeaRoundResultsActivity.class);
 					final ArrayList<Integer> playerIds = new ArrayList<Integer>();
 					for (final BrewPlayer player : brewPlayers) {
 						playerIds.add(player.getId());
@@ -316,7 +315,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity impl
 	}
 
 	private void runTeaRound() {
-		final Intent splash = new Intent(this, TeaRoundGeneratorRunningActivity.class);
+		final Intent splash = new Intent(this, TeaRoundRunningActivity.class);
 		startActivityForResult(splash, TeaApplication.ACTIVITY_RUNNING);
 	}
 
@@ -339,7 +338,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity impl
 			return;
 		}
 		brewGroup = getBrewRepository().saveGroup(groupName, brewPlayers);
-		shortToast("Create Group: " + groupName);
+		shortToast("Created Group: " + groupName);
 		setPlayerDetailHeader();
 	}
 
@@ -347,7 +346,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity impl
 	public void updateBrewGroup(final String groupName) {
 		brewGroup.setName(groupName);
 		getBrewRepository().updateGroup(brewGroup);
-		shortToast("Group Updated to " + groupName);
+		shortToast("Updated Group: " + groupName);
 	}
 
 	private boolean validNumberOfPlayers() {
@@ -363,7 +362,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity impl
 			final BrewPlayer player = playerAdaptor.getItem(position);
 
 			if (0 != player.getId()) {
-				final AlertDialog.Builder builder = new AlertDialog.Builder(TeaRoundGeneratorHomeActivity.this);
+				final AlertDialog.Builder builder = new AlertDialog.Builder(TeaRoundHomeActivity.this);
 				builder.setMessage("Click 'Remove' to remove from this game, 'Delete' to delete completely").setCancelable(true)
 						.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
 							@Override

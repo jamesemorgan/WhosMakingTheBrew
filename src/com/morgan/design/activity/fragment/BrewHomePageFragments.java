@@ -1,4 +1,4 @@
-package com.morgan.design.fragment.refactor;
+package com.morgan.design.activity.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.morgan.design.R;
-import com.morgan.design.activity.TeaRoundGeneratorHomeActivity;
+import com.morgan.design.activity.TeaRoundHomeActivity;
 
 public class BrewHomePageFragments extends Fragment {
 
@@ -21,7 +21,7 @@ public class BrewHomePageFragments extends Fragment {
 		button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final Intent home = new Intent(getActivity(), TeaRoundGeneratorHomeActivity.class);
+				final Intent home = new Intent(getActivity(), TeaRoundHomeActivity.class);
 				startActivity(home);
 			}
 		});

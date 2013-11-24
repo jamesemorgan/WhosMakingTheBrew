@@ -37,7 +37,7 @@
 
         <!-- START New Activities -->
         <activity
-            android:name="com.morgan.design.fragment.refactor.DashbaordActivity"
+            android:name="com.morgan.design.activity.DashbaordFragmentActivity"
             android:label="@string/app_title" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,24 +46,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.morgan.design.fragment.refactor.CreditsFragmentActivity"
+            android:name="com.morgan.design.activity.CreditsFragmentActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation" />
         <activity
-            android:name="com.morgan.design.fragment.refactor.FeedbackFormActivity"
+            android:name="com.morgan.design.activity.FeedbackFormFragmentActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation" />
         <!-- END New Activities -->
         <activity
-            android:name="com.morgan.design.activity.TeaRoundGeneratorHomeActivity"
+            android:name="com.morgan.design.activity.TeaRoundHomeActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation" />
         <activity
-            android:name="com.morgan.design.activity.TeaRoundGeneratorResultsActivity"
+            android:name="com.morgan.design.activity.TeaRoundResultsActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation" />
         <activity
-            android:name="com.morgan.design.activity.TeaRoundGeneratorRunningActivity"
+            android:name="com.morgan.design.activity.TeaRoundRunningActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation" />
         <activity

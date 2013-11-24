@@ -24,9 +24,9 @@ import com.morgan.design.adaptor.ResultAdaptor;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.db.domain.TeaRound;
 
-public class TeaRoundGeneratorResultsActivity extends BaseBrewActivity {
+public class TeaRoundResultsActivity extends BaseBrewFragmentActivity {
 
-	private final Logger LOG = LoggerFactory.getLogger(TeaRoundGeneratorResultsActivity.class);
+	private final Logger LOG = LoggerFactory.getLogger(TeaRoundResultsActivity.class);
 
 	private ResultAdaptor resultAdaptor;
 

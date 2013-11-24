@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 import com.morgan.design.R;
 
-public class TeaRoundGeneratorRunningActivity extends BaseBrewActivity {
+public class TeaRoundRunningActivity extends BaseBrewFragmentActivity {
 
 	private static final float ROTATE_FROM = 0.0f;
 	private static final float ROTATE_TO = -10.0f * 360.0f;// 3.141592654f *

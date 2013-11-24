@@ -1,4 +1,4 @@
-package com.morgan.design.fragment.refactor;
+package com.morgan.design.activity;
 
 import android.support.v4.app.Fragment;
 

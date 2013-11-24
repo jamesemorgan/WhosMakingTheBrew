@@ -1,4 +1,4 @@
-package com.morgan.design.fragment.refactor;
+package com.morgan.design.activity.fragment;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.morgan.design.activity.OrmLiteFragment;
 import com.morgan.design.db.BrewRepository;
 
 public class BaseBrewFragment extends OrmLiteFragment {

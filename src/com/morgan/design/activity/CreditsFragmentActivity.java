@@ -1,4 +1,4 @@
-package com.morgan.design.fragment.refactor;
+package com.morgan.design.activity;
 
 import static com.morgan.design.helpers.Constants.DONATE_URL;
 import static com.morgan.design.helpers.Constants.MARKET_LINK_URL;
@@ -17,7 +17,6 @@ import android.widget.ListView;
 
 import com.google.common.base.Strings;
 import com.morgan.design.R;
-import com.morgan.design.activity.BaseBrewFragmentActivity;
 import com.morgan.design.adaptor.CreditsAdaptor;
 import com.morgan.design.helpers.Credit;
 import com.morgan.design.utils.BuildUtils;
