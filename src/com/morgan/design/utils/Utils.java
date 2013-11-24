@@ -9,8 +9,8 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.morgan.design.R;
-import com.morgan.design.activity.TeaRoundGeneratorCreditsActivity;
 import com.morgan.design.activity.general.FormActivity;
+import com.morgan.design.fragment.refactor.CreditsFragmentActivity;
 
 public class Utils {
 
@@ -39,7 +39,7 @@ public class Utils {
 
 	public static void openCredits(final Activity activity) {
 		try {
-			activity.startActivity(new Intent(activity, TeaRoundGeneratorCreditsActivity.class));
+			activity.startActivity(new Intent(activity, CreditsFragmentActivity.class));
 		}
 		catch (final Exception e) {
 			Utils.shortToast(activity, "Unable to open credits");

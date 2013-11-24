@@ -2,9 +2,6 @@ package com.morgan.design.adaptor;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +14,6 @@ import com.morgan.design.R;
 import com.morgan.design.helpers.Credit;
 
 public class CreditsAdaptor extends ArrayAdapter<Credit> {
-
-	private final Logger LOG = LoggerFactory.getLogger(CreditsAdaptor.class);
 
 	private final Context context;
 	private final List<Credit> credits;
@@ -47,9 +42,6 @@ public class CreditsAdaptor extends ArrayAdapter<Credit> {
 		holder.caption = (TextView) view.findViewById(R.id.caption);
 		holder.caption.setText(credit.getCaption());
 
-		holder.url = (TextView) view.findViewById(R.id.url);
-		holder.url.setText(credit.getCreditWebAddress());
-
 		holder.logo = (ImageView) view.findViewById(R.id.logo);
 		if (0 != credit.getLogo()) {
 			holder.logo.setImageResource(credit.getLogo());
@@ -61,7 +53,6 @@ public class CreditsAdaptor extends ArrayAdapter<Credit> {
 	class ViewHolder {
 		TextView title;
 		TextView caption;
-		TextView url;
 		ImageView logo;
 	}
 

@@ -1,4 +1,4 @@
-package com.morgan.design.activity;
+package com.morgan.design.fragment.refactor;
 
 import static com.morgan.design.helpers.Constants.DONATE_URL;
 import static com.morgan.design.helpers.Constants.MARKET_LINK_URL;
@@ -13,15 +13,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
+import com.google.common.base.Strings;
 import com.morgan.design.R;
+import com.morgan.design.activity.BaseBrewFragmentActivity;
 import com.morgan.design.adaptor.CreditsAdaptor;
 import com.morgan.design.helpers.Credit;
 import com.morgan.design.utils.BuildUtils;
+import com.morgan.design.utils.Utils;
 
-public class TeaRoundGeneratorCreditsActivity extends BaseBrewListActivity implements OnItemClickListener {
+public class CreditsFragmentActivity extends BaseBrewFragmentActivity implements OnItemClickListener {
 
 	private CreditsAdaptor adapter;
+	private ListView listView;
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
@@ -29,16 +34,25 @@ public class TeaRoundGeneratorCreditsActivity extends BaseBrewListActivity imple
 
 		setContentView(R.layout.activity_credits);
 
-		// create our list and custom adapter
-		List<Credit> credits = new ArrayList<Credit>();
+		listView = (ListView) findViewById(R.id.credits_list_view);
 
+		List<Credit> credits = new ArrayList<Credit>();
 		addCredits(credits);
 		addVersion(credits);
 		addDeviceId(credits);
 
 		adapter = new CreditsAdaptor(this, R.layout.player_data_row, credits);
+		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(this);
+	}
 
-		setListAdapter(adapter);
+	@Override
+	public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long duration) {
+		Credit credit = (Credit) parent.getItemAtPosition(position);
+		String webAddress = credit.getCreditWebAddress();
+		if (!Strings.isNullOrEmpty(webAddress)) {
+			Utils.openUrl(this, webAddress);
+		}
 	}
 
 	private void addDeviceId(List<Credit> credits) {
@@ -67,12 +81,4 @@ public class TeaRoundGeneratorCreditsActivity extends BaseBrewListActivity imple
 		return credit;
 	}
 
-	@Override
-	public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long duration) {
-		// @SuppressWarnings("unchecked")
-		// final HashMap<String, ?> item = (HashMap<String, ?>) adapter.getItem(position);
-		// if (item.containsKey(URL) && null != item.get(URL)) {
-		// Utils.openUrl(this, item.get(URL).toString());
-		// }
-	}
 }

@@ -8,7 +8,7 @@ Code changes
 - [ ] Alter domain logic and clean up Brew*.java 
 - [ ] Make project work with latest version of Android
 - [ ] Update all libraries it uses, including assessing alternatives
-- [ ] Update to latest Ormlite
+- [x] Update to latest Ormlite
 - [ ] Update to latest ACRA, is it the best option
 - [ ] Rework what is reported by ACRA
 - [ ] Change build system to use Gradle
@@ -22,8 +22,10 @@ Code changes
 - [x] Rework Settings
 - [x] Rework Google Analytics integration and what is recorded
 - [x] Remove abstract activities  
+- [x] Rework Credits
 - [ ] Replace alerts and dialogs with DialogFragments, remove deprecation
-- [ ] Add details about this to verison and logs http://source.android.com/devices/tech/dalvik/art.html
+- [ ] Add prompt to rate application on google play
+- [ ] Add details about this to version and logs http://source.android.com/devices/tech/dalvik/art.html
 
 Remove dead features:
 - [x] Tea timer (maybe replaced one day!)
