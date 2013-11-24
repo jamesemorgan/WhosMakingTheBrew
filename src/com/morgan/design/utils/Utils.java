@@ -9,8 +9,8 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.morgan.design.R;
-import com.morgan.design.activity.general.FormActivity;
 import com.morgan.design.fragment.refactor.CreditsFragmentActivity;
+import com.morgan.design.fragment.refactor.FeedbackFormActivity;
 
 public class Utils {
 
@@ -48,7 +48,7 @@ public class Utils {
 
 	public static void openFeedback(final Activity activity) {
 		try {
-			activity.startActivity(new Intent(activity, FormActivity.class));
+			activity.startActivity(new Intent(activity, FeedbackFormActivity.class));
 		}
 		catch (final Exception e) {
 			Utils.shortToast(activity, "Unable to open feedback");

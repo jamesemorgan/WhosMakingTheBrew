@@ -18,7 +18,7 @@ Code changes
 - [ ] Rework results view
 - [x] Rework groups view
 - [x] Rework stats view
-- [ ] Rework feedback form
+- [x] Rework feedback form
 - [x] Rework Settings
 - [x] Rework Google Analytics integration and what is recorded
 - [x] Remove abstract activities  

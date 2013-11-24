@@ -1,9 +1,9 @@
-package com.morgan.design.activity.general;
+package com.morgan.design.fragment.refactor;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -14,7 +14,7 @@ import com.morgan.design.R;
 import com.morgan.design.helpers.Constants;
 import com.morgan.design.utils.BuildUtils;
 
-public class FormActivity extends Activity {
+public class FeedbackFormActivity extends FragmentActivity {
 
 	private EditText nameField;
 	private EditText emailField;

@@ -49,6 +49,10 @@
             android:name="com.morgan.design.fragment.refactor.CreditsFragmentActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation" />
+        <activity
+            android:name="com.morgan.design.fragment.refactor.FeedbackFormActivity"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboardHidden|orientation" />
         <!-- END New Activities -->
         <activity
             android:name="com.morgan.design.activity.TeaRoundGeneratorHomeActivity"
@@ -60,10 +64,6 @@
             android:configChanges="keyboardHidden|orientation" />
         <activity
             android:name="com.morgan.design.activity.TeaRoundGeneratorRunningActivity"
-            android:clearTaskOnLaunch="true"
-            android:configChanges="keyboardHidden|orientation" />
-        <activity
-            android:name="com.morgan.design.activity.general.FormActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="keyboardHidden|orientation" />
         <activity
