@@ -1,5 +1,8 @@
 package com.morgan.design.activity;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -7,6 +10,8 @@ import com.morgan.design.db.BrewRepository;
 import com.morgan.design.db.DatabaseHelper;
 
 public class BaseBrewFragmentActivity extends OrmLiteBaseFragment<DatabaseHelper> {
+
+	public final Logger log = LoggerFactory.getLogger(getClass());
 
 	private BrewRepository mBrewRepository;
 

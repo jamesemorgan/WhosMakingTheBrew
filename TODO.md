@@ -23,7 +23,7 @@ Code changes
 - [x] Rework Google Analytics integration and what is recorded
 - [x] Remove abstract activities  
 - [x] Rework Credits
-- [ ] Replace alerts and dialogs with DialogFragments, remove deprecation
+- [x] Replace deprecated dialogs with DialogFragments
 - [x] Add prompt to rate application on google play
 - [ ] Add details about this to version and logs http://source.android.com/devices/tech/dalvik/art.html
 

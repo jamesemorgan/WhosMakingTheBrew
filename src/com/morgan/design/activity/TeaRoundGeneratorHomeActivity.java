@@ -5,39 +5,33 @@ import static com.morgan.design.utils.ObjectUtils.isNotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
-import com.morgan.design.activity.refactor.DashbaordActivity;
 import com.morgan.design.adaptor.PlayerAdaptor;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
+import com.morgan.design.dialog.fragment.ManageGroupDialogFragment;
+import com.morgan.design.fragment.refactor.DashbaordActivity;
 import com.morgan.design.helpers.ContactsLoader;
 import com.morgan.design.utils.BuildUtils;
 import com.morgan.design.utils.Prefs;
@@ -46,17 +40,10 @@ import com.morgan.design.utils.Utils;
 
 public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 
-	private final Logger LOG = LoggerFactory.getLogger(TeaRoundGeneratorHomeActivity.class);
-
 	private AutoCompleteTextView addPlayerEditText;
 	private Button runTeaRoundButton;
 	private TextView playerDetailHeader;
 	private ListView playersListAdapter;
-
-	@Deprecated
-	private static final int DIALOG_ADD_GROUP = 0;
-	@Deprecated
-	private static final int DIALOG_EDIT_GROUP = 1;
 
 	private PlayerAdaptor playerAdaptor;
 	private BrewGroup brewGroup;
@@ -143,7 +130,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 				return true;
 			case R.id.br_add_group:
 				if (validNumberOfPlayers()) {
-					showDialog(DIALOG_ADD_GROUP);
+					showManageGroupDialog(false);
 				}
 				else {
 					shortToast("Not enough players, minimum 2!");
@@ -151,26 +138,12 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 				return true;
 			case R.id.br_edit_group:
 				if (validNumberOfPlayers()) {
-					showDialog(DIALOG_EDIT_GROUP);
+					showManageGroupDialog(true);
 				}
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
-	}
-
-	@Override
-	protected Dialog onCreateDialog(final int id) {
-		Dialog dialog = null;
-		switch (id) {
-			case DIALOG_ADD_GROUP:
-				dialog = showGroupDialog(false);
-				break;
-			case DIALOG_EDIT_GROUP:
-				dialog = showGroupDialog(true);
-				break;
-		}
-		return dialog;
 	}
 
 	@Override
@@ -266,7 +239,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 		player.setName(playerName);
 
 		if (!checkAlreadyPlaying(player)) {
-			LOG.debug("Added player, name: {}", player.getName());
+			log.debug("Added player, name: {}", player.getName());
 
 			brewPlayers.add(player);
 			playerAdaptor.add(player);
@@ -280,7 +253,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 		}
 		else {
 			shortToast(player.getName() + " already playing");
-			LOG.debug("{} already playing", player.getName());
+			log.debug("{} already playing", player.getName());
 		}
 		enableDisableButtonRunTeaRound();
 		setPlayerDetailHeader();
@@ -313,11 +286,6 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 		addPlayerEditText = (AutoCompleteTextView) findViewById(R.id.add_player_text);
 		runTeaRoundButton = (Button) findViewById(R.id.run_tea_round);
 		playersListAdapter = (ListView) findViewById(R.id.players_list_adator);
-	}
-
-	public void hideKeyBoard(final View view) {
-		final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
 
 	private void loadGroup(final Integer groupId) {
@@ -360,55 +328,22 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 		startActivityForResult(splash, TeaApplication.ACTIVITY_RUNNING);
 	}
 
-	private AlertDialog showGroupDialog(final boolean editing) {
-		final LayoutInflater factory = LayoutInflater.from(this);
-		final View textEntryView = factory.inflate(R.layout.add_group_dialog, null);
-		final AlertDialog dialogGroup = new AlertDialog.Builder(this).setTitle(editing ? "Edit Group Name" : "Add Group Name")
-				.setIcon(R.drawable.add_group).setView(textEntryView).create();
-
-		final EditText addGroupEditText = (EditText) textEntryView.findViewById(R.id.add_group_edit_text);
-
+	private void showManageGroupDialog(final boolean editing) {
+		FragmentManager fm = getSupportFragmentManager();
+		ManageGroupDialogFragment editNameDialog = new ManageGroupDialogFragment();
+		Bundle bundle = new Bundle();
+		bundle.putBoolean("edit_mode", editing);
 		if (editing) {
-			addGroupEditText.setText(brewGroup.getName());
+			bundle.putString("brew_group_name", brewGroup.getName());
 		}
-
-		addGroupEditText.setFocusable(true);
-		addGroupEditText.requestFocus();
-
-		showKeyBoard(addGroupEditText);
-		dialogGroup.setButton(editing ? getString(R.string.edit) : getString(R.string.add), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int whichButton) {
-				final String groupName = addGroupEditText.getEditableText().toString();
-				hideKeyBoard(addGroupEditText);
-				addGroupEditText.clearFocus();
-				if (editing) {
-					updateGroupName(groupName);
-				}
-				else {
-					addPlayersToGroup(groupName);
-				}
-			}
-		});
-		dialogGroup.setButton2(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int whichButton) {
-				hideKeyBoard(addGroupEditText);
-				addGroupEditText.clearFocus();
-				dialog.cancel();
-			}
-		});
-		return dialogGroup;
-	}
-
-	public void showKeyBoard(final View view) {
-		final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+		editNameDialog.setArguments(bundle);
+		editNameDialog.show(fm, "add_group_dialog_fragment");
 	}
 
 	public void updateGroupName(final String groupName) {
 		brewGroup.setName(groupName);
 		getBrewRepository().updateGroup(brewGroup);
+		shortToast("Group Updated to " + groupName);
 	}
 
 	private boolean validNumberOfPlayers() {
@@ -420,7 +355,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 		@Override
 		public void onClick(final View v) {
 			final Integer position = (Integer) v.getTag();
-			LOG.debug("Trash clicked, position {}", position);
+			log.debug("Trash clicked, position {}", position);
 			final BrewPlayer player = playerAdaptor.getItem(position);
 
 			if (0 != player.getId()) {

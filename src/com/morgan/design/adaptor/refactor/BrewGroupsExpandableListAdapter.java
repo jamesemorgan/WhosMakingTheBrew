@@ -23,13 +23,18 @@ public class BrewGroupsExpandableListAdapter extends BaseExpandableListAdapter {
 
 	public LayoutInflater inflater;
 
-	private final List<BrewGroup> brewGroups;
+	private List<BrewGroup> brewGroups;
 	private final OnRemovePlayerFromGroup onRemovePlayerFromGroup;
 
 	public BrewGroupsExpandableListAdapter(List<BrewGroup> brewGroups, Context context, OnRemovePlayerFromGroup onRemovePlayerFromGroup) {
 		this.brewGroups = brewGroups;
 		this.onRemovePlayerFromGroup = onRemovePlayerFromGroup;
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	}
+
+	public void setBrewGroups(List<BrewGroup> brewGroups) {
+		this.brewGroups = brewGroups;
+		notifyDataSetChanged();
 	}
 
 	@Override

@@ -37,7 +37,7 @@
 
         <!-- START New Activities -->
         <activity
-            android:name="com.morgan.design.activity.refactor.DashbaordActivity"
+            android:name="com.morgan.design.fragment.refactor.DashbaordActivity"
             android:label="@string/app_title" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

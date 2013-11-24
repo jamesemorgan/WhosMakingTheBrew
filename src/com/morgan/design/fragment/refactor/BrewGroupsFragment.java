@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
 import com.morgan.design.R;
@@ -17,7 +16,7 @@ import com.morgan.design.db.domain.BrewPlayer;
 
 public class BrewGroupsFragment extends BaseBrewFragment implements OnRemovePlayerFromGroup {
 
-	private ExpandableListAdapter adapter;
+	private BrewGroupsExpandableListAdapter adapter;
 	private List<BrewGroup> brewGroups;
 
 	@Override
@@ -30,6 +29,7 @@ public class BrewGroupsFragment extends BaseBrewFragment implements OnRemovePlay
 	public void onResume() {
 		super.onResume();
 		brewGroups = getBrewRepository().findAllBrewGroups();
+		adapter.setBrewGroups(brewGroups);
 	}
 
 	@Override

@@ -1,9 +1,6 @@
-package com.morgan.design.activity.refactor;
+package com.morgan.design.fragment.refactor;
 
 import java.util.Locale;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
@@ -19,16 +16,11 @@ import android.view.MenuItem;
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
 import com.morgan.design.activity.BaseBrewFragmentActivity;
-import com.morgan.design.fragment.refactor.BrewGroupsFragment;
-import com.morgan.design.fragment.refactor.BrewHomePageFragments;
-import com.morgan.design.fragment.refactor.BrewStatsFragments;
 import com.morgan.design.helpers.Changelog;
 import com.morgan.design.utils.Prefs;
 import com.morgan.design.utils.Utils;
 
 public class DashbaordActivity extends BaseBrewFragmentActivity implements ActionBar.TabListener {
-
-	private static Logger LOG = LoggerFactory.getLogger(DashbaordActivity.class);
 
 	public static final int DASHBOARD_GROUPS = 0;
 	public static final int DASHBOARD_HOME = 1;
