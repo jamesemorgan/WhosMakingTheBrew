@@ -2,9 +2,6 @@ package com.morgan.design.fragment.refactor;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +16,6 @@ import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
 
 public class BrewGroupsFragment extends BaseBrewFragment implements OnRemovePlayerFromGroup {
-
-	private static Logger LOG = LoggerFactory.getLogger(BrewGroupsFragment.class);
 
 	private ExpandableListAdapter adapter;
 	private List<BrewGroup> brewGroups;

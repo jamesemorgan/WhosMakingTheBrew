@@ -2,9 +2,6 @@ package com.morgan.design.fragment.refactor;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +15,6 @@ import com.morgan.design.db.domain.BrewStats;
 import com.morgan.design.db.domain.PlayerStats;
 
 public class BrewStatsFragments extends BaseBrewFragment {
-
-	private static Logger LOG = LoggerFactory.getLogger(BrewStatsFragments.class);
 
 	private BrewStats brewStats;
 	private List<PlayerStats> playerStats;

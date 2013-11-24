@@ -24,7 +24,7 @@ Code changes
 - [x] Remove abstract activities  
 - [x] Rework Credits
 - [ ] Replace alerts and dialogs with DialogFragments, remove deprecation
-- [ ] Add prompt to rate application on google play
+- [x] Add prompt to rate application on google play
 - [ ] Add details about this to version and logs http://source.android.com/devices/tech/dalvik/art.html
 
 Remove dead features:
