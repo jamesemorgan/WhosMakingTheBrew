@@ -25,12 +25,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.common.base.Strings;
 import com.morgan.design.R;
 import com.morgan.design.TeaApplication;
 import com.morgan.design.adaptor.PlayerAdaptor;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.dialog.fragment.ManageGroupDialogFragment;
+import com.morgan.design.dialog.fragment.ManageGroupDialogFragment.ManageGroupDialogFragmentActions;
 import com.morgan.design.fragment.refactor.DashbaordActivity;
 import com.morgan.design.helpers.ContactsLoader;
 import com.morgan.design.utils.BuildUtils;
@@ -38,7 +40,7 @@ import com.morgan.design.utils.Prefs;
 import com.morgan.design.utils.StringUtils;
 import com.morgan.design.utils.Utils;
 
-public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
+public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity implements ManageGroupDialogFragmentActions {
 
 	private AutoCompleteTextView addPlayerEditText;
 	private Button runTeaRoundButton;
@@ -259,16 +261,6 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 		setPlayerDetailHeader();
 	}
 
-	public void addPlayersToGroup(final String groupName) {
-		if (notNullEmpyOrValue(groupName, R.string.group_management)) {
-			shortToast("Invalid Group Name");
-			return;
-		}
-		brewGroup = getBrewRepository().saveGroup(groupName, brewPlayers);
-		shortToast("Create Group: " + groupName);
-		setPlayerDetailHeader();
-	}
-
 	private boolean checkAlreadyPlaying(final BrewPlayer player) {
 		if (null == brewPlayers) {
 			return false;
@@ -320,7 +312,7 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 	}
 
 	private boolean notNullEmpyOrValue(final String value, final int resource) {
-		return value == null || value.equals("") || getResources().getString(resource).equals(value);
+		return Strings.isNullOrEmpty(value) || getResources().getString(resource).equals(value);
 	}
 
 	private void runTeaRound() {
@@ -332,15 +324,27 @@ public class TeaRoundGeneratorHomeActivity extends BaseBrewFragmentActivity {
 		FragmentManager fm = getSupportFragmentManager();
 		ManageGroupDialogFragment editNameDialog = new ManageGroupDialogFragment();
 		Bundle bundle = new Bundle();
-		bundle.putBoolean("edit_mode", editing);
+		bundle.putBoolean(ManageGroupDialogFragment.EDIT_MODE, editing);
 		if (editing) {
-			bundle.putString("brew_group_name", brewGroup.getName());
+			bundle.putString(ManageGroupDialogFragment.BREW_GROUP_NAME, brewGroup.getName());
 		}
 		editNameDialog.setArguments(bundle);
-		editNameDialog.show(fm, "add_group_dialog_fragment");
+		editNameDialog.show(fm, ManageGroupDialogFragment.TAG);
 	}
 
-	public void updateGroupName(final String groupName) {
+	@Override
+	public void createBrewGroup(final String groupName) {
+		if (notNullEmpyOrValue(groupName, R.string.group_management)) {
+			shortToast("Invalid Group Name");
+			return;
+		}
+		brewGroup = getBrewRepository().saveGroup(groupName, brewPlayers);
+		shortToast("Create Group: " + groupName);
+		setPlayerDetailHeader();
+	}
+
+	@Override
+	public void updateBrewGroup(final String groupName) {
 		brewGroup.setName(groupName);
 		getBrewRepository().updateGroup(brewGroup);
 		shortToast("Group Updated to " + groupName);

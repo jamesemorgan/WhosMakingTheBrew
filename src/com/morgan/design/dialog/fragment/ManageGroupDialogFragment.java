@@ -16,11 +16,21 @@ import com.morgan.design.activity.TeaRoundGeneratorHomeActivity;
 
 public class ManageGroupDialogFragment extends DialogFragment {
 
+	public static final String EDIT_MODE = "edit_mode";
+	public static final String BREW_GROUP_NAME = "brew_group_name";
+	public static final String TAG = "add_group_dialog_fragment";
+
+	public interface ManageGroupDialogFragmentActions {
+		void updateBrewGroup(String groupName);
+
+		void createBrewGroup(String groupName);
+	}
+
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		final LayoutInflater factory = LayoutInflater.from(getActivity());
 
-		final Boolean editing = getArguments().getBoolean("edit_mode");
+		final Boolean editing = getArguments().getBoolean(EDIT_MODE);
 
 		final View textEntryView = factory.inflate(R.layout.add_group_dialog, null);
 
@@ -30,7 +40,7 @@ public class ManageGroupDialogFragment extends DialogFragment {
 		final EditText addGroupEditText = (EditText) textEntryView.findViewById(R.id.add_group_edit_text);
 
 		if (editing) {
-			String brewGroupName = getArguments().getString("brew_group_name");
+			String brewGroupName = getArguments().getString(BREW_GROUP_NAME);
 			addGroupEditText.setText(brewGroupName);
 		}
 
@@ -48,10 +58,10 @@ public class ManageGroupDialogFragment extends DialogFragment {
 						addGroupEditText.clearFocus();
 
 						if (editing) {
-							((TeaRoundGeneratorHomeActivity) getActivity()).updateGroupName(groupName);
+							((TeaRoundGeneratorHomeActivity) getActivity()).updateBrewGroup(groupName);
 						}
 						else {
-							((TeaRoundGeneratorHomeActivity) getActivity()).addPlayersToGroup(groupName);
+							((TeaRoundGeneratorHomeActivity) getActivity()).createBrewGroup(groupName);
 						}
 					}
 				});
