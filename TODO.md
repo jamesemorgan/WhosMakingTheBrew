@@ -5,7 +5,7 @@ Code changes
 - [ ] Modernise and clean code
 - [x] Set target version to latest android version (19)
 - [x] Set minimum version to android version (11)
-- [ ] Alter domain logic and clean up Brew*.java 
+- [x] Alter domain logic and clean up Brew*.java 
 - [ ] Make project work with latest version of Android
 - [ ] Update all libraries it uses, including assessing alternatives
 - [x] Update to latest Ormlite
@@ -13,6 +13,8 @@ Code changes
 - [ ] Rework what is reported by ACRA
 - [ ] Change build system to use Gradle
 - [x] Replace customer logger with logback-android
+- [ ] Long click groups, Open Group, Delete Group
+- [ ] Add details about this to version and logs http://source.android.com/devices/tech/dalvik/art.html
 - [ ] Rework add players view
 - [ ] Rework animation view
 - [ ] Rework results view
@@ -25,7 +27,6 @@ Code changes
 - [x] Rework Credits
 - [x] Replace deprecated dialogs with DialogFragments
 - [x] Add prompt to rate application on google play
-- [ ] Add details about this to version and logs http://source.android.com/devices/tech/dalvik/art.html
 
 Remove dead features:
 - [x] Tea timer (maybe replaced one day!)
@@ -35,9 +36,9 @@ Remove dead features:
 - [x] Remove email results feature
 
 Keep main features including:
-- [ ] Running a game of selected players
-- [ ] Ability to group players into brew groups
-- [ ] Ability to record and view stats on players and brew groups
+- [x] Running a game of selected players
+- [x] Ability to group players into brew groups
+- [x] Ability to record and view stats on players and brew groups
 
 Gui changes
 - [ ] Improve animation during game runner
@@ -46,7 +47,6 @@ Gui changes
 - [ ] Internationalise and strings
 - [ ] Fix all lint errors, within reason
 - [ ] Animate between views - http://developer.android.com/training/animation/index.html
-
 
 Questions
 - [ ] What does allowBackUp mean?

@@ -11,31 +11,19 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.DeleteBuilder;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.morgan.design.db.domain.BrewGroup;
 import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.db.domain.BrewStats;
 import com.morgan.design.db.domain.PlayerStats;
+import com.morgan.design.db.domain.utils.PlayerScoreComparator;
+import com.morgan.design.db.domain.utils.StatsCalculator;
 
-public class BrewRepository {
+public class BrewRepository extends BaseBrewRepository {
 
-	private final Logger LOG = LoggerFactory.getLogger(BrewRepository.class);
-
-	private Dao<BrewPlayer, Integer> playerDao;
-	private Dao<BrewGroup, Integer> groupDao;
-	private Dao<BrewStats, Integer> statsDao;
-	private Dao<PlayerStats, Integer> playerStatsDao;
-
-	public BrewRepository(final DatabaseHelper databaseHelper) {
-		playerDao = getPlayerDao(databaseHelper);
-		groupDao = getGroupDao(databaseHelper);
-		statsDao = getStatsDao(databaseHelper);
-		playerStatsDao = getPlayerStatsDao(databaseHelper);
+	public BrewRepository(DatabaseHelper databaseHelper) {
+		super(databaseHelper);
 	}
 
 	public void deleteAllLastRunEntries() {
@@ -150,30 +138,18 @@ public class BrewRepository {
 
 	public void saveBrewStats(final List<BrewPlayer> players) {
 		try {
-			BrewStats brewStats = new BrewStats();
-			final List<BrewStats> stats = statsDao.queryForAll();
-
-			if (isNotNull(stats) && isNotEmpty(stats)) {
-				brewStats = stats.get(0);
-			}
-			else {
-				statsDao.create(brewStats);
-			}
+			BrewStats brewStats = loadBrewStat();
 
 			// Total number of players
 			brewStats.addTotalNumberOfPlayers(players.size());
 
 			// Total scores
-			int totalScore = brewStats.getTotalScore();
-			for (final BrewPlayer player : players) {
-				totalScore += player.getScore();
-			}
-			brewStats.setTotalScore(totalScore);
+			brewStats.addTotalScores(StatsCalculator.countTotalScores(players));
 
 			// Total runs
 			brewStats.incrementTotalTimesRun();
 
-			Collections.sort(players);
+			Collections.sort(players, PlayerScoreComparator.INSTANCE);
 
 			// Save highest score
 			final int highestScore = players.get(0).getScore();
@@ -187,7 +163,6 @@ public class BrewRepository {
 			if (isZero(currentLowestScore) || currentLowestScore > lowestScore) {
 				brewStats.setLowestScore(lowestScore);
 			}
-
 			statsDao.update(brewStats);
 		}
 		catch (final SQLException e) {
@@ -197,7 +172,7 @@ public class BrewRepository {
 
 	public void savePlayerStats(final List<BrewPlayer> resultsList) {
 		try {
-			Collections.sort(resultsList);
+			Collections.sort(resultsList, PlayerScoreComparator.INSTANCE);
 
 			// /////////
 			// Winner //
@@ -326,56 +301,16 @@ public class BrewRepository {
 		return new ArrayList<BrewPlayer>();
 	}
 
-	private Dao<BrewPlayer, Integer> getPlayerDao(final DatabaseHelper databaseHelper) {
-		if (isNull(playerDao)) {
-			try {
-				playerDao = databaseHelper.getPlayerDao();
-			}
-			catch (final SQLException e) {
-				logError(e);
-			}
+	private BrewStats loadBrewStat() throws SQLException {
+		BrewStats brewStats = new BrewStats();
+		final List<BrewStats> stats = statsDao.queryForAll();
+		if (isNotNull(stats) && isNotEmpty(stats)) {
+			brewStats = stats.get(0);
 		}
-		return playerDao;
+		else {
+			statsDao.create(brewStats);
+		}
+		return brewStats;
 	}
 
-	private Dao<BrewGroup, Integer> getGroupDao(final DatabaseHelper databaseHelper) {
-		if (isNull(groupDao)) {
-			try {
-				groupDao = databaseHelper.getGroupDao();
-			}
-			catch (final SQLException e) {
-				logError(e);
-			}
-		}
-		return groupDao;
-	}
-
-	private Dao<BrewStats, Integer> getStatsDao(final DatabaseHelper databaseHelper) {
-		if (isNull(statsDao)) {
-			try {
-				statsDao = databaseHelper.getStatsDao();
-			}
-			catch (final SQLException e) {
-				logError(e);
-			}
-		}
-		return statsDao;
-	}
-
-	private Dao<PlayerStats, Integer> getPlayerStatsDao(final DatabaseHelper databaseHelper) {
-		if (isNull(playerStatsDao)) {
-			try {
-				playerStatsDao = databaseHelper.getPlayerStatsDao();
-			}
-			catch (final SQLException e) {
-				logError(e);
-			}
-		}
-		return playerStatsDao;
-	}
-
-	private void logError(final SQLException e) {
-		LOG.error("SQLException ", e);
-		e.printStackTrace();
-	}
 }

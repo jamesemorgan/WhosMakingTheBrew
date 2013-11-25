@@ -2,6 +2,7 @@ package com.morgan.design.db.domain;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import com.morgan.design.db.domain.utils.StatsCalculator;
 
 @DatabaseTable(tableName = "brew_stats")
 public class BrewStats {
@@ -78,22 +79,12 @@ public class BrewStats {
 
 	public int getAverageScore() {
 		// total score / total number players
-		final int totalScore = getTotalScore();
-		final int totalNumberOfPlayers = getTotalNumPlayers();
-		if (totalNumberOfPlayers == 0 || totalScore == 0) {
-			return 0;
-		}
-		return totalScore / totalNumberOfPlayers;
+		return StatsCalculator.average(getTotalScore(), getTotalNumPlayers());
 	}
 
 	public int getAverageNumberOfPlayers() {
 		// total number players / total times run
-		final int totalNumberOfPlayers = getTotalNumPlayers();
-		final int totalTimesRun = getTotalTimesRun();
-		if (totalNumberOfPlayers == 0 || totalTimesRun == 0) {
-			return 0;
-		}
-		return totalNumberOfPlayers / totalTimesRun;
+		return StatsCalculator.average(getTotalTimesRun(), getTotalNumPlayers());
 	}
 
 	public void incrementTotalTimesRun() {
@@ -103,4 +94,9 @@ public class BrewStats {
 	public void addTotalNumberOfPlayers(final int size) {
 		totalNumPlayers = totalNumPlayers + size;
 	}
+
+	public void addTotalScores(int totalScores) {
+		setTotalScore(totalScore + totalScores);
+	}
+
 }

@@ -6,7 +6,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = BrewPlayer.BREW_PLAYERS)
-public class BrewPlayer implements Serializable, Comparable<BrewPlayer> {
+public class BrewPlayer implements Serializable {
 
 	private static final long serialVersionUID = 8844544489762032207L;
 
@@ -72,19 +72,6 @@ public class BrewPlayer implements Serializable, Comparable<BrewPlayer> {
 
 	public void setBrewGroup(final BrewGroup brewGroup) {
 		this.brewGroup = brewGroup;
-	}
-
-	@Override
-	public int compareTo(final BrewPlayer player) {
-		if (getScore() < player.getScore()) {
-			return 1;
-		}
-		else if (getScore() > player.getScore()) {
-			return -1;
-		}
-		else {
-			return 0;
-		}
 	}
 
 }

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import com.morgan.design.db.domain.utils.PlayerScoreComparator;
+
 public class TeaRound {
 
 	public static List<BrewPlayer> determineWinner(final List<BrewPlayer> players) {
@@ -17,7 +19,7 @@ public class TeaRound {
 			players.get(i).setScore(randomScores.get(i));
 		}
 
-		Collections.sort(players);
+		Collections.sort(players, PlayerScoreComparator.INSTANCE);
 
 		return players;
 	}

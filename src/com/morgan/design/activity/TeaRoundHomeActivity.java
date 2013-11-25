@@ -151,12 +151,6 @@ public class TeaRoundHomeActivity extends BaseBrewFragmentActivity implements Ma
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		// See which child activity is calling us back.
 		switch (requestCode) {
-			case TeaApplication.ACTIVITY_HOME: {
-				if (resultCode == RESULT_OK) {
-					//
-				}
-				break;
-			}
 			case TeaApplication.ACTIVITY_RUNNING: {
 				if (resultCode == RESULT_OK) {
 					final Intent resultsIntent = new Intent(this, TeaRoundResultsActivity.class);
@@ -183,11 +177,7 @@ public class TeaRoundHomeActivity extends BaseBrewFragmentActivity implements Ma
 					if (0 != groupId && null != groupId) {
 						loadGroup(groupId);
 					}
-
 				}
-				break;
-			}
-			case TeaApplication.ACTIVITY_PREFERENCES: {
 				break;
 			}
 			default:
