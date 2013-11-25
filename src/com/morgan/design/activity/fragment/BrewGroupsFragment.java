@@ -43,7 +43,12 @@ public class BrewGroupsFragment extends BaseBrewFragment implements OnRemovePlay
 
 		getBrewRepository().deletePlayer(player);
 
+		if (group.hasNoPlayers()) {
+			getBrewRepository().deleteGroup(group);
+		}
+
 		brewGroups = getBrewRepository().findAllBrewGroups();
+		adapter.setBrewGroups(brewGroups);
 	}
 
 	@Override
@@ -55,6 +60,14 @@ public class BrewGroupsFragment extends BaseBrewFragment implements OnRemovePlay
 		adapter = new BrewGroupsExpandableListAdapter(brewGroups, getActivity(), this);
 
 		listView.setAdapter(adapter);
+
+		listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+			@Override
+			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+				adapter.getGroup(groupPosition);
+				return false;
+			}
+		});
 
 		return rootView;
 	}

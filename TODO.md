@@ -13,6 +13,7 @@ Code changes
 - [ ] Rework what is reported by ACRA
 - [ ] Change build system to use Gradle
 - [x] Replace customer logger with logback-android
+- [x] Delete group when no players left
 - [ ] Long click groups, Open Group, Delete Group
 - [ ] Add details about this to version and logs http://source.android.com/devices/tech/dalvik/art.html
 - [ ] Rework add players view

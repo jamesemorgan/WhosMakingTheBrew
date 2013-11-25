@@ -26,7 +26,7 @@ public class BrewGroup implements Serializable {
 	}
 
 	public final int getId() {
-		return this.id;
+		return id;
 	}
 
 	public final void setId(final int id) {
@@ -34,7 +34,7 @@ public class BrewGroup implements Serializable {
 	}
 
 	public final String getName() {
-		return this.name;
+		return name;
 	}
 
 	public final void setName(final String name) {
@@ -42,11 +42,15 @@ public class BrewGroup implements Serializable {
 	}
 
 	public final Collection<BrewPlayer> getBrewPlayers() {
-		return this.brewPlayers;
+		return brewPlayers;
 	}
 
 	public int getSize() {
-		return this.brewPlayers.size();
+		return brewPlayers.size();
+	}
+
+	public boolean hasNoPlayers() {
+		return null == brewPlayers || brewPlayers.isEmpty();
 	}
 
 }
