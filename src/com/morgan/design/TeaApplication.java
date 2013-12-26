@@ -5,6 +5,8 @@ import org.acra.annotation.ReportsCrashes;
 
 import android.app.Application;
 
+import com.morgan.design.utils.BuildUtils;
+
 @ReportsCrashes(formKey = "dHlyYXloTmQ4X0lObDhEeHRnY2Eyd2c6MQ")
 public class TeaApplication extends Application {
 
@@ -26,6 +28,9 @@ public class TeaApplication extends Application {
 	@Override
 	public void onCreate() {
 		ACRA.init(this);
+
+		BuildUtils.logBuildDetails();
+
 		super.onCreate();
 	}
 }

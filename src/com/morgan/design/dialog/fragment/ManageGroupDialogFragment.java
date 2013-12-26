@@ -1,29 +1,39 @@
 package com.morgan.design.dialog.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.morgan.design.R;
-import com.morgan.design.activity.TeaRoundHomeActivity;
+import com.morgan.design.utils.InputUtils;
 
+@SuppressLint("ValidFragment")
 public class ManageGroupDialogFragment extends DialogFragment {
 
 	public static final String EDIT_MODE = "edit_mode";
 	public static final String BREW_GROUP_NAME = "brew_group_name";
 	public static final String TAG = "add_group_dialog_fragment";
 
+	public ManageGroupDialogFragmentActions action;
+
 	public interface ManageGroupDialogFragmentActions {
 		void updateBrewGroup(String groupName);
 
 		void createBrewGroup(String groupName);
+	}
+
+	public ManageGroupDialogFragment() {
+		// Default
+	}
+
+	public ManageGroupDialogFragment(ManageGroupDialogFragmentActions action) {
+		this.action = action;
 	}
 
 	@Override
@@ -47,43 +57,33 @@ public class ManageGroupDialogFragment extends DialogFragment {
 		addGroupEditText.setFocusable(true);
 		addGroupEditText.requestFocus();
 
-		showKeyBoard(addGroupEditText);
+		InputUtils.showKeyBoard(addGroupEditText, getActivity());
 
 		dialogGroup.setButton(Dialog.BUTTON_POSITIVE, editing ? getString(R.string.edit) : getString(R.string.add),
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(final DialogInterface dialog, final int whichButton) {
 						final String groupName = addGroupEditText.getEditableText().toString();
-						hideKeyBoard(addGroupEditText);
+						InputUtils.hideKeyBoard(addGroupEditText, getActivity());
 						addGroupEditText.clearFocus();
 
 						if (editing) {
-							((TeaRoundHomeActivity) getActivity()).updateBrewGroup(groupName);
+							action.updateBrewGroup(groupName);
 						}
 						else {
-							((TeaRoundHomeActivity) getActivity()).createBrewGroup(groupName);
+							action.createBrewGroup(groupName);
 						}
 					}
 				});
 		dialogGroup.setButton(Dialog.BUTTON_NEGATIVE, getString(R.string.cancel), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(final DialogInterface dialog, final int whichButton) {
-				hideKeyBoard(addGroupEditText);
+				InputUtils.hideKeyBoard(addGroupEditText, getActivity());
 				addGroupEditText.clearFocus();
 				dialog.cancel();
 			}
 		});
 		return dialogGroup;
-	}
-
-	public void hideKeyBoard(final View view) {
-		final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-	}
-
-	public void showKeyBoard(final View view) {
-		final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
 	}
 
 }

@@ -34,7 +34,6 @@ import com.morgan.design.db.domain.BrewPlayer;
 import com.morgan.design.dialog.fragment.ManageGroupDialogFragment;
 import com.morgan.design.dialog.fragment.ManageGroupDialogFragment.ManageGroupDialogFragmentActions;
 import com.morgan.design.helpers.ContactsLoader;
-import com.morgan.design.utils.BuildUtils;
 import com.morgan.design.utils.Prefs;
 import com.morgan.design.utils.StringUtils;
 import com.morgan.design.utils.Utils;
@@ -54,7 +53,6 @@ public class TeaRoundHomeActivity extends BaseBrewFragmentActivity implements Ma
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
-		BuildUtils.logBuildDetails();
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.tea_round_home);
@@ -311,7 +309,7 @@ public class TeaRoundHomeActivity extends BaseBrewFragmentActivity implements Ma
 
 	private void showManageGroupDialog(final boolean editing) {
 		FragmentManager fm = getSupportFragmentManager();
-		ManageGroupDialogFragment editNameDialog = new ManageGroupDialogFragment();
+		ManageGroupDialogFragment editNameDialog = new ManageGroupDialogFragment(this);
 		Bundle bundle = new Bundle();
 		bundle.putBoolean(ManageGroupDialogFragment.EDIT_MODE, editing);
 		if (editing) {

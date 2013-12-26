@@ -18,11 +18,11 @@ public class BuildUtils {
 
 	public static void logBuildDetails() {
 		LOG.debug("##########################################");
-		LOG.debug(Build.VERSION.CODENAME);
-		LOG.debug(Integer.toString(Build.VERSION.SDK_INT));
-		LOG.debug(Build.VERSION.RELEASE);
-		LOG.debug(Build.DEVICE);
-		LOG.debug(Build.MANUFACTURER);
+		LOG.debug("Codename: {}", Build.VERSION.CODENAME);
+		LOG.debug("SDK Version: {}", Integer.toString(Build.VERSION.SDK_INT));
+		LOG.debug("Release Version: {}", Build.VERSION.RELEASE);
+		LOG.debug("Device: {}", Build.DEVICE);
+		LOG.debug("Manufacturer: {}", Build.MANUFACTURER);
 		LOG.debug("##########################################");
 	}
 

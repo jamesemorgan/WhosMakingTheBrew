@@ -15,7 +15,6 @@ import com.morgan.design.db.domain.PlayerStats;
 
 public class BrewPlayerStatsExpandableListAdapter extends BaseExpandableListAdapter {
 
-
 	private List<PlayerStats> playerStats;
 	private int lastExpandedGroupPosition;
 
@@ -25,7 +24,7 @@ public class BrewPlayerStatsExpandableListAdapter extends BaseExpandableListAdap
 	public BrewPlayerStatsExpandableListAdapter(ExpandableListView listView, List<PlayerStats> playerStats, Context context) {
 		this.listView = listView;
 		this.playerStats = playerStats;
-		this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	public void setPlayerStats(List<PlayerStats> playerStats) {
@@ -58,11 +57,10 @@ public class BrewPlayerStatsExpandableListAdapter extends BaseExpandableListAdap
 			view = inflater.inflate(R.layout.dashboard_brew_stats_player_name_list_parent, null);
 		}
 
-		PlayerStats playerStat = playerStats.get(groupPosition);
-
 		ParentViewHolder parentView = new ParentViewHolder(view);
-		parentView.playerName.setText(playerStat.getBrewPlayer().getName());
 
+		PlayerStats playerStat = playerStats.get(groupPosition);
+		parentView.playerName.setText(playerStat.getBrewPlayer().getName());
 		return view;
 	}
 

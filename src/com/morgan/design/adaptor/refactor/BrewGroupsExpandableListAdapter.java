@@ -70,7 +70,7 @@ public class BrewGroupsExpandableListAdapter extends BaseExpandableListAdapter {
 
 		ParentViewHolder parentView = new ParentViewHolder(view);
 		parentView.groupName.setText(group.getName());
-		parentView.groupSize.setText(Integer.toString(group.getSize()));
+		parentView.groupSize.setText(group.getSize() + " player" + (group.getSize() > 1 ? "(s)" : ""));
 
 		return view;
 	}

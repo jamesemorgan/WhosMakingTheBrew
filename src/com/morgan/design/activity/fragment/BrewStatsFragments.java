@@ -41,8 +41,9 @@ public class BrewStatsFragments extends BaseBrewFragment {
 		playerStats = getBrewRepository().getPlayerStats();
 		brewStats = getBrewRepository().getBrewStats();
 
-		adapter.setPlayerStats(playerStats);
-
+		if (null != playerStats && !playerStats.isEmpty()) {
+			adapter.setPlayerStats(playerStats);
+		}
 		populateGameStats();
 	}
 
