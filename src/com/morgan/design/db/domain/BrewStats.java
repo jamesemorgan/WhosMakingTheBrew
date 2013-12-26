@@ -99,4 +99,23 @@ public class BrewStats {
 		setTotalScore(totalScore + totalScores);
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("BrewStats [id=");
+		builder.append(id);
+		builder.append(", totalTimesRun=");
+		builder.append(totalTimesRun);
+		builder.append(", highestScore=");
+		builder.append(highestScore);
+		builder.append(", lowestScore=");
+		builder.append(lowestScore);
+		builder.append(", totalScore=");
+		builder.append(totalScore);
+		builder.append(", totalNumPlayers=");
+		builder.append(totalNumPlayers);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

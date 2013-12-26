@@ -74,4 +74,21 @@ public class BrewPlayer implements Serializable {
 		this.brewGroup = brewGroup;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("BrewPlayer [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", score=");
+		builder.append(score);
+		builder.append(", lastRun=");
+		builder.append(lastRun);
+		builder.append(", brewGroup=");
+		builder.append(brewGroup);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

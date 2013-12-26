@@ -53,4 +53,17 @@ public class BrewGroup implements Serializable {
 		return null == brewPlayers || brewPlayers.isEmpty();
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("BrewGroup [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", brewPlayers=");
+		builder.append(brewPlayers);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

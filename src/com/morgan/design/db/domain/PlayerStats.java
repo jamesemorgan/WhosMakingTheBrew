@@ -92,4 +92,23 @@ public class PlayerStats {
 		incrementTotalTimesWon();
 		fromPlayer(winner);
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PlayerStats [id=");
+		builder.append(id);
+		builder.append(", brewPlayer=");
+		builder.append(brewPlayer);
+		builder.append(", totalTimesRun=");
+		builder.append(totalTimesRun);
+		builder.append(", totalTimesWon=");
+		builder.append(totalTimesWon);
+		builder.append(", highestScore=");
+		builder.append(highestScore);
+		builder.append(", lowestScore=");
+		builder.append(lowestScore);
+		builder.append("]");
+		return builder.toString();
+	}
 }
