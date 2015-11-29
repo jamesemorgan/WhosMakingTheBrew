@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/brew_group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/brew_group_size"
+        android:paddingBottom="5dip"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:paddingTop="5dip"
+        android:text="brew group name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/brew_group_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/brew_group_name"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal|center_vertical"
+        android:paddingBottom="5dip"
+        android:paddingTop="5dip"
+        android:text="8 player(s)"
+        android:textAlignment="center" />
+
+</RelativeLayout>

@@ -1,7 +1,5 @@
 package com.morgan.design.adaptor;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -9,95 +7,98 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.morgan.design.R;
-import com.morgan.design.activity.TeaRoundGeneratorHomeActivity.TrashClickHandler;
+import com.morgan.design.activity.TeaRoundHomeActivity.TrashClickHandler;
 import com.morgan.design.db.domain.BrewPlayer;
-import com.morgan.design.helpers.Logger;
 import com.morgan.design.utils.SmileyIconUtils;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 public class PlayerAdaptor extends ArrayAdapter<BrewPlayer> {
 
-	private final static String LOG_TAG = "PlayerAdapter";
+    private final Logger LOG = LoggerFactory.getLogger(PlayerAdaptor.class);
 
-	private final List<BrewPlayer> players;
-	private final Activity context;
+    private static final int PLAYER_DATA_ROW = R.layout.player_data_row;
 
-	private final TrashClickHandler trashClickHandlerListener;
+    private final List<BrewPlayer> players;
+    private final Activity context;
 
-	public PlayerAdaptor(final Activity context, final int textViewResourceId, final List<BrewPlayer> players,
-			final TrashClickHandler trashClickHandlerListener) {
-		super(context, textViewResourceId, players);
-		this.context = context;
-		this.players = players;
-		this.trashClickHandlerListener = trashClickHandlerListener;
-		setNotifyOnChange(true);
-	}
+    private final TrashClickHandler trashClickHandlerListener;
 
-	@Override
-	public void registerDataSetObserver(final DataSetObserver observer) {
-		super.registerDataSetObserver(observer);
-	}
+    public PlayerAdaptor(final Activity context, final List<BrewPlayer> players, final TrashClickHandler trashClickHandlerListener) {
+        super(context, PLAYER_DATA_ROW, players);
+        this.context = context;
+        this.players = players;
+        this.trashClickHandlerListener = trashClickHandlerListener;
+        setNotifyOnChange(true);
+    }
 
-	@Override
-	public void unregisterDataSetObserver(final DataSetObserver observer) {
-		super.unregisterDataSetObserver(observer);
-	}
+    @Override
+    public void registerDataSetObserver(final DataSetObserver observer) {
+        super.registerDataSetObserver(observer);
+    }
 
-	@Override
-	public void notifyDataSetChanged() {
-		super.notifyDataSetChanged();
-	}
+    @Override
+    public void unregisterDataSetObserver(final DataSetObserver observer) {
+        super.unregisterDataSetObserver(observer);
+    }
 
-	@Override
-	public View getView(final int position, final View convertView, final ViewGroup parent) {
-		View view = convertView;
-		ViewHolder holder;
-		if (view == null) {
-			// we first inflate the XML layout file and retrieve reference of the described View.
-			final LayoutInflater vi = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = vi.inflate(R.layout.player_data_row, null);
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
 
-			holder = new ViewHolder();
-			holder.playerName = (TextView) view.findViewById(R.id.name_text_view);
-			holder.playerScore = (TextView) view.findViewById(R.id.score_text_view);
-			holder.trashButton = (Button) view.findViewById(R.id.remove_player);
+    @Override
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
+        View view = convertView;
+        ViewHolder holder;
+        if (view == null) {
+            // We first inflate the XML layout file and retrieve reference of the described View.
+            final LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = vi.inflate(PLAYER_DATA_ROW, null);
 
-			holder.playerSmileyIcon = (ImageView) view.findViewById(R.id.player_smiley_icon);
-			holder.playerSmileyIcon.setImageResource(SmileyIconUtils.getDefaultSmiley());
-			holder.playerSmileyIcon.setAdjustViewBounds(true);
+            holder = new ViewHolder(view);
+            view.setTag(holder);
+        } else {
+            holder = (ViewHolder) view.getTag();
+        }
 
-			view.setTag(holder);
-		}
-		else {
-			holder = (ViewHolder) view.getTag();
-		}
+        holder.trashButton.setTag(position);
+        holder.trashButton.setOnClickListener(trashClickHandlerListener);
 
-		holder.trashButton.setTag(position);
-		holder.trashButton.setOnClickListener(this.trashClickHandlerListener);
+        final BrewPlayer player = players.get(position);
+        LOG.debug(player.getName());
 
-		final BrewPlayer player = this.players.get(position);
-		Logger.d(LOG_TAG, player.getName());
+        if (player != null) {
+            holder.playerName.setText("Name: " + player.getName());
+            holder.playerScore.setText("Score: " + player.getScore());
+        }
 
-		if (player != null) {
-			final TextView nameTextView = (TextView) view.findViewById(R.id.name_text_view);
-			nameTextView.setText("Name: " + player.getName());
+        return view;
+    }
 
-			final TextView ratingTextView = (TextView) view.findViewById(R.id.score_text_view);
-			ratingTextView.setText("Score: " + player.getScore());
-		}
+    class ViewHolder {
+        TextView playerName;
+        TextView playerScore;
+        ImageButton trashButton;
+        ImageView playerSmileyIcon;
 
-		return view;
-	}
+        public ViewHolder(View view) {
+            playerName = (TextView) view.findViewById(R.id.player_data_player_name);
+            playerScore = (TextView) view.findViewById(R.id.player_data_player_details);
+            trashButton = (ImageButton) view.findViewById(R.id.player_data_remove_player);
 
-	class ViewHolder {
-		TextView playerName;
-		TextView playerScore;
-		Button trashButton;
-		ImageView playerSmileyIcon;
-	}
+            playerSmileyIcon = (ImageView) view.findViewById(R.id.player_data_player_icon);
+            playerSmileyIcon.setImageResource(SmileyIconUtils.getDefaultSmiley());
+            // playerSmileyIcon.setAdjustViewBounds(true);
+        }
+    }
 
 }

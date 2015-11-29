@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/player_stats_brews_entered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/brews_entered_label"
+        android:text="1"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/brews_entered_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="right"
+        android:text="Brews Entered: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/player_stats_brews_won"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/player_stats_brews_entered"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/player_stats_brews_entered"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/player_stats_brews_won"
+        android:layout_alignBottom="@+id/player_stats_brews_won"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/player_stats_brews_won"
+        android:gravity="right"
+        android:text="Brews Won: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/player_stats_highest_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/player_stats_brews_won"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/player_stats_brews_won"
+        android:text="999"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/player_stats_lowest_score"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/player_stats_highest_score"
+        android:gravity="right"
+        android:text="Highest Score: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/player_stats_lowest_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/player_stats_highest_score"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/player_stats_highest_score"
+        android:text="111"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/player_stats_lowest_score"
+        android:layout_alignBottom="@+id/player_stats_lowest_score"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/player_stats_lowest_score"
+        android:gravity="right"
+        android:text="Lowest Score: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>
