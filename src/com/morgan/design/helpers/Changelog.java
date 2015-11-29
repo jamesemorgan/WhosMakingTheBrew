@@ -23,7 +23,7 @@ public class Changelog {
         final int prefVersion = Prefs.getAppVersionPref(activity);
         int currentVersion = 0;
 
-        final boolean overrideChangeLog = BuildUtils.isRunningEmmulator();
+        final boolean overrideChangeLog = BuildUtils.isRunningEmulator();
         LOG.debug("Overriding ChangeLog: {}", overrideChangeLog);
 
         final boolean showChangeLog = Prefs.getChangelogPref(activity);

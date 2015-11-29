@@ -44,7 +44,7 @@ public class BrewRepository extends BaseBrewRepository {
         } catch (final SQLException e) {
             logError(e);
         }
-        return new ArrayList<BrewGroup>();
+        return new ArrayList<>();
     }
 
     public List<BrewPlayer> findLastRunPlayers() {
@@ -53,7 +53,7 @@ public class BrewRepository extends BaseBrewRepository {
         } catch (final SQLException e) {
             logError(e);
         }
-        return new ArrayList<BrewPlayer>();
+        return new ArrayList<>();
     }
 
     public void insertLastRunEntry(final List<BrewPlayer> brewPlayers) {

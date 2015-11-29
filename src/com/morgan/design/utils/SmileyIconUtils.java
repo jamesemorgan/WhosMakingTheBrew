@@ -14,7 +14,7 @@ public class SmileyIconUtils {
 
     public static List<Integer> determineIconList(final int resultsSize) {
         if (0 == resultsSize) {
-            return new ArrayList<Integer>();
+            return new ArrayList<>();
         }
 
         final List<Integer> images = new ArrayList<Integer>();

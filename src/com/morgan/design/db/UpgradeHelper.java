@@ -3,8 +3,6 @@ package com.morgan.design.db;
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.morgan.design.utils.StringUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -94,6 +92,16 @@ public class UpgradeHelper {
      * @return true if not found to be an SQL Comment
      */
     private static boolean isNotComment(final String sql) {
-        return !StringUtils.startsWith(sql, "--") || !StringUtils.startsWith(sql, "#");
+        return !startsWith(sql, "--", false) || !startsWith(sql, "#", true);
+    }
+
+    private static boolean startsWith(String str, String prefix, boolean ignoreCase) {
+        if (str == null || prefix == null) {
+            return (str == null && prefix == null);
+        }
+        if (prefix.length() > str.length()) {
+            return false;
+        }
+        return str.regionMatches(ignoreCase, 0, prefix, 0, prefix.length());
     }
 }

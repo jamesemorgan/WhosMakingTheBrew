@@ -18,13 +18,14 @@ public class ContactsLoader {
     private static final Logger LOG = LoggerFactory.getLogger(ContactsLoader.class);
 
     public static List<String> getAllContactNames(ContentResolver contentResolver) {
-        Set<String> lContactNamesList = new HashSet<String>();
+        Set<String> lContactNamesList = new HashSet<>();
+        Cursor lPeople = null;
         try {
             String[] projection = new String[]{Data._ID, ContactsContract.Contacts.DISPLAY_NAME,
                     ContactsContract.Contacts.PHOTO_THUMBNAIL_URI};
 
             // Get all Contacts
-            Cursor lPeople = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, projection, null, null, null);
+            lPeople = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, projection, null, null, null);
             if (lPeople != null) {
                 while (lPeople.moveToNext()) {
                     // Add Contact's Name into the List
@@ -38,8 +39,16 @@ public class ContactsLoader {
             }
         } catch (NullPointerException e) {
             LOG.error("Unable to get contacts", e.getMessage());
+        } finally {
+            if (lPeople != null) {
+                try {
+                    lPeople.close();
+                } catch (Exception e) {
+                    LOG.error("Failed to close contacts cursor", e.getMessage());
+                }
+            }
         }
-        List<String> values = new ArrayList<String>();
+        List<String> values = new ArrayList<>();
         values.addAll(lContactNamesList);
         return values;
     }

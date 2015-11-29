@@ -30,7 +30,6 @@ import com.morgan.design.dialog.fragment.ManageGroupDialogFragment;
 import com.morgan.design.dialog.fragment.ManageGroupDialogFragment.ManageGroupDialogFragmentActions;
 import com.morgan.design.helpers.ContactsLoader;
 import com.morgan.design.utils.Prefs;
-import com.morgan.design.utils.StringUtils;
 import com.morgan.design.utils.Utils;
 
 import java.util.ArrayList;
@@ -205,7 +204,7 @@ public class TeaRoundHomeActivity extends BaseBrewFragmentActivity implements Ma
             builder.append(getResources().getString(R.string.no_players));
         } else {
             builder.append("Players(" + playerAdaptor.getCount() + ")");
-            if (null != brewGroup && StringUtils.isNotBlank(brewGroup.getName())) {
+            if (null != brewGroup && Strings.isNullOrEmpty(brewGroup.getName())) {
                 builder.append(" | Group: ").append(brewGroup.getName());
             }
         }

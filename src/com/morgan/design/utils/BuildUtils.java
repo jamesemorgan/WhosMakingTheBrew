@@ -12,10 +12,6 @@ public class BuildUtils {
 
     private final static Logger LOG = LoggerFactory.getLogger(BuildUtils.class);
 
-    public static boolean isNotRunningEmmulator() {
-        return isRunningEmmulator();
-    }
-
     public static void logBuildDetails() {
         LOG.debug("##########################################");
         LOG.debug("Codename: {}", Build.VERSION.CODENAME);
@@ -42,15 +38,14 @@ public class BuildUtils {
         String versionCode = "- | -";
         try {
             final PackageInfo pi = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
-            versionCode = new StringBuilder().append("").append(Integer.toString(pi.versionCode)).append(" | ").append(pi.versionName)
-                    .toString();
+            versionCode = "" + Integer.toString(pi.versionCode) + " | " + pi.versionName;
         } catch (final Exception e) {
             LOG.error("Error gettting version code", e);
         }
         return versionCode;
     }
 
-    public static boolean isRunningEmmulator() {
+    public static boolean isRunningEmulator() {
         return "sdk".equals(Build.PRODUCT);
     }
 }

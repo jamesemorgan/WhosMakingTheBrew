@@ -43,10 +43,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         LOG.info("onCreate");
         try {
             dropTablesIfExists(connectionSource);
-            TableUtils.createTableIfNotExists(connectionSource, BrewPlayer.class);
-            TableUtils.createTableIfNotExists(connectionSource, BrewGroup.class);
-            TableUtils.createTableIfNotExists(connectionSource, BrewStats.class);
-            TableUtils.createTableIfNotExists(connectionSource, PlayerStats.class);
+            createTableIfNotExists(connectionSource);
         } catch (final SQLException e) {
             LOG.error("Can't create database", e);
         }
@@ -93,23 +90,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                     db.endTransaction();
                 }
             }
-        } catch (final SQLException e) {
-            LOG.error("Can't migrate databases, bootstrap database, data will be lost", e);
-            onCreate(db, connectionSource);
-        } catch (final android.database.SQLException e) {
-            LOG.error("Can't migrate databases, bootstrap database, data will be lost", e);
-            onCreate(db, connectionSource);
         } catch (final Exception e) {
             LOG.error("Can't migrate databases, bootstrap database, data will be lost", e);
             onCreate(db, connectionSource);
         }
-    }
-
-    private void dropTablesIfExists(final ConnectionSource connectionSource) throws SQLException {
-        TableUtils.dropTable(connectionSource, BrewPlayer.class, true);
-        TableUtils.dropTable(connectionSource, BrewGroup.class, true);
-        TableUtils.dropTable(connectionSource, BrewStats.class, true);
-        TableUtils.dropTable(connectionSource, PlayerStats.class, true);
     }
 
     @Override
@@ -143,5 +127,20 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return t;
     }
+
+    private void dropTablesIfExists(final ConnectionSource connectionSource) throws SQLException {
+        TableUtils.dropTable(connectionSource, BrewPlayer.class, true);
+        TableUtils.dropTable(connectionSource, BrewGroup.class, true);
+        TableUtils.dropTable(connectionSource, BrewStats.class, true);
+        TableUtils.dropTable(connectionSource, PlayerStats.class, true);
+    }
+
+    private void createTableIfNotExists(ConnectionSource connectionSource) throws SQLException {
+        TableUtils.createTableIfNotExists(connectionSource, BrewPlayer.class);
+        TableUtils.createTableIfNotExists(connectionSource, BrewGroup.class);
+        TableUtils.createTableIfNotExists(connectionSource, BrewStats.class);
+        TableUtils.createTableIfNotExists(connectionSource, PlayerStats.class);
+    }
+
 
 }
