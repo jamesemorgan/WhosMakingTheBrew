@@ -1,114 +1,114 @@
 package com.morgan.design.db.domain;
 
-import static com.morgan.design.utils.ObjectUtils.isZero;
-
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import static com.morgan.design.utils.ObjectUtils.isZero;
 
 @DatabaseTable(tableName = "player_stats")
 public class PlayerStats {
 
-	public static final String BREW_PLAYER_ID = "fk_player_id";
-	public static final String TOTAL_TIMES_WON = "totalTimesWon";
+    public static final String BREW_PLAYER_ID = "fk_player_id";
+    public static final String TOTAL_TIMES_WON = "totalTimesWon";
 
-	@DatabaseField(generatedId = true)
-	private int id;
+    @DatabaseField(generatedId = true)
+    private int id;
 
-	@DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = true, columnName = BREW_PLAYER_ID)
-	private BrewPlayer brewPlayer;
+    @DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = true, columnName = BREW_PLAYER_ID)
+    private BrewPlayer brewPlayer;
 
-	@DatabaseField(canBeNull = true, defaultValue = "0")
-	private int totalTimesRun;
+    @DatabaseField(canBeNull = true, defaultValue = "0")
+    private int totalTimesRun;
 
-	@DatabaseField(canBeNull = true, defaultValue = "0", columnName = TOTAL_TIMES_WON)
-	private int totalTimesWon;
+    @DatabaseField(canBeNull = true, defaultValue = "0", columnName = TOTAL_TIMES_WON)
+    private int totalTimesWon;
 
-	@DatabaseField(canBeNull = true, defaultValue = "0")
-	private int highestScore;
+    @DatabaseField(canBeNull = true, defaultValue = "0")
+    private int highestScore;
 
-	@DatabaseField(canBeNull = true, defaultValue = "0")
-	private int lowestScore;
+    @DatabaseField(canBeNull = true, defaultValue = "0")
+    private int lowestScore;
 
-	public PlayerStats() {
-		//
-	}
+    public PlayerStats() {
+        //
+    }
 
-	public final int getId() {
-		return id;
-	}
+    public final int getId() {
+        return id;
+    }
 
-	public final BrewPlayer getBrewPlayer() {
-		return brewPlayer;
-	}
+    public final BrewPlayer getBrewPlayer() {
+        return brewPlayer;
+    }
 
-	public final int getTotalTimesRun() {
-		return totalTimesRun;
-	}
+    public final int getTotalTimesRun() {
+        return totalTimesRun;
+    }
 
-	public final int getTotalTimesWon() {
-		return totalTimesWon;
-	}
+    public final int getTotalTimesWon() {
+        return totalTimesWon;
+    }
 
-	public final int getHighestScore() {
-		return highestScore;
-	}
+    public final int getHighestScore() {
+        return highestScore;
+    }
 
-	public final int getLowestScore() {
-		return lowestScore;
-	}
+    public final int getLowestScore() {
+        return lowestScore;
+    }
 
-	public void setBrewPlayer(final BrewPlayer brewPlayer) {
-		this.brewPlayer = brewPlayer;
-	}
+    public void setBrewPlayer(final BrewPlayer brewPlayer) {
+        this.brewPlayer = brewPlayer;
+    }
 
-	public void incrementTotalTimesRun() {
-		totalTimesRun++;
-	}
+    public void incrementTotalTimesRun() {
+        totalTimesRun++;
+    }
 
-	public void incrementTotalTimesWon() {
-		totalTimesWon++;
-	}
+    public void incrementTotalTimesWon() {
+        totalTimesWon++;
+    }
 
-	public void determineHighestScore(final int score) {
-		if (highestScore < score) {
-			highestScore = score;
-		}
-	}
+    public void determineHighestScore(final int score) {
+        if (highestScore < score) {
+            highestScore = score;
+        }
+    }
 
-	public void determineLowestScore(final int score) {
-		if (isZero(lowestScore) || lowestScore > score) {
-			lowestScore = score;
-		}
-	}
+    public void determineLowestScore(final int score) {
+        if (isZero(lowestScore) || lowestScore > score) {
+            lowestScore = score;
+        }
+    }
 
-	public void fromPlayer(final BrewPlayer brewPlayer) {
-		this.brewPlayer = brewPlayer;
-		incrementTotalTimesRun();
-		determineHighestScore(brewPlayer.getScore());
-		determineLowestScore(brewPlayer.getScore());
-	}
+    public void fromPlayer(final BrewPlayer brewPlayer) {
+        this.brewPlayer = brewPlayer;
+        incrementTotalTimesRun();
+        determineHighestScore(brewPlayer.getScore());
+        determineLowestScore(brewPlayer.getScore());
+    }
 
-	public void fromWinner(final BrewPlayer winner) {
-		incrementTotalTimesWon();
-		fromPlayer(winner);
-	}
+    public void fromWinner(final BrewPlayer winner) {
+        incrementTotalTimesWon();
+        fromPlayer(winner);
+    }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("PlayerStats [id=");
-		builder.append(id);
-		builder.append(", brewPlayer=");
-		builder.append(brewPlayer);
-		builder.append(", totalTimesRun=");
-		builder.append(totalTimesRun);
-		builder.append(", totalTimesWon=");
-		builder.append(totalTimesWon);
-		builder.append(", highestScore=");
-		builder.append(highestScore);
-		builder.append(", lowestScore=");
-		builder.append(lowestScore);
-		builder.append("]");
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("PlayerStats [id=");
+        builder.append(id);
+        builder.append(", brewPlayer=");
+        builder.append(brewPlayer);
+        builder.append(", totalTimesRun=");
+        builder.append(totalTimesRun);
+        builder.append(", totalTimesWon=");
+        builder.append(totalTimesWon);
+        builder.append(", highestScore=");
+        builder.append(highestScore);
+        builder.append(", lowestScore=");
+        builder.append(lowestScore);
+        builder.append("]");
+        return builder.toString();
+    }
 }

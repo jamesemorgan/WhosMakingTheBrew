@@ -7,7 +7,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="22" />
+        android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -33,10 +33,10 @@
         android:configChanges="keyboardHidden|orientation"
         android:icon="@drawable/dashboard_teapot_icon"
         android:label="@string/app_name">
-        
+
         <!-- START New Activities -->
         <activity
-            android:name="com.morgan.design.activity.DashbaordFragmentActivity"
+            android:name=".activity.DashboardFragmentActivity"
             android:label="@string/app_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -13,19 +13,19 @@ import com.morgan.design.activity.TeaRoundHomeActivity;
 
 public class BrewHomePageFragments extends Fragment {
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_dashboard_run_tea_round, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_dashboard_run_tea_round, container, false);
 
-		final Button button = (Button) rootView.findViewById(R.id.brew_round_dashboard_enter_brew_round_button);
-		button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				final Intent home = new Intent(getActivity(), TeaRoundHomeActivity.class);
-				startActivity(home);
-			}
-		});
+        final Button button = (Button) rootView.findViewById(R.id.brew_round_dashboard_enter_brew_round_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent home = new Intent(getActivity(), TeaRoundHomeActivity.class);
+                startActivity(home);
+            }
+        });
 
-		return rootView;
-	}
+        return rootView;
+    }
 }
