@@ -19,6 +19,13 @@ Tech Debt
 * [ ] Store LogBack logs & send on crash
 * [ ] Update package to allow for new version of application
 * [ ] Fix all lint errors
+* [ ] Code Clean Up - are all classes used?
+* [ ] Optimizing application with ProGuard?
+* [x] Upgrade LogBack
+
+Possible Improvements
+=====================
+* [ ] Use EmailAppender on Error in LogBack - can this replace ACRA?
 
 Feature Rework
 ==============
@@ -35,6 +42,9 @@ Feature Rework
 * [ ] Latest Android Version Support
 * [ ] Option to remove scores from players with option to view via preference
 * [ ] Backup data on Google Backup?
+* [ ] Update Change Log
+* [ ] Version Management?
+* [ ] About section - add 3rd party license & jem-solutions
 
 Old Rework
 ==========

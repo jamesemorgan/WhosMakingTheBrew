@@ -63,7 +63,7 @@ public class TeaRoundHomeActivity extends BaseBrewFragmentActivity implements Ma
         addPlayerEditText.setOnKeyListener(new EnterPlayerClickListener());
 
         // Load the Contact Name from List into the AutoCompleteTextView
-        addPlayerEditText.setAdapter(new ArrayAdapter<String>(getApplicationContext(), R.layout.single_contact_view,
+        addPlayerEditText.setAdapter(new ArrayAdapter<>(getApplicationContext(), R.layout.single_contact_view,
                 R.id.single_contact_view_name, ContactsLoader.getAllContactNames(getContentResolver())));
 
         playerAdaptor = new PlayerAdaptor(this, new ArrayList<BrewPlayer>(), new TrashClickHandler());
