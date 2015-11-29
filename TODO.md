@@ -1,6 +1,44 @@
 Main goals
 ==========
 
+Dead Features - Possibly to Return
+==================================
+* [ ] Tea Timer?
+* [ ] Widget?
+* [ ] Adverts?
+* [ ] Sharing Results?
+
+Tech Debt
+=========
+
+* [ ] Consider moving to GreenDao from ORMLite - https://github.com/greenrobot/greenDAO
+* [ ] EventBus for Communication - https://github.com/greenrobot/EventBus
+* [ ] Move remaining libs/jars to gradle
+* [ ] Google Analytics
+* [ ] Update to latest ACRA - consider options for crash reporting
+* [ ] Store LogBack logs & send on crash
+* [ ] Update package to allow for new version of application
+* [ ] Fix all lint errors
+
+Feature Rework
+==============
+* [ ] All graphics / styling
+* [ ] Spinning tea pot
+* [ ] Internationalise
+* [ ] Animation between activities
+* [ ] Look up contacts from phone
+* [ ] Log in with social accounts?
+* [ ] Add picture from contact not emojis
+* [ ] General list of players
+* [ ] Results
+* [ ] Groups
+* [ ] Latest Android Version Support
+* [ ] Option to remove scores from players with option to view via preference
+* [ ] Backup data on Google Backup?
+
+Old Rework
+==========
+
 Remove dead features:
 - [x] Tea timer (maybe replaced one day!)
 - [x] Pointless widget etc
@@ -35,34 +73,3 @@ Code changes
 
 -- Groups
 - [x] Long click groups, Open Group / Delete Group
-- [ ] Style Player list text
-- [ ] Style Group list header
-
--- Home
-- [ ] Set smiley image on home screen based on scores
-
--- RUnning
-- [ ] Rework animation view
-- [ ] Look at removing this and replacing it with overlay?
-
--- Results
-- [ ] Rework results view
-- [ ] Check results scroll
-
--- Structural / Other
-- [ ] Make project work with latest version of Android
-- [ ] Update all libraries it uses, including assessing alternatives
-- [ ] Rework what is reported by ACRA
-- [ ] Store Logback Logs in getCacheDir() -> on Crash send logs as part of ACRA
-- [ ] Look at setting up https://github.com/ACRA/acralyzer
-- [ ] Add details about this to version and logs http://source.android.com/devices/tech/dalvik/art.html
-- [ ] Internationalise and strings
-- [ ] Fix all lint errors, within reason
-- [ ] Animate between views - http://developer.android.com/training/animation/index.html
-- [ ] Improve animation during game runner
-- [ ] Remove scores from players with option to view via preference
-- [ ] Remove unused images and assets
-
-Questions
-- [ ] What does allowBackUp mean?
-
